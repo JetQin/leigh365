@@ -43,6 +43,9 @@ class SearchScreen extends Component {
 
   }
   doSearch() {
+    if (!this.state.searchValue){
+      return;
+    }
     if (this.state.searchType === '搜行情') {
       // this.searchStock();
       this.state.stock.page = 1;
@@ -116,21 +119,27 @@ class SearchScreen extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ marginTop: '4%', flexDirection: 'row', borderBottomColor: Colors.$navigationHeaderTextColor, borderBottomWidth: 3 }}>
-          <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
-          <View style={styles.searchBar}>
-            <TextInput
-              placeholder="请输入关键词 按Enter搜索"
-              underlineColorAndroid='transparent'
-              value={this.state.searchValue}
-              onChangeText={(searchValue) => this.setState({ searchValue })}
-              style={styles.searchInput}
-            />
-            <Button transparent onPress={this.doSearch} style={{ position: 'absolute', right: '12%' }}>
+        <View style={styles.container}>
+          <View style={styles.logoContainer}>
+            <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
+          </View>
+          <View style={styles.searchContainer}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                placeholder="请输入关键词 按Enter搜索"
+                underlineColorAndroid='transparent'
+                value={this.state.searchValue}
+                onChangeText={(searchVal) => this.setState({ searchValue: searchVal })}
+                style={styles.searchInput}
+              />
+            </View>
+            <Button transparent onPress={this.doSearch} style={{right:'10%'}}>
               <Icon type='ionicon' name="ios-search" size={20} />
             </Button>
-            <Button transparent onPress={() => this.props.navigation.goBack()} style={styles.closeBtn}>
-              <Icon type='font-awesome' name="close" size={20} color={Colors.$navigationHeaderTextColor} />
+          </View>
+          <View style={styles.closeContainer}>
+            <Button transparent style={styles.closeBtn} onPress={() => this.props.navigation.goBack()} >
+              <Icon type='font-awesome'  name="close" size={20} color={Colors.$navigationHeaderTextColor} />
             </Button>
           </View>
         </View>
