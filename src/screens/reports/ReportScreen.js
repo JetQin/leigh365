@@ -12,7 +12,7 @@ const reportApi = new ReportApi();
 
 class ReportScreen extends Component {
   static navigationOptions = {
-    headerStyle: { backgroundColor: Colors.$redColor },
+    headerStyle: { backgroundColor: Colors.$whiteColor },
     tabBarIcon: ({ tintColor }) => (
       <Icon type='material-community' name="notifications" size={25} color={tintColor} />
     ),
