@@ -22,13 +22,13 @@ class NewsScreen extends Component {
       borderStyle: 'solid',
     },
     headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'row',width: 120}}>
         <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
         <Text style={styles.headerTitle}>新历财经</Text>
       </View>
     ),
     headerRight: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'row'}}>
         <Button transparent onPress={() => navigation.navigate('Search')}>
           <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
         </Button>

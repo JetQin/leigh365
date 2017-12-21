@@ -24,25 +24,29 @@ class ProfileScreen extends Component {
       borderStyle: 'solid',
     };
     let headerLeft = (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'row', width: 120 }}>
         <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
         <Text style={styles.headerTitle}>新历财经</Text>
       </View>
     );
-    const headerRight = (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+
+    const searchBtn = (
         <Button transparent onPress={() => navigation.navigate('Search')}>
           <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
         </Button>
+    );
+    let headerRight = (
+      <View>
+        {searchBtn}
       </View>
     );
     if (params.isLogin) {
-      headerLeft = (
-        <View style={{ flex: 1, flexDirection: 'row', paddingLeft: '15%' }}>
-          <Button bordered onPress={params.logout} style={{ width: '45%', height: '60%', marginTop: '15%', borderColor: Colors.$navigationHeaderTextColor }}>
+      headerRight = (
+        <View style={{ flex: 1, flexDirection: 'row',width: 60,paddingRight: '5%' }}>
+          <View style={{flex: 0.5}}>{searchBtn}</View>
+          <Button bordered onPress={params.logout} style={{ flex: 0.5, height: '60%', marginTop: '15%', borderColor: Colors.$navigationHeaderTextColor }}>
             <Text style={{ color: Colors.$navigationHeaderTextColor }}>登出</Text>
           </Button>
-          <Text style={styles.headerTitle}>新历财经</Text>
         </View>
       );
     }

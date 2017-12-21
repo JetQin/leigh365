@@ -27,7 +27,7 @@ class HomeScreen extends React.Component {
       borderStyle: 'solid',
     },
     headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'row', width: 120 }}>
         <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
         <Text style={styles.title}>新历财经</Text>
       </View>

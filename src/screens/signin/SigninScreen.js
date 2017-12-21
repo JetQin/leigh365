@@ -31,7 +31,7 @@ class SigninScreen extends Component {
       borderStyle: 'solid',
     },
     headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'row',width: 150 }}>
         <Button transparent onPress={() => navigation.goBack()}>
           <Icon type='ionicon' name='md-menu' size={20} color={Colors.$navigationHeaderTextColor} />
         </Button>
