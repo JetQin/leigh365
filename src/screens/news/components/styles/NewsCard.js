@@ -44,6 +44,7 @@ const styles = EStyleSheet.create({
     fontFamily: 'Montserrat-Regular',
     color: Colors.$black,
     backgroundColor: 'transparent',
+    flex: 0.5
   },
   separator: {
     flex: 1,

@@ -81,7 +81,7 @@ class NewsCard extends Component {
                 <View style={styles.footer}>
                   <Text style={styles.footerText}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>
                   <Icon size={12} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Text style={styles.footerText}>{item.category}</Text>
+                  <Text numberOfLines={1} style={styles.footerText}>{item.category}</Text>
                   <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
                   <Icon size={12} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => this.addPostList(item.id)} />
                   <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
