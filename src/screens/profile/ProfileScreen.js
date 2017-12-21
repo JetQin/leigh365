@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage, Image, Alert } from 'react-native';
 import { Avatar, Badge } from 'react-native-elements';
-import { Button, Tabs, Tab } from 'native-base';
+import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
@@ -265,7 +265,7 @@ class ProfileScreen extends Component {
   render() {
     return (
       <View style={styles.root}>
-        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)}>
+        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
           <Tab heading='我的新历'>
             <View style={styles.layout}>
               <View style={styles.top}>
