@@ -34,21 +34,19 @@ const styles = EStyleSheet.create({
     marginLeft: '2%',
   },
   buttonStyle: {   
-    width: '91%',
-    justifyContent: 'center',
     backgroundColor: '#6A97BE',
   },
   flexContainer: {
     flexDirection: 'row',
     marginLeft: '2%',
+    justifyContent: 'space-between'
   },
   cell: {
-    flex: 1, 
+    flex: 0.3, 
     marginTop: '4%',  
   },
   smallBtn: {
     justifyContent: 'center',
-    marginLeft: '10%',
   },
   logo: {
     top: 15,

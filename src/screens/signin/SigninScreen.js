@@ -31,7 +31,7 @@ class SigninScreen extends Component {
       borderStyle: 'solid',
     },
     headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'row',width: 150 }}>
         <Button transparent onPress={() => navigation.goBack()}>
           <Icon type='ionicon' name='md-menu' size={20} color={Colors.$navigationHeaderTextColor} />
         </Button>
@@ -200,8 +200,8 @@ class SigninScreen extends Component {
     }
     const formData = {
       type: 'register',
-      user_name: this.state.registerusername,
-      password: this.state.registerPassword,
+      user_name: this.state.rUsername,
+      password: this.state.rPassword,
       email: this.state.email,
     };
 

@@ -60,13 +60,14 @@ class StockInfo extends Component {
                   borderStyle: 'solid',
                   borderLeftColor: item.price_change > 0 ? Colors.$redColor : Colors.$greenColor,
                 }}
+                onPress={() => (this.props.navigation.navigate('Report', { code: item.code }))}
                 key={i}
                 title={
                   <SwipeRow
                     ref={(c) => { this.row = c; }}
                     rightOpenValue={-80}
                     body={
-                      <View style={{ flex: 0.75 }}>
+                      <View style={{ flex: 1 }}>
                         <View style={styles.header}>
                           <View style={styles.headerLeft}>
                             <Text style={styles.headerText}>{item.name}</Text>
