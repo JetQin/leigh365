@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { Button, Tabs, Tab } from 'native-base';
 import Colors from '../../../constants/Colors';
 import styles from './styles/SearchScreen';
-import { StockCard } from '../holder/components';
+import StockList from './components/StockList';
 import NewsCard from '../news/components/NewsCard';
 import { WordpressApi } from '../../../constants/api';
 
@@ -50,7 +50,7 @@ class SearchScreen extends Component {
       // this.searchStock();
       this.state.stock.page = 1;
       this.state.stock.data = [];
-      this.stockCard._onRefresh();
+      this.stockList._onRefresh();
     }
     if (this.state.searchType === '搜新闻') {
       this.state.news.page = 1;
@@ -99,8 +99,8 @@ class SearchScreen extends Component {
     let news = (<View />);
     if (this.state.stock) {
       stock = (
-        <StockCard
-          ref={(c) => { this.stockCard = c; }}
+        <StockList
+          ref={(c) => { this.stockList = c; }}
           stocks={this.state.stock.data} scroll={this.searchStock}
           navigation={this.props.navigation}
         />
