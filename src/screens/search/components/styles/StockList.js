@@ -36,6 +36,7 @@ const styles = EStyleSheet.create({
   },
   buttonRight: {
     flex: 0.3,
+    marginLeft: 35,
   },
   headerText: {
     fontSize: 18,
@@ -57,6 +58,14 @@ const styles = EStyleSheet.create({
     color: Colors.$greenColor,
     backgroundColor: 'transparent',
   },
+  buttonItem: {
+    height: 25,
+    paddingLeft: 3,
+    paddingRight: 3,
+  },
+  buttonText: {
+    fontSize: 12,
+  },
   footer: {
     flex: 1,
     flexDirection: 'row',
@@ -68,7 +77,7 @@ const styles = EStyleSheet.create({
     flex: 0.2,
   },
   footerRight: {
-    flex: 0.2,
+    flex: 0.3,
     flexDirection: 'row',
   },
   footerText: {

@@ -70,8 +70,8 @@ class StockList extends Component {
                       <Text style={item.price_change > 0 ? styles.headerRedText : styles.headerGreenText}>{item.price_change}</Text>
                     </View>
                     <View style={styles.buttonRight}>
-                       <Button>
-                           <Text>+加入自选行情</Text>
+                       <Button style={styles.buttonItem}>
+                           <Text style={styles.buttonText}>+加入自选行情</Text>
                        </Button>
                     </View>
                   </View>
@@ -93,6 +93,7 @@ class StockList extends Component {
                       }
                       <Text style={item.price_change > 0 ? styles.footerRedText : styles.footerGreenText}>{ item.p_change }%</Text>
                     </View>
+                    <View style={{ marginLeft: 45}} />
                   </View>
                 }
                 subtitleContainerStyle={{ paddingTop: 3, paddingBottom: 2 }}
