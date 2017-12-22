@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WebView } from 'react-native';
+import { WebView, Platform } from 'react-native';
 
 class ViewHtml extends Component {
   state = {};
@@ -13,7 +13,8 @@ class ViewHtml extends Component {
   render() {
     const url = this.props.navigation.state.params.uri;
     return (
-      <WebView source={{ uri: url }} />
+      Platform.OS === 'ios' ? <WebView source={{ uri: url }} javaScriptEnabled={true} userAgent='ios' /> 
+          : <WebView source={{ uri: url }} javaScriptEnabled={true} userAgent='android' /> 
     );
   }
 }

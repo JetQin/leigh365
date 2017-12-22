@@ -18,7 +18,6 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -59,7 +58,6 @@
 		B7FAAC7123884524878623D1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78F15340318D4B40977D0C06 /* EvilIcons.ttf */; };
 		BED86C6C50244B59B73B67D9 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AF41D15C1294D56B2E476CC /* EvilIcons.ttf */; };
 		C06752BCF097438CB4C581A2 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40C7E503AE0747B38BAC7E07 /* Montserrat-Light.ttf */; };
-		C5793FFB1FE8AE1200FC871D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5793FFA1FE8AE0900FC871D /* CFNetwork.framework */; };
 		CACFE8BC0D5D4D11A9B83973 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3033A52B86054ADD9464E820 /* Octicons.ttf */; };
 		D01E8558B393416EA0BE870E /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C734928D9054A03890E5416 /* libRNVectorIcons.a */; };
 		E1E264F571DA4758929C38CB /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFE97BAEB7FF4471B029F030 /* Zocial.ttf */; };
@@ -371,7 +369,6 @@
 		13B07F961A680F5B00A75B9A /* leigh365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = leigh365.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = leigh365/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = leigh365/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = leigh365/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = leigh365/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = leigh365/main.m; sourceTree = "<group>"; };
@@ -425,7 +422,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5793FFB1FE8AE1200FC871D /* CFNetwork.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -556,7 +552,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = leigh365;
@@ -1199,7 +1194,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				272CB0732FFC4CDF960CEA66 /* Entypo.ttf in Resources */,
 				B7FAAC7123884524878623D1 /* EvilIcons.ttf in Resources */,
 				8A4D2A137C4745ABAB3615DB /* FontAwesome.ttf in Resources */,
@@ -1327,18 +1321,6 @@
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = leigh365;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {

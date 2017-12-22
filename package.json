@@ -11,7 +11,7 @@
     "react-test-renderer": "16.0.0"
   },
   "rnpm": {
-    "assets":[
+    "assets": [
       "./assets/fonts/"
     ]
   },
