@@ -24,11 +24,6 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    flex: 0.8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   titleText: {
     fontSize: 16,
     fontFamily: 'Montserrat-Regular',
@@ -36,7 +31,7 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
   },
   footer: {
-    flex: 0.2,
+    flex: 1,
     flexDirection: 'row',
   },
   footerText: {
@@ -44,7 +39,6 @@ const styles = EStyleSheet.create({
     fontFamily: 'Montserrat-Regular',
     color: Colors.$black,
     backgroundColor: 'transparent',
-    flex: 0.5
   },
   separator: {
     flex: 1,
