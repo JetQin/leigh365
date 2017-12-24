@@ -55,9 +55,9 @@ class NewsCardList extends Component {
                   <Text style={styles.footerText}>{ item.date }</Text>
                   <Icon size={12} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
                   <Text style={styles.footerText}>{item.category}</Text>
-                  <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
+                  {/* <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} /> */}
                   <Icon size={12} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                  {/* <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} /> */}
                 </View>
               }
               subtitleContainerStyle={{ paddingLeft: 10, paddingTop: 8, paddingBottom: 5 }}

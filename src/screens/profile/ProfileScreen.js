@@ -304,7 +304,7 @@ class ProfileScreen extends Component {
                   </Badge>
                 </View>
               </View>
-              <View style={styles.bottom}>
+              {/* <View style={styles.bottom}>
                 <PricingCard
                   color='#4f9deb'
                   title='每天'
@@ -332,13 +332,13 @@ class ProfileScreen extends Component {
                   button={{ title: '充值' }}
                   onButtonPress={() => this.charge('6month')}
                 />
-              </View>
+              </View> */}
             </View>
           </Tab>
-          <Tab heading='动态' >
+          {/* <Tab heading='动态' >
             <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Bold', justifyContent: 'center', alignItems: 'center' }}>
             后续版本将实现该功能</Text>
-          </Tab>
+          </Tab> */}
           <Tab heading='文章收藏夹' >
             <NewsInfo
               ref={(c) => { this.articleCard = c; }}
