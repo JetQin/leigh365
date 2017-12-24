@@ -309,7 +309,7 @@ class SigninScreen extends Component {
                   <Text>登入</Text>
                 </Button>
               </View>
-              <View style={[styles.cell, styles.smallBtn]}>
+              {/* <View style={[styles.cell, styles.smallBtn]}>
                 <Button small style={styles.buttonStyle}>
                   <Text>微信登陆</Text>
                 </Button>
@@ -318,13 +318,13 @@ class SigninScreen extends Component {
                 <Button small style={styles.buttonStyle}>
                   <Text>微博注册</Text>
                 </Button>
-              </View>
+              </View> */}
             </View>
-            <Button transparent info><Text style={styles.myColor}>忘记密码？</Text></Button>
+            {/* <Button transparent info><Text style={styles.myColor}>忘记密码？</Text></Button>
             <Button transparent info >
               <Icon type='material-community' name='phone' size={15} color='#6A97BE' />
               <Text style={[{ paddingLeft: '0%' }, styles.myColor]}>联系我们</Text>
-            </Button>
+            </Button> */}
           </Tab>
           <Tab heading='注册'>
             <View style={styles.formTitle}>
@@ -373,7 +373,7 @@ class SigninScreen extends Component {
                   <Text>注册</Text>
                 </Button>
               </View>
-              <View style={[styles.cell, styles.smallBtn]}>
+              {/* <View style={[styles.cell, styles.smallBtn]}>
                 <Button small style={styles.buttonStyle}>
                   <Text>微信登陆</Text>
                 </Button>
@@ -382,7 +382,7 @@ class SigninScreen extends Component {
                 <Button small style={styles.buttonStyle}>
                   <Text>微博注册</Text>
                 </Button>
-              </View>
+              </View> */}
             </View>
           </Tab>
         </Tabs>
