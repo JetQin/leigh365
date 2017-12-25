@@ -56,6 +56,14 @@ const styles = EStyleSheet.create({
     marginLeft: 8,
     marginRight: 8,
   },
+  closeBtn: { 
+    width: 20, 
+    height: 20, 
+    borderRadius: 10, 
+    backgroundColor: '#EFF8FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;
