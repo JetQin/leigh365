@@ -62,9 +62,13 @@ const styles = EStyleSheet.create({
     height: 25,
     paddingLeft: 3,
     paddingRight: 3,
+    backgroundColor: Colors.$whiteColor,
+    borderColor: '#A4D3EE',
+    borderWidth: 1.2,
   },
   buttonText: {
     fontSize: 12,
+    color: '#A4D3EE',
   },
   footer: {
     flex: 1,
