@@ -61,20 +61,21 @@ export default class NewsInfo extends Component {
                     rightOpenValue={-80}
                     body={
                       <View style={{ flex: 1, marginLeft: 0, flexDirection: 'row' }}>
-                        <View style={{ paddingRight: 10, flex: 0.13 }}>
+                        <View style={{ paddingRight: 10}}>
                           {item.picUrl === '' ? <View style={styles.emptyView} /> : <Avatar medium source={{ uri: item.picUrl }} />}
                         </View>
-                        <View style={{ flex: 0.87 }}>
+                        <View style={{ paddingLeft: 5 }}>
                           <Text numberOfLines={1} style={{ fontSize: normalize(14), color: '#43484d' }}>{item.name}</Text>
                           <View style={[styles.footer, { paddingTop: 8  }]}>
                             <Text style={styles.footerText}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>
                             <Icon size={12} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                            <Text numberOfLines={1} style={styles.footerText}>{item.category}</Text>
+                            <Text numberOfLines={1} style={[styles.footerText,{flex: 0.6}]}>{item.category}</Text>
                             <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
                           </View>
                         </View>
                       </View>
                     }
+                    
                     right={
                       <Button danger onPress={() => this._deleteNews(item.id)}>
                         <Text>删除</Text>
