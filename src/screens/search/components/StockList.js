@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl, View, Text } from 'react-native';
+import { ScrollView, RefreshControl, View, Text, AsyncStorage, Alert } from 'react-native';
 import { Icon, List, ListItem } from 'react-native-elements';
 import { Button } from 'native-base';
 import Colors from '../../../../constants/Colors';
@@ -10,9 +10,11 @@ class StockList extends Component {
   constructor(props) {
     super(props);
     this._onRefresh = this._onRefresh.bind(this);
+    this.addStockToList = this.addStockToList.bind(this);
     this.state = {
       refreshing: false,
       stocks: [],
+      code: '',
     };
   }
 
@@ -35,6 +37,28 @@ class StockList extends Component {
       borderStyle: 'solid',
       borderLeftColor:  value > 0 ? Colors.$redColor : Colors.$greenColor,
     }
+  }
+
+  async addStockToList() {
+    const login = await AsyncStorage.getItem('@user_id');
+    if (undefined === login || login === null) {
+      Alert.alert('警告', '用户未登录，请先登录',
+        [
+          { text: '确定' },
+        ],
+        { cancelable: false }
+      );
+    } 
+    // else {
+    //   const params = { userId: login, code: this.props.code };
+    //   this.props.wordpressApi.addStockToList(params);
+    //   Alert.alert('提示', '收藏成功',
+    //     [
+    //       { text: '确定' },
+    //     ],
+    //     { cancelable: false }
+    //   );
+    // }
   }
 
   render() {
@@ -90,7 +114,7 @@ class StockList extends Component {
                       </View>
                     </View>
                     <View style={styles.buttonRight}>
-                        <Button style={styles.buttonItem}>
+                        <Button style={styles.buttonItem} onPress={this.addStockToList}>
                           <Text style={styles.buttonText}>+加入自选行情</Text>
                         </Button>
                     </View>
