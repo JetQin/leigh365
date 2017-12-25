@@ -2,41 +2,31 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Colors from '../../../../../constants/Colors';
 
 const styles = EStyleSheet.create({
-  root: {
+  containerStyle: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: Colors.$blackBlueColor,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
+    alignItems: 'center',
   },
-  redBorder: {
-    borderLeftWidth: 5,
-    borderStyle: 'solid',
-    borderLeftColor: Colors.$redColor,
+  leftContainerStyle: {
+    flex: 0.75,
+    marginRight: 25,
   },
-  greenBorder: {
-    borderLeftWidth: 5,
-    borderStyle: 'solid',
-    borderLeftColor: Colors.$redColor,
+  buttonRight: {
+    flex: 0.25,
   },
   header: {
     flex: 1,
     flexDirection: 'row',
   },
   headerLeft: {
-    flex: 0.3,
+    flex: 0.4,
   },
   headerCenter: {
-    flex: 0.2,
+    flex: 0.3,
   },
   headerRight: {
-    flex: 0.2,
-    alignItems: 'flex-end',
-  },
-  buttonRight: {
     flex: 0.3,
-    marginLeft: 35,
+    alignItems: 'flex-end',
   },
   headerText: {
     fontSize: 18,
@@ -59,7 +49,7 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
   },
   buttonItem: {
-    height: 25,
+    height: 20,
     paddingLeft: 3,
     paddingRight: 3,
     backgroundColor: Colors.$whiteColor,
@@ -67,7 +57,8 @@ const styles = EStyleSheet.create({
     borderWidth: 1.2,
   },
   buttonText: {
-    fontSize: 12,
+    fontSize: 10,
+    fontWeight: '900',
     color: '#A4D3EE',
   },
   footer: {
@@ -75,10 +66,10 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
   },
   footerLeft: {
-    flex: 0.3,
+    flex: 0.4,
   },
   footerCenter: {
-    flex: 0.2,
+    flex: 0.3,
   },
   footerRight: {
     flex: 0.3,
