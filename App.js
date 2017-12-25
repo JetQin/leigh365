@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { LoadingScreen } from './src/commons';
+import { LoadingScreen,SplashScreen } from './src/commons';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 import Colors from './constants/Colors';
@@ -13,10 +13,22 @@ EStyleSheet.build(Colors);
 class App extends React.Component {
   state = {
     fontLoaded: false,
+    splashLoaded: false,
+  }
+
+  constructor(props){
+    super(props);
+    this.splash = this.splash.bind(this);
   }
 
   componentDidMount() {
     // this._loadAssetsAsync();
+    this.timer = setInterval(this.splash, 3000);
+  }
+
+  splash() {
+    this.setState({ splashLoaded: true });
+    clearInterval(this.timer);
   }
 
   // async _loadAssetsAsync() {
@@ -43,6 +55,9 @@ class App extends React.Component {
     // if (!this.state.fontLoaded) {
     //   return <LoadingScreen />;
     // }
+    if (!this.state.splashLoaded) {
+        return <SplashScreen />;
+      }
     return (<Provider store={store}>
       <Root />
     </Provider>);

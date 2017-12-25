@@ -11,12 +11,14 @@
     "react-test-renderer": "16.0.0"
   },
   "rnpm": {
-    "assets":[
+    "assets": [
       "./assets/fonts/"
     ]
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./ios/leigh365/main.jsbundle' --dev=false --platform='ios'",
+    "build:android": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./android/leigh365/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
     "test": "jest"
   },
   "dependencies": {

@@ -59,44 +59,44 @@ class StockList extends Component {
                 key={i}
                 onPress={() => (this.props.navigation.navigate('Report', { code: item.code }))}
                 title={
-                  <View style={styles.header}>
-                    <View style={styles.headerLeft}>
-                      <Text style={styles.headerText}>{item.name}</Text>
-                    </View>
-                    <View style={styles.headerCenter}>
-                      <Text style={styles.headerText}>{item.open}</Text>
-                    </View>
-                    <View style={styles.headerRight}>
-                      <Text style={item.price_change > 0 ? styles.headerRedText : styles.headerGreenText}>{item.price_change}</Text>
+                  <View style={styles.containerStyle}>
+                    <View style={styles.leftContainerStyle}>
+                      <View style={styles.header}>
+                        <View style={styles.headerLeft}>
+                          <Text style={styles.headerText}>{item.name}</Text>
+                        </View>
+                        <View style={styles.headerCenter}>
+                          <Text style={styles.headerText}>{item.open}</Text>
+                        </View>
+                        <View style={styles.headerRight}>
+                          <Text style={item.price_change > 0 ? styles.headerRedText : styles.headerGreenText}>{item.price_change}</Text>
+                        </View>
+                      </View>
+                      <View style={styles.footer}>
+                        <View style={styles.footerLeft}>
+                          <Text style={styles.footerText}>{ item.code }</Text>
+                        </View>
+                        <View style={styles.footerCenter}>
+                          <Text style={styles.footerText}>2:59 PM</Text>
+                        </View>
+                        <View style={styles.footerRight}>
+                          {
+                            item.price_change > 0 ?
+                              (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} iconStyle={{ paddingLeft: 20 }} />) :
+                              (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} iconStyle={{ paddingLeft: 20 }} />)
+                          }
+                          <Text style={item.price_change > 0 ? styles.footerRedText : styles.footerGreenText}>{ item.p_change }%</Text>
+                        </View>
+                      </View>
                     </View>
                     <View style={styles.buttonRight}>
-                       <Button style={styles.buttonItem}>
-                           <Text style={styles.buttonText}>+加入自选行情</Text>
-                       </Button>
+                        <Button style={styles.buttonItem}>
+                          <Text style={styles.buttonText}>+加入自选行情</Text>
+                        </Button>
                     </View>
                   </View>
                 }
                 hideChevron
-                subtitle={
-                  <View style={styles.footer}>
-                    <View style={styles.footerLeft}>
-                      <Text style={styles.footerText}>{ item.code }</Text>
-                    </View>
-                    <View style={styles.footerCenter}>
-                      <Text style={styles.footerText}>2:59 PM</Text>
-                    </View>
-                    <View style={styles.footerRight}>
-                      {
-                        item.price_change > 0 ?
-                          (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} iconStyle={{ paddingLeft: 20 }} />) :
-                          (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} iconStyle={{ paddingLeft: 20 }} />)
-                      }
-                      <Text style={item.price_change > 0 ? styles.footerRedText : styles.footerGreenText}>{ item.p_change }%</Text>
-                    </View>
-                    <View style={{ marginLeft: 45}} />
-                  </View>
-                }
-                subtitleContainerStyle={{ paddingTop: 3, paddingBottom: 2 }}
               />
             ))
           }
