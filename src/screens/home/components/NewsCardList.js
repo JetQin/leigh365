@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, RefreshControl } from 'react-native';
+import { View, ScrollView, Text, RefreshControl, Share } from 'react-native';
 import { Icon, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
 import Fonts from '../../../../constants/Fonts';
@@ -13,6 +13,8 @@ class NewsCardList extends Component {
       refreshing: false,
       news: [],
     };
+    this.shareNews = this.shareNews.bind(this);
+    this.showResult = this.showResult.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +27,31 @@ class NewsCardList extends Component {
     this.props.scroll().then(() => {
       this.setState({ refreshing: false, news: this.props.news });
     });
+  }
+
+  shareNews(){
+    Share.share({
+      message: 'Share test',
+      url: 'http:/synebussiness.cn/',
+      title: 'React Native'
+    }, {
+      dialogTitle: 'Share',
+      excludedActivityTypes: ['com.apple.UIKit.activity.PostToTwitter'],
+      tintColor: 'green',
+    }).then(this.showResult)
+      .catch((error) => this.setState({result: 'error:'+error.message}));
+  }
+
+  showResult() {
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        this.setState({result: 'shared with an activityType: ' + result.activityType});
+      } else {
+        this.setState({result: 'shared'});
+      }
+    } else if (result.action === Share.dismissedAction) {
+      this.setState({result: 'dismissed'});
+    }
   }
 
   render() {
@@ -57,7 +84,7 @@ class NewsCardList extends Component {
                   <Text style={styles.footerText}>{item.category}</Text>
                   <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
                   <Icon size={12} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                  <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={this.shareNews} />
                 </View>
               }
               subtitleContainerStyle={{ paddingLeft: 10, paddingTop: 8, paddingBottom: 5 }}
