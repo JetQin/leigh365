@@ -1402,7 +1402,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.synebusiness.leigh365;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.synebusiness.XinLiCaiJing;
 				PRODUCT_NAME = leigh365;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1431,7 +1431,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.synebusiness.leigh365;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.synebusiness.XinLiCaiJing;
 				PRODUCT_NAME = leigh365;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
