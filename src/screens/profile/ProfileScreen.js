@@ -5,7 +5,7 @@ import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
-import { NewsInfo, StockInfo, PricingCard } from './components/';
+import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
 
 const wordpressApi = new WordpressApi();
@@ -88,7 +88,6 @@ class ProfileScreen extends Component {
   }
 
   componentDidMount() {
-    // AsyncStorage.clear();
     this.loginSuccesful();
     this.fetchUserCollectNum();
   }
@@ -265,7 +264,7 @@ class ProfileScreen extends Component {
   render() {
     return (
       <View style={styles.root}>
-        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
+        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
           <Tab heading='我的新历'>
             <View style={styles.layout}>
               <View style={styles.top}>
@@ -335,9 +334,8 @@ class ProfileScreen extends Component {
               </View>
             </View>
           </Tab>
-          <Tab heading='动态' >
-            <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Bold', justifyContent: 'center', alignItems: 'center' }}>
-            后续版本将实现该功能</Text>
+          <Tab heading='博客' >
+            { BlogList }
           </Tab>
           <Tab heading='文章收藏夹' >
             <NewsInfo
