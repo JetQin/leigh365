@@ -271,14 +271,14 @@ class SigninScreen extends Component {
     return (
       <View style={styles.root}>
         <Tabs initialPage={0}>
-          <Tab heading='登陆'>
+          <Tab heading='登录'>
             <View style={styles.formTitle}>
               <Title>登陆</Title>
             </View>
             <View>
               <View>
                 <Input
-                  placeholder='请输入您的用户名或者注册邮箱'
+                  placeholder='手机号'
                   onChange={this.changeUsername}
                   helpInfo={this.state.usernameHelp}
                   ref={(c) => { this.usernameInput = c; }}
@@ -286,7 +286,16 @@ class SigninScreen extends Component {
               </View>
               <View>
                 <Input
-                  placeholder='请输入密码'
+                  placeholder='验证码'
+                  password={this.props.password}
+                  onChange={this.changePassword}
+                  helpInfo={this.state.passwordHelp}
+                  ref={(c) => { this.passwordInput = c; }}
+                />
+              </View>
+              <View>
+                <Input
+                  placeholder='手机验证码'
                   password={this.props.password}
                   onChange={this.changePassword}
                   helpInfo={this.state.passwordHelp}

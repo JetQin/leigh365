@@ -5,16 +5,21 @@ import { Button } from 'native-base';
 import Colors from '../../../../constants/Colors';
 
 import styles from './styles/StockList';
+import { WordpressApi } from '../../../../constants/api';
+
+const wordpressApi = new WordpressApi();
 
 class StockList extends Component {
+  static defaultProps ={
+    wordpressApi,
+  }
+  
   constructor(props) {
     super(props);
     this._onRefresh = this._onRefresh.bind(this);
-    this.addStockToList = this.addStockToList.bind(this);
     this.state = {
       refreshing: false,
       stocks: [],
-      code: '',
     };
   }
 
@@ -31,15 +36,8 @@ class StockList extends Component {
     });
   }
 
-  borderColor(value) {
-    return {
-      borderLeftWidth: 5,
-      borderStyle: 'solid',
-      borderLeftColor:  value > 0 ? Colors.$redColor : Colors.$greenColor,
-    }
-  }
-
-  async addStockToList() {
+  async addStock(code) {
+    console.log("stock code: " + code);
     const login = await AsyncStorage.getItem('@user_id');
     if (undefined === login || login === null) {
       Alert.alert('警告', '用户未登录，请先登录',
@@ -48,17 +46,16 @@ class StockList extends Component {
         ],
         { cancelable: false }
       );
-    } 
-    // else {
-    //   const params = { userId: login, code: this.props.code };
-    //   this.props.wordpressApi.addStockToList(params);
-    //   Alert.alert('提示', '收藏成功',
-    //     [
-    //       { text: '确定' },
-    //     ],
-    //     { cancelable: false }
-    //   );
-    // }
+    } else {
+      const params = { userId: login, code: code };
+      this.props.wordpressApi.addStockToList(params);
+      Alert.alert('提示', '收藏成功',
+        [
+          { text: '确定' },
+        ],
+        { cancelable: false }
+      );
+    }
   }
 
   render() {
@@ -114,7 +111,7 @@ class StockList extends Component {
                       </View>
                     </View>
                     <View style={styles.buttonRight}>
-                        <Button style={styles.buttonItem} onPress={this.addStockToList}>
+                        <Button style={styles.buttonItem} onPress={() => this.addStock(item.code)}>
                           <Text style={styles.buttonText}>+加入自选行情</Text>
                         </Button>
                     </View>
