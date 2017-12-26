@@ -69,6 +69,20 @@ const styles = EStyleSheet.create({
   labelCheck: {
     fontWeight: 'bold',
   },
+  textInputView:{
+    borderWidth: 1,
+    borderColor: 'green',
+    padding: 2,
+    marginBottom: 20
+  },
+  textInput:{
+    width: 200,
+    height: 44
+  },
+  stateText: {
+    paddingTop: 50,
+    color: 'gray'
+  }
 });
 
 export default styles;
