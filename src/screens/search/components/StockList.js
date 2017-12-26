@@ -39,7 +39,7 @@ class StockList extends Component {
     }
   }
 
-  async addStockToList() {
+  async addStockToList(code) {
     const login = await AsyncStorage.getItem('@user_id');
     if (undefined === login || login === null) {
       Alert.alert('警告', '用户未登录，请先登录',
@@ -114,7 +114,7 @@ class StockList extends Component {
                       </View>
                     </View>
                     <View style={styles.buttonRight}>
-                        <Button style={styles.buttonItem} onPress={this.addStockToList}>
+                        <Button style={styles.buttonItem} onPress={() => this.addStockToList(item.code)}>
                           <Text style={styles.buttonText}>+加入自选行情</Text>
                         </Button>
                     </View>
