@@ -335,7 +335,7 @@ class ProfileScreen extends Component {
             </View>
           </Tab>
           <Tab heading='博客' >
-            { BlogList }
+            <BlogList />
           </Tab>
           <Tab heading='文章收藏夹' >
             <NewsInfo
