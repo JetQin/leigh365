@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import { Tabs, ScrollableTab, Tab, Button } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
@@ -132,13 +132,16 @@ class NewsScreen extends Component {
     if (ref.props.heading === '发现') {
       this.find._onRefresh();
     }
+    if (ref.props.heading === '+') {
+      this.props.navigation.navigate('Item');
+    }
   }
 
   render() {
     return (
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
-          <Tabs renderTabBar={() => <ScrollableTab />} onChangeTab={({ ref }) => this.changeTab(ref)} >
+          <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} >
             <Tab heading='热点'>
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
             </Tab>
@@ -152,6 +155,9 @@ class NewsScreen extends Component {
               <NewsCard ref={(c) => { this.house = c; }} news={this.state.houseNews.data} scroll={this.updateHouseNews} navigation={this.props.navigation} />
             </Tab>
             <Tab heading='发现'>
+              <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
+            </Tab>
+            <Tab heading='+'>
               <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
             </Tab>
           </Tabs>

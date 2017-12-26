@@ -75,6 +75,7 @@ export default class NewsInfo extends Component {
                         </View>
                       </View>
                     }
+                    
                     right={
                       <Button danger onPress={() => this._deleteNews(item.id)}>
                         <Text>删除</Text>
