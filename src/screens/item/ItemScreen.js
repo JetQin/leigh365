@@ -39,11 +39,6 @@ class ItemScreen extends Component {
           <Button transparent dark style={styles.headerMid}>
             <Text style={{fontSize: 12}}>点击进入频道</Text>
           </Button>
-          <View style={[styles.cell, styles.smallBtn]}>
-            <Button small style={styles.buttonStyle}>
-              <Text>微信登陆</Text>
-            </Button>
-          </View>
           <Button rounded bordered danger small style={{ backgroundColor: 'green'}} onPress={() => this.doEditItem}>
               
           </Button>
