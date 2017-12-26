@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text} from 'react-native';
-import { Button } from 'native-base'; 
+import { View, Text, Alert} from 'react-native';
+import { Button, Icon } from 'native-base'; 
 import styles from './styles/ItemScreen';
+import { ItemCard, ItemDeleteCard } from './components/';
 
 
 class ItemScreen extends Component {
@@ -11,26 +12,46 @@ class ItemScreen extends Component {
 
   constructor(props) {
     super(props);
-
+    this.state = {
+      deleteIco: false,
+      myInterestText: '编辑sss',
+    }
   }
+
+  doEditItem() {
+    Alert.alert('aaaaaaaaaaaa');
+    if(this.state.deleteIco) { //完成
+      this.setState({myInterestText: '编辑'});
+    } else { //编辑
+      this.setState({myInterestText: '完成'});
+    }
+    this.setState({deleteIco: !this.state.deleteIco});
+  }
+
 
   render() {
     return (
     <View style={styles.container}>
       <View style={styles.myInterest}>
+        
         <View style={styles.header}>
           <Text style={styles.headerLeft}>我的频道</Text>
           <Button transparent dark style={styles.headerMid}>
             <Text style={{fontSize: 12}}>点击进入频道</Text>
           </Button>
-          <View style={{flex: 0.2}}>
-            <Button bordered small >
-              <Text style={{fontSize: 12}}>编辑</Text>
+          <View style={[styles.cell, styles.smallBtn]}>
+            <Button small style={styles.buttonStyle}>
+              <Text>微信登陆</Text>
             </Button>
           </View>
+          <Button rounded bordered danger small style={{ backgroundColor: 'green'}} onPress={() => this.doEditItem}>
+              
+          </Button>
         </View>
-        <View style={styles.myInterestHeaderContainer}>
-
+        <View style={styles.myInterestContainer}>
+          <ItemDeleteCard
+            delete={this.state.deleteIco}
+          />
         </View>
       </View>
       <View style={styles.interestSuggest}>
@@ -41,7 +62,7 @@ class ItemScreen extends Component {
           </Button>
         </View>
         <View style={styles.interestSuggesContainer}>
-        
+          <ItemCard/>
         </View>
       </View>
     </View>

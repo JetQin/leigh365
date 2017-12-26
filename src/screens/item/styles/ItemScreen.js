@@ -11,16 +11,14 @@ const styles = EStyleSheet.create({
   headerLeft: {
     flex: 0.3, 
     fontSize: 16,
-    color: '#252424'
   },
   headerMid: {
     flex: 0.5, 
-    color: '#DBDBDB'
   },
   myInterest: {
 
   },
-  myInterestHeaderContainer: {
+  myInterestContainer: {
 
   },
   editBtn: {
@@ -31,7 +29,22 @@ const styles = EStyleSheet.create({
   },
   interestSuggesContainer: {
 
-  }
+  },
+  cell: {
+    flex: 0.3, 
+    marginTop: '4%',  
+  },
+  smallBtn: {
+    justifyContent: 'center',
+  },
+  buttonStyle: {   
+    backgroundColor: '#6A97BE',
+  },
+  flexContainer: {
+    flexDirection: 'row',
+    marginLeft: '2%',
+    justifyContent: 'space-between'
+  },
 });
 
 export default styles;
