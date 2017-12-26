@@ -4,6 +4,7 @@ import { Icon, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
 import Fonts from '../../../../constants/Fonts';
 import styles from './styles/NewsCardList';
+import * as wechat from 'react-native-wechat';
 
 class NewsCardList extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class NewsCardList extends Component {
 
   componentDidMount() {
     this.setState({ news: this.props.news });
+    wechat.registerApp('wx8d560da3ba038e7e');
   }
 
   _onRefresh() {
