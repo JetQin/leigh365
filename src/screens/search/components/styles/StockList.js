@@ -49,7 +49,7 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
   },
   buttonItem: {
-    height: 20,
+    height: 25,
     paddingLeft: 3,
     paddingRight: 3,
     backgroundColor: Colors.$whiteColor,
