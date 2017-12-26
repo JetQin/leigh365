@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Image } from 'react-native';
+import { View, AsyncStorage, Image, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Tabs, Tab, Title, Button, Text } from 'native-base';
@@ -9,6 +9,7 @@ import styles from './styles/SigninScreen';
 import { authenticate, register } from './actions';
 import CheckBox from './components/CheckBox';
 import Input from './components/Input';
+import CountDownButton from './components/CountDownButton';
 
 @connect(
   state => ({
@@ -68,6 +69,8 @@ class SigninScreen extends Component {
       rPasswordRe: '',
       rPasswordReHelp: '',
       validateFlag: true,
+      phoneNum: '',
+      state: '这里显示状态',
     };
     this.signin = this.signin.bind(this);
     this.login = this.login.bind(this);
@@ -267,7 +270,14 @@ class SigninScreen extends Component {
     obj.setState({ helpInfo: '' });
   }
 
+  changePhoneNum(obj) {
+    this.setState({
+      phoneNum: obj
+    });
+  }
+
   render() {
+    const {phoneNum} = this.state;
     return (
       <View style={styles.root}>
         <Tabs initialPage={0}>
@@ -278,10 +288,9 @@ class SigninScreen extends Component {
             <View>
               <View>
                 <Input
-                  placeholder='手机号'
-                  onChange={this.changeUsername}
-                  helpInfo={this.state.usernameHelp}
-                  ref={(c) => { this.usernameInput = c; }}
+                  placeholder='手机号' 
+                  value={phoneNum} 
+                  onChange={(value) => this.changePhoneNum(value)}
                 />
               </View>
               <View>
@@ -296,11 +305,19 @@ class SigninScreen extends Component {
               <View>
                 <Input
                   placeholder='手机验证码'
-                  password={this.props.password}
-                  onChange={this.changePassword}
-                  helpInfo={this.state.passwordHelp}
-                  ref={(c) => { this.passwordInput = c; }}
                 />
+                <CountDownButton
+                  timerTitle={'获取验证码'}
+                  enable={phoneNum.length > 10}
+                  onClick={(shouldStartCounting)=>{
+                    this._requestAPI(shouldStartCounting)
+                  }}
+                  timerEnd={()=>{
+                    this.setState({
+                      state: '倒计时结束'
+                    })
+                  }}/>
+                <Text style={styles.stateText}>{this.state.state}</Text>
               </View>
               <View>
                 <CheckBox

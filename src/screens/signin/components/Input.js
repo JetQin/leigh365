@@ -47,6 +47,7 @@ class Input extends Component {
           onChangeText={this.props.onChange}
           ref={(c) => { this._myInput = c; }} 
           helpInfo={this.props.helpInfo}
+          value={this.props.value}
         />
         <Text style={styles.helpInfo} ref={(c) => { this._myText = c; }}>{this.state.helpInfo}</Text>
       </View>
