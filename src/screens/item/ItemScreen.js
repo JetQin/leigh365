@@ -51,6 +51,8 @@ class ItemScreen extends Component {
   constructor(props) {
     super(props);
     this.doEditItem = this.doEditItem.bind(this);
+    this.doAddItem = this.doAddItem.bind(this);
+    this.doRemoveItem = this.doRemoveItem.bind(this);
     this.state = {
       deleteIco: false,
       editText: '编辑',
@@ -83,6 +85,29 @@ class ItemScreen extends Component {
     const suggestItem = this.getSuggestInterest(myItem,this.props.items);
     this.setState({ myInterestItem: myItem});
     this.setState({ suggestInterestItem: suggestItem});
+  }
+
+  doAddItem() {
+    Alert.alert('add............');
+    // const login = await AsyncStorage.getItem('@user_id');
+    // const request = {
+    //   type: 'getUserInterest',
+    //   usesrId: login,
+    // };
+    // const myItem = await this.props.wordpressApi.fetchPosts(request);
+    // this.setState({ myInterestItem: myItem});
+    // this.setState({ suggestInterestItem: suggestItem});
+  }
+
+  doRemoveItem() {
+    Alert.alert('remove...............');
+    // const login = await AsyncStorage.getItem('@user_id');
+    // const request = {
+    //   type: 'getUserInterest',
+    //   usesrId: login,
+    // };
+    // const myItem = await this.props.wordpressApi.fetchPosts(request);
+    // this.setState({ myInterestItem: myItem});
   }
 
   getSuggestInterest(arry1,arry2) {
@@ -123,6 +148,7 @@ class ItemScreen extends Component {
             delete={this.state.deleteIco}
             items={this.state.myInterestItem}
             ref={(c) => { this.myInterest = c; }}
+            action={this.doRemoveItem}
           />
         </View>
       </View>
@@ -137,6 +163,7 @@ class ItemScreen extends Component {
           <ItemCard
             items={this.state.suggestInterestItem}
             ref={(c) => { this.suggestInterest = c; }}
+            action={this.doAddItem}
           />
         </View>
       </View>

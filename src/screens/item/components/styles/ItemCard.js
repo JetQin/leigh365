@@ -23,6 +23,7 @@ const styles = EStyleSheet.create({
     },
     icoContainer: {
         marginLeft: 3, 
+        marginRight: 3,
         fontSize: 15, 
         color: 'grey',
     }

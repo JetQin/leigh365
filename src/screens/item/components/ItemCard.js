@@ -8,14 +8,14 @@ class ItemCard extends Component {
 
   constructor(props) {
     super(props);
-    this.doAddItem = this.doAddItem.bind(this);
+    this._doAddItem = this._doAddItem.bind(this);
     this.state = {
         items:[]
     }
   }
 
-  doAddItem() {
-    Alert.alert('add');
+  _doAddItem() {
+    this.props.action();
   }
   
   render() {
@@ -24,7 +24,7 @@ class ItemCard extends Component {
         {
           this.props.items.map((item, i) => (             
             <View key={i} style={styles.itemContainer}>
-              <Button small light style={styles.btnContainer} onPress={this.doAddItem}>
+              <Button small light style={styles.btnContainer} onPress={this._doAddItem}>
                 <Icon type='ionicon' name='add' style={styles.icoContainer}/>
                 <Text>{item.name}</Text>                    
               </Button> 

@@ -4,21 +4,18 @@ import { Button, Icon } from 'native-base';
 import styles from './styles/ItemDeleteCard';
 import { Dimensions } from 'react-native';
 import Colors from '../../../../constants/Colors';
-const DimensionsWidth = Dimensions.get('window').width;
-const DimensionsHeight = Dimensions.get('window').height * 0.5;
-const width = 60;
 class ItemDeleteCard extends Component {
 
   constructor(props) {
     super(props);
-    this.doRemoveItem = this.doRemoveItem.bind(this);
+    this._doRemoveItem = this._doRemoveItem.bind(this);
     this.state = {
         items:[]
     }
   }
 
-  doRemoveItem() {
-    Alert.alert('remove');
+  _doRemoveItem(name) {
+    this.props.action(name);
   }
   
 
@@ -26,7 +23,7 @@ class ItemDeleteCard extends Component {
     let deleteIco = (<View/>);
     if(this.props.delete){
       deleteIco = (
-        <Button light iconLeft onPress={this.doRemoveItem} style={styles.deleteBtnContainer}>
+        <Button light iconLeft onPress={this._doRemoveItem} style={styles.deleteBtnContainer}>
           <Icon type='font-awesome' name='close' style={styles.deleteIconContainer}/>
         </Button> 
       );
