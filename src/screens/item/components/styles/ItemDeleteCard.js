@@ -3,39 +3,37 @@ import { Dimensions } from 'react-native';
 
 const DimensionsWidth = Dimensions.get('window').width;
 const DimensionsHeight = Dimensions.get('window').height * 0.5;
-const width = 60;
+const btnWidth = 60;
+const btnContainerWidth = btnWidth+20;
 const styles = EStyleSheet.create({
     container: {
         flexDirection: 'row', 
         flexWrap: 'wrap',
     },
-    deleteItemContainer: {
-        flexDirection : 'row', 
-        justifyContent: 'flex-end',
-    },
-    itemContainer: {
-        flexDirection: 'row',
-        margin: (DimensionsWidth/4-width)/2,
-    },
-    itemBtnContainer: {
-        width: width, 
-        justifyContent: 'center',
-    },
-    deleteContainer: {
-        position: 'relative',
-        right: 25 ,
-        top: 10,
-    },
     deleteBtnContainer: {
         justifyContent: 'center',
         width: 20,
         height: 20, 
-        borderRadius: 10,
+        borderRadius: 10,  
+        position: 'relative',
+        right: 12 ,
+        bottom: 8,     
     },
     deleteIconContainer: {
         marginLeft: 0, 
-        color: 'white', 
-        fontSize: 20,
+        color: 'grey', 
+        fontSize: 16,
+    },
+    itemContainer: {
+        marginLeft: (DimensionsWidth/4-btnContainerWidth)/2, 
+        marginRight: (DimensionsWidth/4-btnContainerWidth)/2, 
+        width:btnContainerWidth,
+        padding:10, 
+        flexDirection: 'row',
+    },
+    btnContainer: {
+        width: btnWidth, 
+        justifyContent: 'center',
     }
 });
 

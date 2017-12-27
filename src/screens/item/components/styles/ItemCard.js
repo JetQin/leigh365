@@ -3,23 +3,28 @@ import { Dimensions } from 'react-native';
 
 const DimensionsWidth = Dimensions.get('window').width;
 const DimensionsHeight = Dimensions.get('window').height * 0.5;
-const width = 60;
+const btnWidth = 60;
+const btnContainerWidth = btnWidth+20;
 const styles = EStyleSheet.create({
     container: {
         flexDirection: 'row', 
         flexWrap: 'wrap'
     },
+    itemContainer: {
+        marginLeft: (DimensionsWidth/4-btnContainerWidth)/2, 
+        marginRight: (DimensionsWidth/4-btnContainerWidth)/2, 
+        width:btnContainerWidth,
+        padding:10, 
+        flexDirection: 'row'
+    },
     btnContainer: {
-        width: width, 
-        margin: (DimensionsWidth/4-width)/2, 
-        paddingRight: 8
+        width: btnWidth, 
+        justifyContent: 'center'
     },
     icoContainer: {
-        fontSize: 20,
-        marginLeft: 5,
-    },
-    textContainer: {
-        paddingLeft: 5,
+        marginLeft: 3, 
+        fontSize: 15, 
+        color: 'grey',
     }
 });
 

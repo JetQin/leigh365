@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Colors from '../../../../constants/Colors';
 
 const styles = EStyleSheet.create({
   container:{
@@ -7,6 +8,7 @@ const styles = EStyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: '2%',
   },
   headerLeft: {
     flex: 0.3, 
@@ -22,28 +24,20 @@ const styles = EStyleSheet.create({
 
   },
   editBtn: {
-
+    height: '40%',
+    width: 40,
+    marginTop: '4%'
+  },
+  editText: {
+    color: Colors.$redColor, 
+    fontSize: 12, 
+    paddingLeft: '18%'
   },
   interestSuggest: {
 
   },
   interestSuggesContainer: {
 
-  },
-  cell: {
-    flex: 0.3, 
-    marginTop: '4%',  
-  },
-  smallBtn: {
-    justifyContent: 'center',
-  },
-  buttonStyle: {   
-    backgroundColor: '#6A97BE',
-  },
-  flexContainer: {
-    flexDirection: 'row',
-    marginLeft: '2%',
-    justifyContent: 'space-between'
   },
 });
 
