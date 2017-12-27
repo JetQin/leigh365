@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, Image, TextInput } from 'react-native';
 import { Avatar, List, ListItem } from 'react-native-elements';
 import { Button } from 'native-base';
+import ImagePicker from 'react-native-image-picker';
+
 import Colors from '../../../constants/Colors';
 import styles from './styles/PostScreen';
 
@@ -32,14 +34,43 @@ class PostScreen extends Component {
 
     constructor(props){
         super(props);
-        this.state = {status: '', wordCount: 0, location: ''}
+        this.state = {status: '', wordCount: 0, location: '', image1:'', image2: '', image3: '' }
         this.updatePost = this.updatePost.bind(this);
+        this.selectImage = this.selectImage.bind(this);
     }
 
     updatePost(text) {
         this.setState({ status: text, wordCount: text.length });
     }
     
+    selectImage() {
+        let options = {
+            title: '选择照片',
+            takePhotoButtonTitle: '拍照',
+            chooseFromLibraryButtonTitle: '相册',
+            cancelButtonTitle: "取消",
+        };
+
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+          
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+              console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+              let source = { uri: response.uri };
+              this.setState({ image1: response.uri });
+            }
+        });
+
+    }
+
     render() {
         return (
             <View style={styles.root}>
@@ -54,10 +85,10 @@ class PostScreen extends Component {
                     <Text>{this.state.wordCount}/150</Text>
                 </View>
                 <View style={styles.imageContainer}>
-                    <Avatar
-                        large
+                     <Image source={this.state.image1} style={styles.uploadAvatar} />
+                    <Avatar large
                         title='+'
-                        onPress={() => console.log('Works!')}
+                        onPress={this.selectImage}
                         activeOpacity={0.7}
                         containerStyle={{ paddingLeft: 10, paddingRight: 10, paddingBottom:5 }}
                     />
