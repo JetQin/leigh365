@@ -17,10 +17,11 @@ const styles = EStyleSheet.create({
         borderRadius: 10,  
         position: 'relative',
         right: 12 ,
-        bottom: 8,     
+        bottom: 8,   
     },
     deleteIconContainer: {
         marginLeft: 0, 
+        marginRight: 0,
         color: 'grey', 
         fontSize: 16,
     },
