@@ -10,23 +10,10 @@ class ItemDeleteCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        items:[
-            {name: '推荐'},
-            {name: '科技'},
-            {name: '财经'},
-            {name: '国际'},
-            {name: '股票'},
-            {name: '深圳'},
-            {name: '房产'},
-        ]
+        items:[]
     }
 
   }
-
-  componentDidMount() {
-  }
-
-
 
   render() {
     let deleteIco = (<View/>);
@@ -42,7 +29,7 @@ class ItemDeleteCard extends Component {
     return (
       <View style={styles.container}>
         {
-          this.state.items.map((item, i) => (
+          this.props.items.map((item, i) => (
             <View key={i} style={styles.deleteItemContainer}>
                 <View style={styles.itemContainer}>        
                     <Button small light style={styles.itemBtnContainer}>

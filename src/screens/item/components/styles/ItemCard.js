@@ -11,7 +11,9 @@ const styles = EStyleSheet.create({
     },
     btnContainer: {
         width: width, 
-        margin: (DimensionsWidth/4-width)/2, 
+        marginLeft: (DimensionsWidth/4-width)/2, 
+        marginRight: (DimensionsWidth/4-width)/2, 
+        marginBottom:(DimensionsWidth/4-width)/2,
         paddingRight: 8
     },
     icoContainer: {

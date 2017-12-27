@@ -15,7 +15,9 @@ const styles = EStyleSheet.create({
     },
     itemContainer: {
         flexDirection: 'row',
-        margin: (DimensionsWidth/4-width)/2,
+        marginLeft: (DimensionsWidth/4-width)/2, 
+        marginRight: (DimensionsWidth/4-width)/2, 
+        marginBottom:(DimensionsWidth/4-width)/2,
     },
     itemBtnContainer: {
         width: width, 
