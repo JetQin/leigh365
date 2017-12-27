@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import { HomeNavigator } from './HomeNavigator';
-import { LoginScreen, SigninScreen, SignupScreen, SearchScreen, ViewHtml, ReportScreen, ItemScreen } from '../screens';
+import { LoginScreen, SigninScreen, SignupScreen, SearchScreen, ViewHtml, ReportScreen, ItemScreen, PostScreen } from '../screens';
 
 export default StackNavigator({
   Home: { screen: HomeNavigator },
@@ -11,6 +11,7 @@ export default StackNavigator({
   ViewHtml: { screen: ViewHtml },
   Report: { screen: ReportScreen },
   Item: { screen: ItemScreen },
+  Post: { screen: PostScreen },
 },
 {
   mode: 'modal',

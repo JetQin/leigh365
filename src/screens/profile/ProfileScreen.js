@@ -30,7 +30,7 @@ class ProfileScreen extends Component {
     );
 
     const headerRight = (
-        <Button transparent onPress={() => navigation.navigate('Search')}>
+        <Button transparent onPress={() => navigation.navigate('Post')}>
           <Icon type='ionicon' name='md-add' size={30} color={Colors.$navigationHeaderTextColor} iconStyle={{ paddingRight: 10}}/>
         </Button>
     );
