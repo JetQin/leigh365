@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import Colors from '../../../../constants/Colors';
 
 const styles = EStyleSheet.create({
   root: {
@@ -70,11 +71,11 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    color: 'black',
-    left: 15,
+    color: Colors.$navigationHeaderTextColor,
+    // left: 15,
     fontSize: 18,
-    paddingTop: 12,
-    fontFamily: 'Montserrat-Regular',
+    paddingLeft: 10,
+    fontFamily: 'Montserrat-Bold',
   },
   title: {
     fontSize: 16,

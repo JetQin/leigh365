@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
-import { Icon, List, ListItem, ListView, Avatar } from 'react-native-elements';
+import { View, ScrollView, Text, Image } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { List, ListItem, Card, CardItem, Thumbnail, Button, Left, Body, Right} from 'native-base';
 
+import Colors from '../../../../constants/Colors';
 import styles from './styles/BlogList';
 
 export default class BlogList extends Component {
@@ -11,73 +13,92 @@ export default class BlogList extends Component {
         this.state= {
             blogs: [
                 {
-                    date: '2017/12/18',
+                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                     name: 'Pony',
-                    title: 'Appointments',
+                    date: '1小时前',
+                    reading: '10',
+                    status: 'Hsldfksldfksldf asdfjakfjkajdfla kasjdfkjaslfjasljf',
                     image1: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                     image2: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                     image3: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                    icon: 'bandcamp',
+                    share: '4',
+                    comments: '5',
+                    likes: '20',
                   },
                   {
-                    date: '2017/12/18',
+                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                     name: 'Pony',
-                    title: 'Trips',
+                    date: '1小时前',
+                    reading: '10',
+                    status: 'Hsldfksldfksldf asdfjakfjkajdfla kasjdfkjaslfjasljf',
                     image1: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                     image2: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
                     image3: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                    icon: 'user-circle-o',
+                    share: '4',
+                    comments: '5',
+                    likes: '20',
                   },
               ],
         }
     }
 
-
     render() {
         return (
-            <List>
-                {
-                    this.state.blogs.map((item, i) => (
-                        <ListItem
-                            key={i}
-                            hideChevron
-                            avatar={
-                                <Avatar
-                                rounded
-                                source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
-                                title={item.title}
-                            />}
-                            title={item.title}
-                            containerStyle={{ paddingTop: 10, paddingBottom: 100}}
-                            subtitle={
-                                <View style={styles.subtitle}>
-                                    {/* <View style={styles.contentContainer}> */}
-                                        <Text style={styles.content}> You miss fdddddd dddddddd You miss fdddddd dddddddd</Text>
-                                    {/* </View> */}
-                                    <View style={styles.imageContainer}>
-                                        <Image
-                                            style={styles.image}
-                                            source={{uri: item.image1}}
-                                        />
-                                        <Image
-                                            style={styles.image}
-                                            source={{uri: item.image2}}
-                                        />
-                                        <Image
-                                            style={styles.image}
-                                            source={{uri: item.image3}}
-                                        />
+            <ScrollView>
+                <List>
+                   {
+                    this.state.blogs.map((item, i) => {
+                    return (
+                        <ListItem key={i} itemDivider={false}>
+                            <Card>
+                                <CardItem>
+                                    <Left>
+                                        <Thumbnail source={{uri: item.avatar }} />
+                                        <Body>
+                                            <Text style={styles.userTitle}>{item.name}</Text>
+                                            <Text style={styles.timeTitle} note>{item.date}</Text>
+                                        </Body>
+                                    </Left>
+                                    <Right>
+                                        <Button bordered small><Text style={styles.readTitle}> {item.reading} 阅读 </Text></Button>
+                                    </Right>
+                                </CardItem>
+                                <CardItem cardBody>
+                                    <View style={styles.body}>
+                                        <View>
+                                            <Text style={styles.content}>{item.status}</Text>
+                                        </View>
+                                        <View style={styles.imageContainer}>
+                                            <Image source={{uri: item.image1}} style={{height: 50, width: 50, flex: 1}}/>
+                                            <Image source={{uri: item.image2}} style={{height: 50, width: 50, flex: 1}}/>
+                                            <Image source={{uri: item.image3}} style={{height: 50, width: 50, flex: 1}}/>
+                                        </View>
                                     </View>
+                                </CardItem>
+                                <CardItem>
                                     <View style={styles.footer}>
-                                        <Icon type='font-awesome' size={16} name='bookmark' />
-                                        <Icon type='font-awesome' size={16} name='heartbeat' />
+                                        <Button transparent>
+                                            <Icon name="share" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+                                            <Text style={styles.footerText}>{item.share}</Text>
+                                        </Button>
+                                        <Button transparent>
+                                            <Icon name="ios-chatbubbles" type='ionicon' color={Colors.$navigationHeaderTextColor} size={16} />
+                                            <Text style={styles.footerText}>{item.comments}</Text>
+                                        </Button>
+                                        <Button transparent>
+                                            <Icon name="thumbs-up"  type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16} />
+                                            <Text style={styles.footerText}>{item.likes}</Text>
+                                        </Button>
                                     </View>
-                                </View>
-                            }
-                        />
-                    ))
-                }
-            </List>
+                                </CardItem>
+                            </Card>
+                        </ListItem>
+                      );
+                    })
+                  }
+                </List>
+            </ScrollView>
         );
     }
+
 }
