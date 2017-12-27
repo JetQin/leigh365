@@ -337,7 +337,7 @@ class ProfileScreen extends Component {
           <Tab heading='博客' >
             <BlogList />
           </Tab>
-          <Tab heading='文章收藏夹' >
+          <Tab heading='收藏夹' >
             <NewsInfo
               ref={(c) => { this.articleCard = c; }}
               news={this.state.myArticle.data}

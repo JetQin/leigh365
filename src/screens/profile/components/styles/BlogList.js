@@ -8,27 +8,52 @@ const styles = EStyleSheet.create({
     marginTop: 5,
     marginBottom: 3,
   },
-  title: {
-    flex: 1,
-    flexDirection: 'row',
+  userTitle: {
+    fontSize: 13,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$grayTextColor,
+    paddingLeft: 3,
+    backgroundColor: 'transparent',
   },
-  subtitle: {
-    flex: 1,
+  timeTitle: {
+    fontSize: 10,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$blueTextColor,
+    paddingLeft: 3,
+    backgroundColor: 'transparent',
   },
-  contentContainer: {
-    flexDirection:'row',
-    flexWrap: 'wrap',
+  readTitle: {
+    fontSize: 11,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$blueTextColor,
+    backgroundColor: 'transparent',
+  },
+  body: {
+    flex: 1,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  status: {
+    flex: 1,
   },
   content: {
-    fontSize: 16,
+    fontSize: 13,
     fontFamily: 'Montserrat-Regular',
-    color: Colors.$black,
+    color: Colors.$grayTextColor,
     paddingLeft: 10,
     backgroundColor: 'transparent',
   },
   imageContainer: {
     flex: 1,
     flexDirection: 'row',
+    paddingTop: 10,
+  },
+  footerText: {
+    fontSize: 12,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$grayTextColor,
+    paddingLeft: 10,
+    backgroundColor: 'transparent',
   },
   image: {
     flex: 0.3,
@@ -42,11 +67,11 @@ const styles = EStyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'space-b',
-    justifyContent: 'flex-end',
-    paddingTop: 86,
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
+    paddingRight: 0,
   }
 
 });
