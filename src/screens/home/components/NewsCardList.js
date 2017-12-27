@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, RefreshControl, Share } from 'react-native';
+import { View, ScrollView, Text, RefreshControl, Share, Alert } from 'react-native';
 import { Icon, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
 import Fonts from '../../../../constants/Fonts';
 import styles from './styles/NewsCardList';
+// import * as WeChat from 'react-native-wechat';
 
 class NewsCardList extends Component {
   constructor(props) {
@@ -17,8 +18,9 @@ class NewsCardList extends Component {
     this.showResult = this.showResult.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ news: this.props.news });
+    // await WeChat.registerApp('wx8d560da3ba038e7e');
   }
 
   _onRefresh() {
@@ -30,16 +32,28 @@ class NewsCardList extends Component {
   }
 
   shareNews(){
-    Share.share({
-      message: 'Share test',
-      url: 'http:/synebussiness.cn/',
-      title: 'React Native'
-    }, {
-      dialogTitle: 'Share',
-      excludedActivityTypes: ['com.apple.UIKit.activity.PostToTwitter'],
-      tintColor: 'green',
-    }).then(this.showResult)
-      .catch((error) => this.setState({result: 'error:'+error.message}));
+    // Share.share({
+    //   message: 'Share test',
+    //   url: 'http:/synebussiness.cn/',
+    //   title: 'React Native'
+    // }, {
+    //   dialogTitle: 'Share',
+    //   excludedActivityTypes: ['com.apple.UIKit.activity.PostToTwitter'],
+    //   tintColor: 'green',
+    // }).then(this.showResult)
+    //   .catch((error) => this.setState({result: 'error:'+error.message}));
+
+    // WeChat.isWXAppInstalled()
+    // .then((isInstalled) => {
+    //   if (isInstalled) {
+    //     WeChat.shareToSession({type: 'text', description: '测试微信好友分享文本'})
+    //     .catch((error) => {
+    //       Alert.alert(error.message);
+    //     });
+    //   } else {
+    //     Alert.alert('没有安装微信软件，请您安装微信之后再试');
+    //   }
+    // });
   }
 
   showResult() {

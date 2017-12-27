@@ -283,25 +283,25 @@ class SigninScreen extends Component {
         <Tabs initialPage={0}>
           <Tab heading='登录'>
            <View>
-              <TextInput
+              <TextInput style={[styles.borderStyle, styles.inputStyle]} underlineColorAndroid='transparent'
                 placeholder={'手机号' }
                 value={phoneNum} 
                 onChangeText={(value) => this.changePhoneNum(value)}
                 />
             </View>
             <View>
-              <TextInput
+              <TextInput style={[styles.borderStyle, styles.inputStyle]} underlineColorAndroid='transparent'
                 placeholder={'验证码'}
               />
             </View>
             <View style={styles.verifyCodeContainer}>
               <View style={styles.verifyLeft}>
-                <TextInput
+                <TextInput style={styles.borderStyle} underlineColorAndroid='transparent'
                     placeholder={'手机验证码'}
                 />
               </View>
-              <View style={styles.verifyRight}>
-                <CountDownButton style={styles.fecheVerifyCodeStyle}
+              <View style={[styles.borderStyle, styles.verifyRight]}>
+                <CountDownButton
                   timerTitle={'获取验证码'}
                    enable={phoneNum.length > 10}
                   onClick={(shouldStartCounting)=>{
@@ -314,15 +314,18 @@ class SigninScreen extends Component {
                 }}/>
               </View>
             </View>
-              {/* <View>
-                <CheckBox
-                  label="下次自动登陆" checked={this.state.aotoLogin}
-                  value={this.state.aotoLogin}
-                  checkStyle={styles.check}
-                  labelStyle={styles.labelCheck}
+            <View>
+              <CheckBox
+                label="我已阅读并同意用户协议和隐私条款" checked={this.state.aotoLogin}
+                value={this.state.aotoLogin}
+                checkStyle={styles.check}
+                labelStyle={styles.labelCheck}
                 />
-              </View>
             </View>
+            <View>
+              <Button Info><Text> sd </Text></Button>
+            </View>
+            {/*</View>
             <View style={styles.flexContainer}>
               <View style={styles.cell}>
                 <Button style={styles.buttonStyle} onPress={this.login} >

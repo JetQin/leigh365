@@ -12,4 +12,4 @@ export * from './search';
 export * from './webview';
 export * from './reports';
 export * from './item';
-
+export * from './post';

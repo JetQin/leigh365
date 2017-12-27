@@ -14,4 +14,6 @@ export default {
   $navigationHeaderTextColor: '#0090D7',
   $chartLegend: '#34495E',
   $chartColor: '#2980B9',
+  $blueTextColor: '#4987EF',
+  $grayTextColor: '#949494',
 };

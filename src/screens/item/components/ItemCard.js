@@ -3,40 +3,32 @@ import { View, Text, ScrollView, RefreshControl, AsyncStorage, Alert } from 'rea
 import { Button, Icon } from 'native-base';
 import styles from './styles/ItemCard';
 import { Dimensions } from 'react-native';
-import Colors from '../../../../constants/Colors';
 
 class ItemCard extends Component {
 
   constructor(props) {
     super(props);
+    this._doAddItem = this._doAddItem.bind(this);
     this.state = {
-        items:[
-            {name: '推荐'},
-            {name: '科技'},
-            {name: '财经'},
-            {name: '国际'},
-            {name: '股票'},
-            {name: '深圳'},
-            {name: '房产'},
-        ]
+        items:[]
     }
-
   }
 
-  componentDidMount() {
+  _doAddItem() {
+    this.props.action();
   }
-
-
-
+  
   render() {
     return (
       <View style={styles.container}>
         {
-          this.state.items.map((item, i) => (
-            <Button key={i} iconLeft small light style={styles.btnContainer}>
-              <Icon type='ionicon' name='add' style={styles.icoContainer}/>
-              <Text style={styles.textContainer}>{item.name}</Text>
-            </Button>
+          this.props.items.map((item, i) => (             
+            <View key={i} style={styles.itemContainer}>
+              <Button small light style={styles.btnContainer} onPress={this._doAddItem}>
+                <Icon type='ionicon' name='add' style={styles.icoContainer}/>
+                <Text>{item.name}</Text>                    
+              </Button> 
+            </View>
           ))
         }
       </View>

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   checkbox: {
     width: 16,
     height: 16,
+    color: '#1C86EE',
   },
   labelContainer: {
     marginLeft: 10,

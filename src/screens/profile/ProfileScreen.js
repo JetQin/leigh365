@@ -5,7 +5,7 @@ import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
-import { NewsInfo, StockInfo, PricingCard } from './components/';
+import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
 
 const wordpressApi = new WordpressApi();
@@ -23,33 +23,17 @@ class ProfileScreen extends Component {
       borderBottomColor: Colors.$navigationHeaderTextColor,
       borderStyle: 'solid',
     };
-    let headerLeft = (
-      <View style={{ flex: 1, flexDirection: 'row', width: 120 }}>
-        <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
-        <Text style={styles.headerTitle}>新历财经</Text>
-      </View>
-    );
-
-    const searchBtn = (
+    const headerLeft = (
         <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
+          <Text style={styles.headerTitle}>设置</Text>
         </Button>
     );
-    let headerRight = (
-      <View>
-        {searchBtn}
-      </View>
+
+    const headerRight = (
+        <Button transparent onPress={() => navigation.navigate('Post')}>
+          <Icon type='ionicon' name='md-add' size={30} color={Colors.$navigationHeaderTextColor} iconStyle={{ paddingRight: 10}}/>
+        </Button>
     );
-    if (params.isLogin) {
-      headerRight = (
-        <View style={{ flex: 1, flexDirection: 'row',width: 60,paddingRight: '5%' }}>
-          <View style={{flex: 0.5}}>{searchBtn}</View>
-          <Button bordered onPress={params.logout} style={{ flex: 0.5, height: '60%', marginTop: '15%', borderColor: Colors.$navigationHeaderTextColor }}>
-            <Text style={{ color: Colors.$navigationHeaderTextColor }}>登出</Text>
-          </Button>
-        </View>
-      );
-    }
 
     const tabBarIcon = ({ tintColor }) => (
       <Icon type='material-community' name="account-circle" size={25} color={tintColor} />
@@ -88,7 +72,6 @@ class ProfileScreen extends Component {
   }
 
   componentDidMount() {
-    // AsyncStorage.clear();
     this.loginSuccesful();
     this.fetchUserCollectNum();
   }
@@ -265,7 +248,7 @@ class ProfileScreen extends Component {
   render() {
     return (
       <View style={styles.root}>
-        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
+        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
           <Tab heading='我的新历'>
             <View style={styles.layout}>
               <View style={styles.top}>
@@ -335,11 +318,10 @@ class ProfileScreen extends Component {
               </View>
             </View>
           </Tab>
-          <Tab heading='动态' >
-            <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Bold', justifyContent: 'center', alignItems: 'center' }}>
-            后续版本将实现该功能</Text>
+          <Tab heading='博客' >
+            <BlogList />
           </Tab>
-          <Tab heading='文章收藏夹' >
+          <Tab heading='收藏夹' >
             <NewsInfo
               ref={(c) => { this.articleCard = c; }}
               news={this.state.myArticle.data}
