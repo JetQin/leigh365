@@ -69,19 +69,17 @@ const styles = EStyleSheet.create({
   labelCheck: {
     fontWeight: 'bold',
   },
-  textInputView:{
-    borderWidth: 1,
-    borderColor: 'green',
-    padding: 2,
-    marginBottom: 20
+  verifyCodeContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  textInput:{
-    width: 200,
-    height: 44
+  verifyLeft:{
+    flex: 0.7,
   },
-  stateText: {
-    paddingTop: 50,
-    color: 'gray'
+  verifyRight: {
+    flex: 0.3,
   }
 });
 
