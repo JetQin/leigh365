@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
 import { Avatar, List, ListItem } from 'react-native-elements';
 import { Button } from 'native-base';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import Colors from '../../../constants/Colors';
 import styles from './styles/PostScreen';
@@ -44,30 +45,44 @@ class PostScreen extends Component {
     }
     
     selectImage() {
-        let options = {
-            title: '选择照片',
-            takePhotoButtonTitle: '拍照',
-            chooseFromLibraryButtonTitle: '相册',
-            cancelButtonTitle: "取消",
-        };
+        // let options = {
+        //     title: '选择照片',
+        //     takePhotoButtonTitle: '拍照',
+        //     chooseFromLibraryButtonTitle: '相册',
+        //     cancelButtonTitle: "取消",
+        // };
 
-        ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
+        // ImagePicker.showImagePicker(options, (response) => {
+        //     console.log('Response = ', response);
           
-            if (response.didCancel) {
-              console.log('User cancelled image picker');
-            }
-            else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
-            }
-            else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
-            }
-            else {
-              let source = { uri: response.uri };
-              this.setState({ image1: response.uri });
-            }
-        });
+        //     if (response.didCancel) {
+        //       console.log('User cancelled image picker');
+        //     }
+        //     else if (response.error) {
+        //       console.log('ImagePicker Error: ', response.error);
+        //     }
+        //     else if (response.customButton) {
+        //       console.log('User tapped custom button: ', response.customButton);
+        //     }
+        //     else {
+        //         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        //       let source = { uri: response.uri };
+        //     //   this.setState({ image1: response.uri });
+        //     //   console.log(this.state);
+        //          this.setState({ avatarSource: source });
+        //     }
+        // });
+
+        ImagePicker.openPicker({
+            width: 100,
+            height: 100,
+            // multiple: true,
+            // minFiles: 1,
+            // maxFiles: 3,
+            cropping: true
+          }).then(image => {
+            console.log(image);
+          });
 
     }
 
@@ -85,8 +100,8 @@ class PostScreen extends Component {
                     <Text>{this.state.wordCount}/150</Text>
                 </View>
                 <View style={styles.imageContainer}>
-                     <Image source={this.state.image1} style={styles.uploadAvatar} />
-                    <Avatar large
+                    <Image source={this.state.avatarSource} style={styles.uploadAvatar} />
+                    <Avatar xlarge
                         title='+'
                         onPress={this.selectImage}
                         activeOpacity={0.7}

@@ -36,7 +36,13 @@ class ItemDeleteCard extends Component {
               <Button small light style={styles.btnContainer}>
                 <Text>{item.name}</Text>                    
               </Button> 
-              {deleteIco}
+              {
+                  this.props.delete ?  (
+                    <Button light iconLeft onPress={this._doRemoveItem} style={styles.deleteBtnContainer}>
+                      <Icon type='font-awesome' name='close' style={styles.deleteIconContainer}/>
+                    </Button> 
+                  ) : <View/>
+             }
             </View>
           ))
         }

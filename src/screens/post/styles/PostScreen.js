@@ -27,6 +27,8 @@ const styles = EStyleSheet.create({
   },
 
   imageContainer: {
+    flex: 1,
+    flexDirection: 'row',
     paddingLeft: 10,
   }
 
