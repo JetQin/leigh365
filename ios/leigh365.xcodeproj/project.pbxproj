@@ -58,6 +58,7 @@
 		8A4D2A137C4745ABAB3615DB /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CAFBCA57EDB40AA9FF22878 /* FontAwesome.ttf */; };
 		A85E93A29FC743D98BD21F79 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAE4A27B77A44B9F9FD2BC8B /* Foundation.ttf */; };
 		AA060CB42B49465C80815A19 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 030D1ADA8A114B618524F80C /* Entypo.ttf */; };
+		ABC6BD8E03F041C4978379EA /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 183382EE374F4D3880330C13 /* libRNImagePicker.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B25C5008DB7F457BAAE48896 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23B9AF6E31374EF2A0834996 /* Foundation.ttf */; };
 		B7FAAC7123884524878623D1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78F15340318D4B40977D0C06 /* EvilIcons.ttf */; };
@@ -373,6 +374,13 @@
 			remoteGlobalIDString = 10D6D7A41F160C250066F0F3;
 			remoteInfo = RCTWeChatTests;
 		};
+		C5F89C081FF38E0A005A66FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FDF009C6DA94D62BCA5A9D0 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -400,6 +408,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = leigh365/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = leigh365/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		183382EE374F4D3880330C13 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		1FDF009C6DA94D62BCA5A9D0 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		23B9AF6E31374EF2A0834996 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		278B35622CF0437F912101CF /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		288B896718DA425FAECD4E58 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
@@ -486,6 +496,7 @@
 				5EC929415A5146B595283C86 /* libjschelpers.a in Frameworks */,
 				315D4291120E469CACCE0907 /* libthird-party.a in Frameworks */,
 				702243D035E8424A8D1A6AF5 /* libdouble-conversion.a in Frameworks */,
+				ABC6BD8E03F041C4978379EA /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +674,7 @@
 				FD4D32A671C141319810E7C7 /* InAppUtils.xcodeproj */,
 				0FB39BFD4AEC4373A0B2E681 /* RNVectorIcons.xcodeproj */,
 				07455EFB870046219A5657C1 /* RCTWeChat.xcodeproj */,
+				1FDF009C6DA94D62BCA5A9D0 /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -765,6 +777,7 @@
 				A8183BCA7FC84AE2A70A21C8 /* libjschelpers.a */,
 				5347F86EE11F437C85CED02A /* libthird-party.a */,
 				EC3C906D419A4195B036E5EE /* libdouble-conversion.a */,
+				183382EE374F4D3880330C13 /* libRNImagePicker.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -796,6 +809,14 @@
 			children = (
 				C5D075161FF1E24C006FE072 /* libRCTWeChat.a */,
 				C5D075181FF1E24C006FE072 /* RCTWeChatTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5F89C051FF38E0A005A66FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5F89C091FF38E0A005A66FB /* libRNImagePicker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -970,6 +991,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = C5F89C051FF38E0A005A66FB /* Products */;
+					ProjectRef = 1FDF009C6DA94D62BCA5A9D0 /* RNImagePicker.xcodeproj */;
 				},
 				{
 					ProductGroup = C506504D1FE8217F00191F33 /* Products */;
@@ -1267,6 +1292,13 @@
 			remoteRef = C5D075171FF1E24C006FE072 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C5F89C091FF38E0A005A66FB /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = C5F89C081FF38E0A005A66FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1424,12 +1456,14 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = leigh365Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1458,12 +1492,14 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = leigh365Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1498,6 +1534,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = leigh365/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1530,6 +1567,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = leigh365/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1564,11 +1602,13 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = "leigh365-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1607,11 +1647,13 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = "leigh365-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1656,6 +1698,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.leigh365-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1680,6 +1723,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

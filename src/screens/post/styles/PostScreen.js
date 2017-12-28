@@ -21,6 +21,11 @@ const styles = EStyleSheet.create({
     justifyContent: 'flex-end',
   },
 
+  uploadAvatar: {
+    width: 100,
+    height: 100,
+  },
+
   imageContainer: {
     paddingLeft: 10,
   }
