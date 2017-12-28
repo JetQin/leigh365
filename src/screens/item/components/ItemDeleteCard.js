@@ -14,20 +14,12 @@ class ItemDeleteCard extends Component {
     }
   }
 
-  _doRemoveItem(name) {
-    this.props.action(name);
+  _doRemoveItem(id) {
+    this.props.action(id);
   }
   
 
   render() {
-    let deleteIco = (<View/>);
-    if(this.props.delete){
-      deleteIco = (
-        <Button light iconLeft onPress={this._doRemoveItem} style={styles.deleteBtnContainer}>
-          <Icon type='font-awesome' name='close' style={styles.deleteIconContainer}/>
-        </Button> 
-      );
-    }
     return (
       <View style={styles.container}>
         {
@@ -36,7 +28,13 @@ class ItemDeleteCard extends Component {
               <Button small light style={styles.btnContainer}>
                 <Text>{item.name}</Text>                    
               </Button> 
-              {deleteIco}
+              {
+                this.props.delete? 
+              <Button light iconLeft onPress={() => this._doRemoveItem(item.id)} style={styles.deleteBtnContainer}>
+                <Icon type='font-awesome' name='close' style={styles.deleteIconContainer}/>
+              </Button>
+              :<View/>  
+              }
             </View>
           ))
         }

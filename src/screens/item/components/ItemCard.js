@@ -14,8 +14,8 @@ class ItemCard extends Component {
     }
   }
 
-  _doAddItem() {
-    this.props.action();
+  _doAddItem(id) {
+    this.props.action(id);
   }
   
   render() {
@@ -24,7 +24,7 @@ class ItemCard extends Component {
         {
           this.props.items.map((item, i) => (             
             <View key={i} style={styles.itemContainer}>
-              <Button small light style={styles.btnContainer} onPress={this._doAddItem}>
+              <Button small light style={styles.btnContainer} onPress={() => this._doAddItem(item.id)}>
                 <Icon type='ionicon' name='add' style={styles.icoContainer}/>
                 <Text>{item.name}</Text>                    
               </Button> 
