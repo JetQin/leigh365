@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 15,
     lineHeight: 15,
-    color: 'grey',
+    color: 'gray',
   },
 });
 
@@ -52,7 +52,7 @@ class CheckBox extends Component {
 
       let container = (
         <View style={styles.container}>
-          <Icon type='font-awesome' name={source} size={16} color='#AEAEAE' />
+          <Icon type='font-awesome' name={source} size={16} color='#4876FF' underlayColor='#4876FF' />
           <View style={styles.labelContainer}>
             <Text style={[styles.label, this.props.labelStyle]}>{this.props.label}</Text>
           </View>
@@ -65,7 +65,7 @@ class CheckBox extends Component {
             <View style={styles.labelContainer}>
               <Text style={[styles.label, this.props.labelStyle]}>{this.props.label}</Text>
             </View>
-            <Icon name={source} size={16} color='#AEAEAE' />>
+            <Icon name={source} size={16} color='#4876FF'  underlayColor='#4876FF'/>>
           </View>
         );
       }

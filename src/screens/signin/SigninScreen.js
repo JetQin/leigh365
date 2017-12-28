@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, AsyncStorage, Image, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { Tabs, Tab, Title, Button, Text } from 'native-base';
-import { Icon } from 'react-native-elements';
+import { Tabs, Tab, Title, Text } from 'native-base';
+import { Icon, Button } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import styles from './styles/SigninScreen';
 import { authenticate, register } from './actions';
@@ -283,20 +283,20 @@ class SigninScreen extends Component {
         <Tabs initialPage={0}>
           <Tab heading='登录'>
            <View>
-              <TextInput style={[styles.borderStyle, styles.inputStyle]} underlineColorAndroid='transparent'
+              <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
                 placeholder={'手机号' }
                 value={phoneNum} 
                 onChangeText={(value) => this.changePhoneNum(value)}
                 />
             </View>
             <View>
-              <TextInput style={[styles.borderStyle, styles.inputStyle]} underlineColorAndroid='transparent'
+              <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
                 placeholder={'验证码'}
               />
             </View>
             <View style={styles.verifyCodeContainer}>
               <View style={styles.verifyLeft}>
-                <TextInput style={styles.borderStyle} underlineColorAndroid='transparent'
+                <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
                     placeholder={'手机验证码'}
                 />
               </View>
@@ -323,7 +323,11 @@ class SigninScreen extends Component {
                 />
             </View>
             <View>
-              <Button Info><Text> sd </Text></Button>
+              <Button 
+                title='登录' 
+                buttonStyle={ styles.buttonStyle}
+                fontSize= {20}
+                />
             </View>
             {/*</View>
             <View style={styles.flexContainer}>

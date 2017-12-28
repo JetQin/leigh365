@@ -94,6 +94,8 @@ const styles = EStyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
+  },
+  textStyle: {
     fontSize: 16,
   },
   inputStyle: {
@@ -103,7 +105,12 @@ const styles = EStyleSheet.create({
     marginRight: '4%',
     padding: '1%',
   },
- 
+  buttonStyle: {
+    backgroundColor: '#6495ED',
+    borderRadius: 3,
+    paddingTop: 6,
+    paddingBottom: 6,
+  }
 });
 
 export default styles;
