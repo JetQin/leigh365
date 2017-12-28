@@ -9,42 +9,43 @@ import Colors from '../../../constants/Colors';
 class ItemScreen extends Component {
   static defaultProps = {
     InterestItem: [
-      {name: '推荐'},
-      {name: '科技'},
-      {name: '财经'},
-      {name: '国际'},
-      {name: '股票'},
-      {name: '深圳'},
-      {name: '房产'}
+      {name: '推荐',id: '001'},
+      {name: '科技',id: '002'},
+      {name: '财经',id: '003'},
+      {name: '国际',id: '004'},
+      {name: '股票',id: '005'},
+      {name: '深圳',id: '006'},
+      {name: '房产',id: '007'}
     ],
     items:[
-      {name: '推荐'},
-      {name: '科技'},
-      {name: '财经'},
-      {name: '国际'},
-      {name: '股票'},
-      {name: '深圳'},
-      {name: '视频'},
-      {name: '商品'},
-      {name: '外汇'},
-      {name: '中国'},
-      {name: '债券'},
-      {name: '欧洲'},
-      {name: '日本'},
-      {name: '美国'},
-      {name: '期权'},
-      {name: '新三板'},
-      {name: '港股'},
-      {name: '沪深'},
-      {name: '美股'},
-      {name: '企业家'},
-      {name: '能源'},
-      {name: '创业'},
-      {name: '黄金'},
-      {name: '基金'},
-      {name: '中小板'},
-      {name: '硅谷'},
-      {name: '华尔街'}
+      {name: '推荐',id: '001'},
+      {name: '科技',id: '002'},
+      {name: '财经',id: '003'},
+      {name: '国际',id: '004'},
+      {name: '股票',id: '005'},
+      {name: '深圳',id: '006'},
+      {name: '房产',id: '007'},
+      {name: '视频',id: '008'},
+      {name: '商品',id: '009'},
+      {name: '外汇',id: '010'},
+      {name: '中国',id: '011'},
+      {name: '债券',id: '012'},
+      {name: '欧洲',id: '013'},
+      {name: '日本',id: '014'},
+      {name: '美国',id: '015'},
+      {name: '期权',id: '016'},
+      {name: '新三板',id: '017'},
+      {name: '港股',id: '018'},
+      {name: '沪深',id: '019'},
+      {name: '美股',id: '029'},
+      {name: '企业家',id: '021'},
+      {name: '能源',id: '022'},
+      {name: '创业',id: '023'},
+      {name: '黄金',id: '024'},
+      {name: '基金',id: '025'},
+      {name: '中小板',id: '026'},
+      {name: '硅谷',id: '027'},
+      {name: '华尔街',id: '028'}
     ]
   };
 
@@ -87,8 +88,8 @@ class ItemScreen extends Component {
     this.setState({ suggestInterestItem: suggestItem});
   }
 
-  doAddItem() {
-    Alert.alert('add............');
+  doAddItem(id) {
+    Alert.alert('add............'+ id);
     // const login = await AsyncStorage.getItem('@user_id');
     // const request = {
     //   type: 'getUserInterest',
@@ -99,8 +100,8 @@ class ItemScreen extends Component {
     // this.setState({ suggestInterestItem: suggestItem});
   }
 
-  doRemoveItem() {
-    Alert.alert('remove...............');
+  doRemoveItem(id) {
+    Alert.alert('remove...............'+id);
     // const login = await AsyncStorage.getItem('@user_id');
     // const request = {
     //   type: 'getUserInterest',
@@ -110,21 +111,24 @@ class ItemScreen extends Component {
     // this.setState({ myInterestItem: myItem});
   }
 
-  getSuggestInterest(arry1,arry2) {
+  getSuggestInterest(myItem,totalItem) {
     let arry = [];
-    let tmp = arry1.concat(arry2);
+    let tmp = myItem.concat(totalItem);
     let o = {};
     for (var i = 0; i < tmp.length; i ++) {
-      if(tmp[i].name in o) {
-        o[tmp[i].name] ++
+      if(tmp[i].id in o) {
+        o[tmp[i].id] ++;
       }else {
-        o[tmp[i].name] = 1;
+        o[tmp[i].id] = 1;
       } 
     } 
     for (x in o) {
-      if (o[x] == 1) {
-        arry.push({name: x});
+      for (var i = 0; i < totalItem.length; i ++){
+        if (o[x] == 1 && x == totalItem[i].id) {
+          arry.push({name: totalItem[i].name,id: x});
+        }
       }
+      
     }
     return arry;
   }

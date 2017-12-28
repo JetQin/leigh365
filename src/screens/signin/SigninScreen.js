@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, AsyncStorage, Image, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { Tabs, Tab, Title, Button, Text } from 'native-base';
-import { Icon } from 'react-native-elements';
+import { Tabs, Tab, Title, Text } from 'native-base';
+import { Icon, Button } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import styles from './styles/SigninScreen';
 import { authenticate, register } from './actions';
@@ -282,52 +282,54 @@ class SigninScreen extends Component {
       <View style={styles.root}>
         <Tabs initialPage={0}>
           <Tab heading='登录'>
-            <View style={styles.formTitle}>
-              <Title>登陆</Title>
+           <View>
+              <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
+                placeholder={'手机号' }
+                value={phoneNum} 
+                onChangeText={(value) => this.changePhoneNum(value)}
+                />
             </View>
             <View>
-              <View>
-                <Input
-                  placeholder='手机号' 
-                  value={phoneNum} 
-                  onChange={(value) => this.changePhoneNum(value)}
+              <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
+                placeholder={'验证码'}
+              />
+            </View>
+            <View style={styles.verifyCodeContainer}>
+              <View style={styles.verifyLeft}>
+                <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
+                    placeholder={'手机验证码'}
                 />
               </View>
-              <View>
-                <Input
-                  placeholder='验证码'
-                  password={this.props.password}
-                  onChange={this.changePassword}
-                  helpInfo={this.state.passwordHelp}
-                  ref={(c) => { this.passwordInput = c; }}
-                />
-              </View>
-              <View>
-                <Input
-                  placeholder='手机验证码'
-                />
+              <View style={[styles.borderStyle, styles.verifyRight]}>
                 <CountDownButton
                   timerTitle={'获取验证码'}
-                  enable={phoneNum.length > 10}
+                   enable={phoneNum.length > 10}
                   onClick={(shouldStartCounting)=>{
                     this._requestAPI(shouldStartCounting)
                   }}
                   timerEnd={()=>{
                     this.setState({
-                      state: '倒计时结束'
+                    state: '倒计时结束'
                     })
-                  }}/>
-                <Text style={styles.stateText}>{this.state.state}</Text>
-              </View>
-              <View>
-                <CheckBox
-                  label="下次自动登陆" checked={this.state.aotoLogin}
-                  value={this.state.aotoLogin}
-                  checkStyle={styles.check}
-                  labelStyle={styles.labelCheck}
-                />
+                }}/>
               </View>
             </View>
+            <View>
+              <CheckBox
+                label="我已阅读并同意用户协议和隐私条款" checked={this.state.aotoLogin}
+                value={this.state.aotoLogin}
+                checkStyle={styles.check}
+                labelStyle={styles.labelCheck}
+                />
+            </View>
+            <View>
+              <Button 
+                title='登录' 
+                buttonStyle={ styles.buttonStyle}
+                fontSize= {20}
+                />
+            </View>
+            {/*</View>
             <View style={styles.flexContainer}>
               <View style={styles.cell}>
                 <Button style={styles.buttonStyle} onPress={this.login} >
@@ -344,13 +346,13 @@ class SigninScreen extends Component {
                 <Button small style={styles.buttonStyle}>
                   <Text>微博注册</Text>
                 </Button>
-              </View>
-            </View>
+              </View> */}
+            {/* </View>
             <Button transparent info><Text style={styles.myColor}>忘记密码？</Text></Button>
             <Button transparent info >
               <Icon type='material-community' name='phone' size={15} color='#6A97BE' />
               <Text style={[{ paddingLeft: '0%' }, styles.myColor]}>联系我们</Text>
-            </Button>
+            </Button> */}
           </Tab>
           <Tab heading='注册'>
             <View style={styles.formTitle}>
