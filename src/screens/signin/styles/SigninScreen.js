@@ -110,7 +110,23 @@ const styles = EStyleSheet.create({
     borderRadius: 3,
     paddingTop: 6,
     paddingBottom: 6,
-  }
+  },
+  otherSiginContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
+    marginTop: '4%',
+    marginBottom: '1%',
+    marginLeft: '12%',
+    marginRight: '12%',
+  },
+  iconContainer: {
+    width:40,
+    height: 40,
+    borderRadius: 50,
+    borderStyle: 'solid',
+    borderWidth: 1,
+  },
 });
 
 export default styles;

@@ -329,6 +329,48 @@ class SigninScreen extends Component {
                 fontSize= {20}
                 />
             </View>
+            <View style={styles.otherSiginContainer}>
+              <View>
+              <Icon
+                  name='mailbox'
+                  type='material-community'
+                  color='#EEC900'
+                  size={20}
+                  containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
+                />
+                <Text style={ {fontSize: 12} }>账号</Text>
+              </View>
+              <View>
+                <Icon
+                  name='weibo'
+                  type='zocial'
+                  color='#EE0000'
+                  size={20}
+                  containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
+                />
+                <Text style={ {fontSize: 12} }>微博</Text>
+              </View>
+              <View>
+                <Icon
+                  name='cellphone-iphone'
+                  type='material-community'
+                  color='#EE3B3B'
+                  size={20}
+                  containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
+                />
+                <Text style={ {fontSize: 12} }>手机</Text>
+              </View>
+              <View>
+                <Icon
+                  name='weixin'
+                  type='font-awesome'
+                  color='#32CD32'
+                  size={20}
+                  containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
+                />
+                <Text style={ {fontSize: 12} }>微信</Text>
+              </View>
+            </View>
             {/*</View>
             <View style={styles.flexContainer}>
               <View style={styles.cell}>
