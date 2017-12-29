@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert} from 'react-native';
+import { View, Text, Alert, AsyncStorage} from 'react-native';
 import { Button, Icon } from 'native-base'; 
 import styles from './styles/ItemScreen';
 import { ItemCard, ItemDeleteCard } from './components/';
@@ -17,7 +17,7 @@ class ItemScreen extends Component {
       {name: '深圳',id: '006'},
       {name: '房产',id: '007'}
     ],
-    items:[
+    totalItem:[
       {name: '推荐',id: '001'},
       {name: '科技',id: '002'},
       {name: '财经',id: '003'},
@@ -75,33 +75,46 @@ class ItemScreen extends Component {
     this.setState({deleteIco: !this.state.deleteIco});
   }
 
-  getMyInterestItem() {
+  async getMyInterestItem() {
     // const login = await AsyncStorage.getItem('@user_id');
     // const request = {
     //   type: 'getUserInterest',
     //   usesrId: login,
     // };
     // const myInterestItem = await this.props.wordpressApi.fetchPosts(request);
-    const myItem = this.props.InterestItem;
-    const suggestItem = this.getSuggestInterest(myItem,this.props.items);
-    this.setState({ myInterestItem: myItem});
+    // const myItemList = await AsyncStorage.getItem('@item_list');
+    // if(!myItemList){
+    //   myItemList = this.props.InterestItem;
+    // }
+    const suggestItem = this.getDiffItem(this.props.InterestItem,this.props.totalItem);
+    this.setState({ myInterestItem: myItemList});
     this.setState({ suggestInterestItem: suggestItem});
   }
 
   doAddItem(id) {
-    Alert.alert('add............'+ id);
+    console.log('add............'+ id);
     // const login = await AsyncStorage.getItem('@user_id');
     // const request = {
     //   type: 'getUserInterest',
     //   usesrId: login,
     // };
     // const myItem = await this.props.wordpressApi.fetchPosts(request);
-    // this.setState({ myInterestItem: myItem});
-    // this.setState({ suggestInterestItem: suggestItem});
+    const userAddItem = this.getUserAddItem(id);
+    const userItems =  this.state.myInterestItem.concat(userAddItem);
+    const suggestItem =  this.getDiffItem(userItems,this.state.suggestInterestItem);
+    AsyncStorage.setItem('@item_list', JSON.stringify(userItems));
+    this.setState({ myInterestItem: userItems});
+    this.setState({ suggestInterestItem: suggestItem});
   }
 
   doRemoveItem(id) {
-    Alert.alert('remove...............'+id);
+    console.log('remove...............'+id);
+    const userRemoveItem = this.getUserAddItem(id);
+    const userItems =  this.getDiffItem(userRemoveItem,this.state.myInterestItem);
+    const suggestItem =  userRemoveItem.concat(this.state.suggestInterestItem);
+    AsyncStorage.setItem('@item_list', JSON.stringify(userItems));
+    this.setState({ myInterestItem: userItems});
+    this.setState({ suggestInterestItem: suggestItem});
     // const login = await AsyncStorage.getItem('@user_id');
     // const request = {
     //   type: 'getUserInterest',
@@ -111,11 +124,20 @@ class ItemScreen extends Component {
     // this.setState({ myInterestItem: myItem});
   }
 
-  getSuggestInterest(myItem,totalItem) {
+  getUserAddItem(id) {
+    const addItem = [];
+    for (var i = 0, len = this.props.totalItem.length; i < len; i ++) {
+      if(this.props.totalItem[i].id == id) {
+        addItem.push(this.props.totalItem[i]);
+      } 
+    }
+    return addItem;
+  }
+  getDiffItem(myItem,totalItem) {
     let arry = [];
     let tmp = myItem.concat(totalItem);
     let o = {};
-    for (var i = 0; i < tmp.length; i ++) {
+    for (let i = 0; i < tmp.length; i ++) {
       if(tmp[i].id in o) {
         o[tmp[i].id] ++;
       }else {
@@ -123,7 +145,7 @@ class ItemScreen extends Component {
       } 
     } 
     for (x in o) {
-      for (var i = 0; i < totalItem.length; i ++){
+      for (let i = 0; i < totalItem.length; i ++){
         if (o[x] == 1 && x == totalItem[i].id) {
           arry.push({name: totalItem[i].name,id: x});
         }
