@@ -86,7 +86,8 @@ class ItemScreen extends Component {
     // if(!myItemList){
     //   myItemList = this.props.InterestItem;
     // }
-    const suggestItem = this.getDiffItem(this.props.InterestItem,this.props.totalItem);
+    const myItemList = this.props.InterestItem;
+    const suggestItem = this.getDiffItem(myItemList,this.props.totalItem);
     this.setState({ myInterestItem: myItemList});
     this.setState({ suggestInterestItem: suggestItem});
   }

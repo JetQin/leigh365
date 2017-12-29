@@ -63,25 +63,53 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
   },
   check: {
-    marginLeft: 10,
-    marginTop: 10,
+    marginTop: '2%',
+    marginBottom: '1%',
+    marginLeft: '4%',
   },
   labelCheck: {
     fontWeight: 'bold',
   },
-  textInputView:{
+  verifyCodeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  verifyLeft:{
+    flex: 0.6,
+    marginLeft: '4%',
+    marginTop: '1%',
+    marginBottom: '1%',
+  },
+  verifyRight: {
+    flex: 0.4,
+    borderLeftWidth: 0,
+    marginRight: '4%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '1%',
+    marginBottom: '1%',
+  },
+  borderStyle: {
+    height: 40,
     borderWidth: 1,
-    borderColor: 'green',
-    padding: 2,
-    marginBottom: 20
+    borderColor: '#ccc',
   },
-  textInput:{
-    width: 200,
-    height: 44
+  textStyle: {
+    fontSize: 16,
   },
-  stateText: {
-    paddingTop: 50,
-    color: 'gray'
+  inputStyle: {
+    marginTop: '1%',
+    marginBottom: '1%',
+    marginLeft: '4%',
+    marginRight: '4%',
+    padding: '1%',
+  },
+  buttonStyle: {
+    backgroundColor: '#6495ED',
+    borderRadius: 3,
+    paddingTop: 6,
+    paddingBottom: 6,
   }
 });
 
