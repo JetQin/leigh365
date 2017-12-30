@@ -282,12 +282,12 @@ class ProfileScreen extends Component {
                   <View style={styles.headerTitleContainer}>
                     <Text style={styles.title}>{this.state.user.name}</Text>
                   </View>
-                  <View style={styles.settingBtn}>
+                  {/* <View style={styles.settingBtn}>
                     <Button transparent info onPress={this.changeAvatar} >
                       <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
                       <Text style={styles.label}>编辑头像</Text>
                     </Button>
-                  </View>
+                  </View> */}
                 </View>
                 <View style={styles.myCollectContainer}>
                   <Badge style={styles.collectContainer}>

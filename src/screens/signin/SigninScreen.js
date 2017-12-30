@@ -33,7 +33,7 @@ class SigninScreen extends Component {
     headerLeft: (
       <View style={{ flex: 1, flexDirection: 'row',width: 150 }}>
         <Button transparent onPress={() => navigation.goBack()}>
-          <Icon type='ionicon' name='md-menu' size={20} color={Colors.$navigationHeaderTextColor} />
+          <Icon type='ionicon' name='md-menu' style={{paddingLeft:3,paddingTop:5}} size={25} color={Colors.$navigationHeaderTextColor} />
         </Button>
         <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
         <Text style={styles.titleText}>新历财经</Text>
