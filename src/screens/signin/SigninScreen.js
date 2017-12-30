@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, AsyncStorage, Image, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { Tabs, Tab, Title, Text } from 'native-base';
-import { Icon, Button } from 'react-native-elements';
+import { Tabs, Tab, Title, Text, Button } from 'native-base';
+import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import styles from './styles/SigninScreen';
 import { authenticate, register } from './actions';
@@ -34,7 +34,7 @@ class SigninScreen extends Component {
     headerLeft: (
       <View style={{ flex: 1, flexDirection: 'row',width: 150 }}>
         <Button transparent onPress={() => navigation.goBack()}>
-          <Icon type='ionicon' name='md-menu' size={20} color={Colors.$navigationHeaderTextColor} />
+          <Icon type='font-awesome' name='close' size={20}  color=''/>
         </Button>
         <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
         <Text style={styles.titleText}>新历财经</Text>
@@ -291,13 +291,13 @@ class SigninScreen extends Component {
             </View>
             <View>
               <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
-                placeholder={'验证码'}
+                placeholder={'密码'}
               />
             </View>
             <View style={styles.verifyCodeContainer}>
               <View style={styles.verifyLeft}>
                 <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
-                    placeholder={'手机验证码'}
+                    placeholder={'验证码'}
                 />
               </View>
               <View style={[styles.borderStyle, styles.verifyRight]}>
@@ -314,20 +314,10 @@ class SigninScreen extends Component {
                 }}/>
               </View>
             </View>
-            <View>
-              <CheckBox
-                label="我已阅读并同意用户协议和隐私条款" checked={this.state.aotoLogin}
-                value={this.state.aotoLogin}
-                checkStyle={styles.check}
-                labelStyle={styles.labelCheck}
-                />
-            </View>
-            <View>
-              <Button 
-                title='登录' 
-                buttonStyle={ styles.buttonStyle}
-                fontSize= {20}
-                />
+            <View style={styles.buttonContainer}>
+              <Button block style={styles.buttonStyle}>
+                <Text style={{ fontSize: 17 }}>登录</Text>
+              </Button>
             </View>
             <View style={styles.otherSiginContainer}>
               <View>

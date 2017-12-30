@@ -33,8 +33,12 @@ const styles = EStyleSheet.create({
     marginTop: '4%',
     marginLeft: '2%',
   },
+  buttonContainer: {
+    margin: '4%',
+  },
   buttonStyle: {   
     backgroundColor: '#6A97BE',
+    borderRadius: 6,
   },
   flexContainer: {
     flexDirection: 'row',
@@ -105,12 +109,12 @@ const styles = EStyleSheet.create({
     marginRight: '4%',
     padding: '1%',
   },
-  buttonStyle: {
-    backgroundColor: '#6495ED',
-    borderRadius: 3,
-    paddingTop: 6,
-    paddingBottom: 6,
-  },
+  // buttonStyle: {
+  //   backgroundColor: '#6495ED',
+  //   borderRadius: 3,
+  //   paddingTop: 6,
+  //   paddingBottom: 6,
+  // },
   otherSiginContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
