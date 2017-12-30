@@ -3,12 +3,20 @@ import { View, Text, Image, TextInput } from 'react-native';
 import { Avatar, List, ListItem } from 'react-native-elements';
 import { Button } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import { LocationApi } from '../../../constants/locationApi';
 
 import Colors from '../../../constants/Colors';
 import styles from './styles/PostScreen';
 
+
+const locationApi = new LocationApi();
+
 class PostScreen extends Component {
     
+    static defaultProps = {
+        locationApi,
+    }
+
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
         const headerStyle = {
@@ -37,12 +45,38 @@ class PostScreen extends Component {
         this.state = {status: '', wordCount: 0, location: '', image1:'', image2: '', image3: '' }
         this.updatePost = this.updatePost.bind(this);
         this.selectImage = this.selectImage.bind(this);
+        this.getPosition = this.getPosition.bind(this);
+        this.getCityByPosition = this.getCityByPosition.bind(this);
+    }
+
+    componentDidMount() {
+        this.getPosition();
     }
 
     updatePost(text) {
         this.setState({ status: text, wordCount: text.length });
     }
     
+    getPosition(){
+        navigator.geolocation.getCurrentPosition((position) =>{
+            const positionData = position.coords;
+            console.log(positionData.latitude);
+            console.log(positionData.longitude);
+            // this.getPosition(positionData);
+            console.log('get position');
+            return positionData;
+        }).then(async(positionData)=>{
+            console.log('get city');
+            const response = await this.props.locationApi.getPosition(positionData);
+            console.log(response);
+        }); 
+    }
+
+    async getCityByPosition(positionData){
+        const response = await this.props.locationApi.getPosition(positionData);
+        console.log(response);
+    }
+
     selectImage() {
         let options = {
             title: '选择照片',
@@ -64,8 +98,11 @@ class PostScreen extends Component {
               console.log('User tapped custom button: ', response.customButton);
             }
             else {
-              let source = { uri: response.uri };
-              this.setState({ image1: response.uri });
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+                let source = { uri: response.uri };
+            //   this.setState({ image1: response.uri });
+            //   console.log(this.state);
+                this.setState({ avatarSource: source });
             }
         });
 
@@ -85,7 +122,7 @@ class PostScreen extends Component {
                     <Text>{this.state.wordCount}/150</Text>
                 </View>
                 <View style={styles.imageContainer}>
-                     <Image source={this.state.image1} style={styles.uploadAvatar} />
+                    <Image source={this.state.avatarSource} style={styles.uploadAvatar} />
                     <Avatar large
                         title='+'
                         onPress={this.selectImage}
