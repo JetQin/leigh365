@@ -54,7 +54,6 @@
 		6F878AFE758442BD90F47DCA /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F844FA6F725F48BDA0048422 /* rubicon-icon-font.ttf */; };
 		702243D035E8424A8D1A6AF5 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3C906D419A4195B036E5EE /* libdouble-conversion.a */; };
 		7B1BE4ABAC32453A86F73FB3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57C58BDFB44641C6BEFA2861 /* Ionicons.ttf */; };
-		7CFF9813BFA04DE3A9289147 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0981EFA4B6E44A6BAA3EF807 /* libimageCropPicker.a */; };
 		7E89CC5EC699402F9816409D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A2D1BA3EF694DEA85D76E91 /* Montserrat-Medium.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8A4D2A137C4745ABAB3615DB /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CAFBCA57EDB40AA9FF22878 /* FontAwesome.ttf */; };
@@ -524,7 +523,6 @@
 				315D4291120E469CACCE0907 /* libthird-party.a in Frameworks */,
 				702243D035E8424A8D1A6AF5 /* libdouble-conversion.a in Frameworks */,
 				ABC6BD8E03F041C4978379EA /* libRNImagePicker.a in Frameworks */,
-				7CFF9813BFA04DE3A9289147 /* libimageCropPicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
