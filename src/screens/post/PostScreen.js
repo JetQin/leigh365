@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput } from 'react-native';
+import { View, Text, Image, TextInput, Alert, AsyncStorage } from 'react-native';
 import { Avatar, List, ListItem } from 'react-native-elements';
 import { Button } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
-import { LocationApi } from '../../../constants/locationApi';
+import { LocationApi, PostApi } from '../../../constants/';
 
 import Colors from '../../../constants/Colors';
 import styles from './styles/PostScreen';
 
 
 const locationApi = new LocationApi();
-
+const postApi = new PostApi();
 class PostScreen extends Component {
     
     static defaultProps = {
-        locationApi,
+        locationApi, postApi
     }
 
     static navigationOptions = ({ navigation }) => {
@@ -32,7 +32,7 @@ class PostScreen extends Component {
         );
     
         const headerRight = (
-            <Button transparent onPress={() => console.log('test')}>
+            <Button transparent onPress={() => params.savePost()}>
                 <Text style={styles.headerTitle}>发布</Text>
             </Button>
         );
@@ -42,21 +42,47 @@ class PostScreen extends Component {
 
     constructor(props){
         super(props);
-        this.state = {status: '', wordCount: 0, location: '', image1:'', image2: '', image3: '', city: '北京' }
+        this.state = {status: '', wordCount: 0, location: '', image:'', city: '北京' }
         this.updatePost = this.updatePost.bind(this);
         this.selectImage = this.selectImage.bind(this);
         this.getPosition = this.getPosition.bind(this);
         this.getCityByPosition = this.getCityByPosition.bind(this);
+        this.savePost = this.savePost.bind(this);
     }
 
     componentDidMount() {
         this.getPosition();
+        this.props.navigation.setParams({ savePost: this.savePost });
     }
 
     updatePost(text) {
         this.setState({ status: text, wordCount: text.length });
     }
     
+    async savePost(){
+        // const loginInfo = await AsyncStorage.getItem('@login');
+        // if (loginInfo) {
+            // const login = JSON.parse(loginInfo);
+            const params = { 
+                type: 'post_status', 
+                userId: 1,
+                content: this.state.status,
+                image: this.state.imageSource.uri,
+                city: this.state.city,
+            };
+            const response = await this.props.postApi.post(params);
+            console.log(response);
+        // }
+        // else{
+        //     Alert.alert('提示', ' 发布成功',
+        //         [
+        //         { text: '确定' },
+        //         ],
+        //         { cancelable: false }
+        //     );
+        // }
+    }
+
     getPosition(){
         navigator.geolocation.getCurrentPosition(async(position) =>{
             const positionData = position.coords;
@@ -98,9 +124,9 @@ class PostScreen extends Component {
               console.log('User tapped custom button: ', response.customButton);
             }
             else {
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-                let source = { uri: response.uri };
-                this.setState({ avatarSource: source });
+                let source = { uri: 'data:image/jpeg;base64,' + response.data };
+                // let source = { uri: response.uri };
+                this.setState({ imageSource: source });
             }
         });
 
@@ -121,7 +147,7 @@ class PostScreen extends Component {
                     <Text>{this.state.wordCount}/150</Text>
                 </View>
                 <View style={styles.imageContainer}>
-                    <Image source={this.state.avatarSource} style={styles.uploadAvatar} />
+                    <Image source={this.state.imageSource} style={styles.uploadAvatar} />
                     <Avatar
                         title='+'
                         width={100}
