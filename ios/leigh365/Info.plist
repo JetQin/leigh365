@@ -56,6 +56,21 @@
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 			</dict>
+      <key>5b0988e595225.cdn.sohucs.com</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
+      <key>cms-bucket.nosdn.127.net</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
+      <key>api.map.baidu.com</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
