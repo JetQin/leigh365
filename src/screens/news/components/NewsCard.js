@@ -89,8 +89,9 @@ class NewsCard extends Component {
         {
           this.state.news.map((item, i) => (
             <ListItem
-              key={i}
-              onPress={() => (this.props.navigation.navigate('ViewHtml', { uri: item.url }))}
+              key={i} //this.props.navigation.navigate('Item');
+              //onPress={() => (this.props.navigation.navigate('ViewHtml', { uri: item.url }))}
+              onPress={() => (this.props.navigation.navigate('Detail'))}
               title={
                 <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', paddingLeft: 10}}>
                     <View style={{flexDirection: 'row', flex: 0.5, alignItems: 'center'}}>
