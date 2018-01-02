@@ -71,7 +71,7 @@ class SigninScreen extends Component {
       validateFlag: true,
       phoneNum: '',
       state: '这里显示状态',
-      mailbox: true,
+      signup: 'cellphone-iphone',
     };
     this.signin = this.signin.bind(this);
     this.login = this.login.bind(this);
@@ -278,17 +278,15 @@ class SigninScreen extends Component {
   }
 
   changeSignup(name) {
-    if(name === 'mailbox'){
-      signup = (
-           
-      )
-    }
+    this.setState({
+      signup: name
+    })
   }
 
   render() {
     const {phoneNum} = this.state;
     let signup = <View />;
-    if(this.state.mailbox){
+    if(this.state.signup === 'cellphone'){
       signup= (
         <View>
           <View>
@@ -376,7 +374,7 @@ class SigninScreen extends Component {
                   color='#EEC900'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {(name) => this.changeSignup(name)}
                 />
                 <Text style={ {fontSize: 12} }>账号</Text>
               </View>
@@ -387,7 +385,7 @@ class SigninScreen extends Component {
                   color='#EE0000'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {(name) => this.changeSignup(name)}
                 />
                 <Text style={ {fontSize: 12} }>微博</Text>
               </View>
@@ -398,7 +396,7 @@ class SigninScreen extends Component {
                   color='#EE3B3B'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {(name) => this.changeSignup(name)}
                 />
                 <Text style={ {fontSize: 12} }>手机</Text>
               </View>
@@ -409,23 +407,28 @@ class SigninScreen extends Component {
                   color='#32CD32'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {(name) => this.changeSignup(name)}
                 />
                 <Text style={ {fontSize: 12} }>微信</Text>
               </View>
             </View>
           </Tab>
           <Tab heading='注册'>
+            {signup}
+            <View style={styles.buttonContainer}>
+              <Button block style={styles.buttonStyle}>
+                <Text style={{ fontSize: 17 }}>注册</Text>
+              </Button>
+            </View>
             <View style={styles.otherSiginContainer}>
-              {signup}
               <View>
-              <Icon
+                <Icon
                   name='mailbox'
                   type='material-community'
                   color='#EEC900'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {() => this.changeSignup('mailbox')}
                 />
                 <Text style={ {fontSize: 12} }>账号</Text>
               </View>
@@ -436,7 +439,7 @@ class SigninScreen extends Component {
                   color='#EE0000'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {() => this.changeSignup('weibo')}
                 />
                 <Text style={ {fontSize: 12} }>微博</Text>
               </View>
@@ -447,7 +450,7 @@ class SigninScreen extends Component {
                   color='#EE3B3B'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {() => this.changeSignup('cellphone')}
                 />
                 <Text style={ {fontSize: 12} }>手机</Text>
               </View>
@@ -458,7 +461,7 @@ class SigninScreen extends Component {
                   color='#32CD32'
                   size={20}
                   containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
-                  onPress= {(name) => this.changeSingup(name)}
+                  onPress= {() => this.changeSignup('weixin')}
                 />
                 <Text style={ {fontSize: 12} }>微信</Text>
               </View>
