@@ -18,6 +18,7 @@ import CountDownButton from './components/CountDownButton';
   }),
   { authenticate, register }
 )
+
 class SigninScreen extends Component {
   static defaultProps = {
     password: true,
@@ -72,6 +73,7 @@ class SigninScreen extends Component {
       phoneNum: '',
       state: '这里显示状态',
       signup: 'cellphone-iphone',
+      verifyImg: 'http://synebusiness.cn/verify.php',
     };
     this.signin = this.signin.bind(this);
     this.login = this.login.bind(this);
@@ -83,6 +85,7 @@ class SigninScreen extends Component {
     this.changeRegisterPasswordRe = this.changeRegisterPasswordRe.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
   }
+  
 
   changeUsername(title) {
     this.setState({ username: title });
@@ -283,6 +286,13 @@ class SigninScreen extends Component {
     })
   }
 
+  changeVerifyImg() {
+    // this.setState({
+    //   verifyImg: 'http://synebusiness.cn/verify.php?rand=Math.random()'
+    // })
+    alert("verify");
+  }
+
   render() {
     const {phoneNum} = this.state;
     let signup = <View />;
@@ -299,6 +309,7 @@ class SigninScreen extends Component {
           <View>
             <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
               placeholder={'密码'}
+              secureTextEntry= {true}
             />
           </View>
           <View style={styles.verifyCodeContainer}>
@@ -323,6 +334,34 @@ class SigninScreen extends Component {
           </View>
         </View>
       ); 
+    }
+    else if(this.state.signup === 'mailbox'){
+      signup= (
+        <View>
+          <View>
+            <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
+              placeholder={'邮箱' }
+            />
+          </View>
+          <View>
+            <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
+              placeholder={'密码'}
+              secureTextEntry= {true}
+            />
+          </View>
+          <View style={styles.verifyCodeContainer}>
+            <View style={styles.verifyLeft}>
+              <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
+                  placeholder={'验证码'}
+              />
+            </View>
+            <View style={[styles.borderStyle, styles.verifyRight]}>
+              <Image source={{uri: this.state.verifyImg}} style={{width: 100, height: 38}}
+                onPress={this.changeVerifyImg} />
+            </View>
+          </View>
+        </View>
+      );
     }
 
     return (
