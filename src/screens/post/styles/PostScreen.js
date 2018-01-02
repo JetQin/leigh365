@@ -27,9 +27,10 @@ const styles = EStyleSheet.create({
   },
 
   imageContainer: {
-    flex: 1,
+    flex: 0.3,
     flexDirection: 'row',
     paddingLeft: 10,
+    backgroundColor: '#EEF2E4',
   }
 
 });

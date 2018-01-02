@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 const apiUrl = 'http://api.map.baidu.com/geocoder/v2/?ak=7hOstgqRCXdyrwwSKQiKsKUGa4GBF3Br&location=';
-// let locationApiUrl = 'http://api.map.baidu.com/geocoder/v2/?ak=7hOstgqRCXdyrwwSKQiKsKUGa4GBF3Br&location=51.50998,-0.1337&output=json&pois=1';
 
-class LocationApi {
+class PostApi {
   async getPosition(position) {
     let locationApiUrl = apiUrl;
     locationApiUrl = locationApiUrl.concat(position.latitude);
@@ -16,5 +15,5 @@ class LocationApi {
 }
 
 export {
-  LocationApi,
+  PostApi,
 };

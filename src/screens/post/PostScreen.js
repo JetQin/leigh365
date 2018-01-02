@@ -42,7 +42,7 @@ class PostScreen extends Component {
 
     constructor(props){
         super(props);
-        this.state = {status: '', wordCount: 0, location: '', image1:'', image2: '', image3: '' }
+        this.state = {status: '', wordCount: 0, location: '', image1:'', image2: '', image3: '', city: '北京' }
         this.updatePost = this.updatePost.bind(this);
         this.selectImage = this.selectImage.bind(this);
         this.getPosition = this.getPosition.bind(this);
@@ -58,17 +58,17 @@ class PostScreen extends Component {
     }
     
     getPosition(){
-        navigator.geolocation.getCurrentPosition((position) =>{
+        navigator.geolocation.getCurrentPosition(async(position) =>{
             const positionData = position.coords;
             console.log(positionData.latitude);
             console.log(positionData.longitude);
             // this.getPosition(positionData);
             console.log('get position');
-            return positionData;
-        }).then(async(positionData)=>{
-            console.log('get city');
-            const response = await this.props.locationApi.getPosition(positionData);
-            console.log(response);
+            if(positionData) {
+                const response = await this.props.locationApi.getPosition(positionData);
+                this.setState({city: response.result.addressComponent.city });
+                console.log(response);
+            }
         }); 
     }
 
@@ -100,8 +100,6 @@ class PostScreen extends Component {
             else {
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 let source = { uri: response.uri };
-            //   this.setState({ image1: response.uri });
-            //   console.log(this.state);
                 this.setState({ avatarSource: source });
             }
         });
@@ -114,6 +112,7 @@ class PostScreen extends Component {
                 <TextInput
                     style={{height: 100, borderColor: 'gray', borderWidth: 1}}
                     multiline
+                    autoFocus
                     maxLength={150}
                     onChangeText={this.updatePost}
                     value={this.state.status}
@@ -123,18 +122,18 @@ class PostScreen extends Component {
                 </View>
                 <View style={styles.imageContainer}>
                     <Image source={this.state.avatarSource} style={styles.uploadAvatar} />
-                    <Avatar large
+                    <Avatar
                         title='+'
+                        width={100}
+                        height={100}
+                        containerStyle={{ width:100,height:100 }}
                         onPress={this.selectImage}
                         activeOpacity={0.7}
                         containerStyle={{ paddingLeft: 10, paddingRight: 10, paddingBottom:5 }}
                     />
                 </View>
                 <List>
-                    <ListItem 
-                        leftIcon={{ name: 'location-on', type:'materialIcons', color: '#BF6625' }}
-                        title='南山区'
-                    />
+                    <ListItem leftIcon={{ name: 'location-on', type:'materialIcons', color: '#BF6625' }} title={this.state.city} />
                 </List>
             </View>
         );
