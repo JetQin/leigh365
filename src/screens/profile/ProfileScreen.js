@@ -7,12 +7,14 @@ import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
 import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
+import { PostApi } from '../../../constants/index';
 
 const wordpressApi = new WordpressApi();
+const postApi = new PostApi();
 
 class ProfileScreen extends Component {
   static defaultProps = {
-    wordpressApi,
+    wordpressApi, postApi,
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -52,6 +54,10 @@ class ProfileScreen extends Component {
         page: 1,
         data: [],
       },
+      blogs:{
+        page: 1,
+        data: [],
+      },
       isLogin: false,
       user: {
         name: '',
@@ -66,6 +72,7 @@ class ProfileScreen extends Component {
     this.charge = this.charge.bind(this);
     this.fetchUserArticle = this.fetchUserArticle.bind(this);
     this.fetchUserStock = this.fetchUserStock.bind(this);
+    this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
@@ -144,6 +151,17 @@ class ProfileScreen extends Component {
     }
   }
 
+  async fetchUserBlogs(){
+    // if (undefined !== this.state.user.user_id) {
+      const request = {
+        type: 'get_post_status',
+        userId: 1,
+      };
+      const blogs = await this.props.postApi.getPost(request);
+      this.setState({ blogs: { page: this.state.blogs.page + 1, data: blogs } });
+    // }
+  }
+
   async deleteArticleRecord(id) {
     if (id) {
       const request = {
@@ -158,7 +176,6 @@ class ProfileScreen extends Component {
         ],
         { cancelable: false }
       );
-      // this.articleCard._onRefresh();
       this.setState({ myArticle: { page: this.state.myArticle.page, data: this.state.myArticle.data.filter((item) => item.id !== id) } });
     }
   }
@@ -319,7 +336,11 @@ class ProfileScreen extends Component {
             </View>
           </Tab>
           <Tab heading='博客' >
-            <BlogList />
+            <BlogList 
+               blogs={this.state.blogs.data}
+               username={this.state.user.name}
+               scroll={this.fetchUserBlogs}
+            />
           </Tab>
           <Tab heading='收藏夹' >
             <NewsInfo
