@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Alert } from 'react-native';
+import { View, Text, AsyncStorage, Image, Alert, Picker, Dimensions } from 'react-native';
 import { Avatar, Badge } from 'react-native-elements';
 import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
@@ -264,20 +264,23 @@ class ProfileScreen extends Component {
   }
 
   render() {
+    const {height, width} = Dimensions.get('window');
     return (
       <View style={styles.root}>
+        {/* <Image source={require('../../../assets/imgs/background.jpg')}   style={{width: width, height: height}} /> */}
         <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
           <Tab heading='我的新历'>
             <View style={styles.layout}>
               <View style={styles.top}>
                 <View style={styles.avatarContainer}>
                   <Avatar
-                    large
                     rounded
-                    containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$blueTextColor }}
+                    height={80}
+                    width={80}
+                    containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$black }}
                     source={ require('../../../assets/imgs/avatar.jpg') }
                     onPress={this.login}
-                    activeOpacity={0.7}
+                    // activeOpacity={0.7}
                   />
                 </View>
                 <View style={styles.settingContainer}>
@@ -287,8 +290,17 @@ class ProfileScreen extends Component {
                   <View style={styles.settingBtn}>
                     <Button transparent info onPress={this.changeAvatar} >
                       <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                      <Text style={styles.label}>编辑头像</Text>
+                      {/* <Text style={styles.label}>编辑头像</Text> */}
                     </Button>
+                    {/* <Picker
+                      selectedValue={this.state.language}
+                      mode="dialog"
+                      >
+                      <Picker.Item label="Java" value="Java"/>
+                      <Picker.Item label="JavaScript" value="js"/>
+                      <Picker.Item label="C语音" value="c"/>
+                      <Picker.Item label="PHP开发" value="php"/>
+                    </Picker> */}
                   </View>
                 </View>
                 <View style={styles.myCollectContainer}>

@@ -42,8 +42,8 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   settingBtn: {
-    position: 'absolute',
-    right: 5,
+    // position: 'absolute',
+    // right: 5,
     justifyContent: 'center',
   },
   // 我的收藏
