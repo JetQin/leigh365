@@ -67,7 +67,7 @@ class WordpressApi {
     const wordpressApiUrl = apiUrl;
     const params = new FormData();
     params.append('type', authdata.type);
-    params.append('user_name', authdata.user_name);
+    // params.append('user_name', authdata.user_name);
     params.append('email', authdata.email);
     params.append('password', authdata.password);
     const response = await axios.post(wordpressApiUrl, params);
