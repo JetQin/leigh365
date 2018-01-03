@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Image, TextInput } from 'react-native';
+import { View, AsyncStorage, Image, TextInput, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { Tabs, Tab, Title, Text, Button } from 'native-base';
@@ -10,6 +10,9 @@ import { authenticate, register } from './actions';
 import CheckBox from './components/CheckBox';
 import Input from './components/Input';
 import CountDownButton from './components/CountDownButton';
+import { WordpressApi } from '../../../constants/api';
+
+const api = new WordpressApi();
 
 @connect(
   state => ({
@@ -22,6 +25,7 @@ import CountDownButton from './components/CountDownButton';
 class SigninScreen extends Component {
   static defaultProps = {
     password: true,
+    api,
   };
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: '个人信息',
@@ -287,10 +291,10 @@ class SigninScreen extends Component {
   }
 
   changeVerifyImg() {
-    // this.setState({
-    //   verifyImg: 'http://synebusiness.cn/verify.php?rand=Math.random()'
-    // })
-    alert("verify");
+    const response = this.props.api.getVerifyImg();
+    this.setState({
+      verifyImg: 'http://synebusiness.cn/verify.php',
+    });
   }
 
   render() {
@@ -355,9 +359,13 @@ class SigninScreen extends Component {
                   placeholder={'验证码'}
               />
             </View>
-            <View style={[styles.borderStyle, styles.verifyRight]}>
-              <Image source={{uri: this.state.verifyImg}} style={{width: 100, height: 38}}
-                onPress={this.changeVerifyImg} />
+            <View style={[styles.borderStyle, styles.verifyRight]} >
+              <Button transparent onPress={this.changeVerifyImg.bind(this)} >
+                <Image source={{
+                  uri: this.state.verifyImg,}}
+                  style={{width: 100, height: 38}}
+                />
+              </Button>
             </View>
           </View>
         </View>
