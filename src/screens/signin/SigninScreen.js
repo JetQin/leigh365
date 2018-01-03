@@ -155,7 +155,7 @@ class SigninScreen extends Component {
   }
   validatePassword() {
     if (this.state.password === '' || this.state.password === null) {
-      this.passwordInput.setState({ helpInfo: '* 密码不能为空' });
+      // this.passwordInput.setState({ helpInfo: '* 密码不能为空' });
       this.state.validateFlag = false;
     } else {
       this.state.validateFlag = true;
@@ -163,7 +163,7 @@ class SigninScreen extends Component {
   }
   validateUsername() {
     if (this.state.username === '' || this.state.username === null) {
-      this.usernameInput.setState({ helpInfo: '* 用户名不能为空' });
+      // this.usernameInput.setState({ helpInfo: '* 用户名不能为空' });
       this.state.validateFlag = false;
     } else {
       this.state.validateFlag = true;
@@ -378,17 +378,18 @@ class SigninScreen extends Component {
             <View>
               <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
                 placeholder={'邮箱/手机号' }
-                value={phoneNum} 
-                onChangeText={(value) => this.changePhoneNum(value)}
+                onChangeText={this.changeUsername}
                 />
             </View>
             <View>
               <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
                 placeholder={'密码'}
+                onChangeText={this.changePassword}
+                secureTextEntry= {true}
               />
             </View>
             <View style={styles.buttonContainer}>
-              <Button block style={styles.buttonStyle}>
+              <Button block style={styles.buttonStyle} onPress={this.login}>
                 <Text style={{ fontSize: 17 }}>登录</Text>
               </Button>
             </View>
