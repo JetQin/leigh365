@@ -22,11 +22,20 @@ const styles = EStyleSheet.create({
     paddingLeft: 3,
     backgroundColor: 'transparent',
   },
+  readBtn: {
+    height: 20,
+    width: 50,
+    borderColor: Colors.$navigationHeaderTextColor,
+  },
   readTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: 'Montserrat-Regular',
-    color: Colors.$blueTextColor,
+    color: Colors.$navigationHeaderTextColor,
     backgroundColor: 'transparent',
+  },
+  cardItem: {
+    paddingTop: 5, 
+    paddingBottom: 5
   },
   body: {
     flex: 1,
@@ -40,29 +49,19 @@ const styles = EStyleSheet.create({
     fontSize: 13,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$grayTextColor,
-    paddingLeft: 10,
     backgroundColor: 'transparent',
   },
   imageContainer: {
-    flex: 1,
     flexDirection: 'row',
-    paddingTop: 10,
+    justifyContent: 'space-between',
+    height:70,
   },
-  footerText: {
-    fontSize: 12,
-    fontFamily: 'Montserrat-Regular',
-    color: Colors.$grayTextColor,
-    paddingLeft: 10,
-    backgroundColor: 'transparent',
-  },
+
   image: {
     flex: 0.3,
-    width: 50, 
-    height: 50,
-    paddingLeft: 20,
-    paddingRight: 20,
     paddingTop: 5,
     paddingBottom: 5,
+    height:'100%',
   },
   footer: {
     flex: 1,
@@ -71,7 +70,16 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
-    paddingRight: 0,
+  },
+  footerText: {
+    fontSize: 12,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$grayTextColor,
+    paddingLeft: 10,
+    backgroundColor: 'transparent',
+  },
+  btn: {
+    height: 25,
   }
 
 });
