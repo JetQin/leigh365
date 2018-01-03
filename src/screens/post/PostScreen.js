@@ -72,6 +72,9 @@ class PostScreen extends Component {
             };
             const response = await this.props.postApi.post(params);
             console.log(response);
+            if(response.status){
+                this.props.navigation.goBack()
+            }
         // }
         // else{
         //     Alert.alert('提示', ' 发布成功',
@@ -92,8 +95,9 @@ class PostScreen extends Component {
             console.log('get position');
             if(positionData) {
                 const response = await this.props.locationApi.getPosition(positionData);
-                this.setState({city: response.result.addressComponent.city });
-                console.log(response);
+                if(response.result) {
+                    this.setState({city: response.result.addressComponent.city });
+                }
             }
         }); 
     }
@@ -107,6 +111,7 @@ class PostScreen extends Component {
         let options = {
             title: '选择照片',
             takePhotoButtonTitle: '拍照',
+            quality: 0.1,
             chooseFromLibraryButtonTitle: '相册',
             cancelButtonTitle: "取消",
         };
