@@ -26,7 +26,7 @@ class ProfileScreen extends Component {
       borderStyle: 'solid',
     };
     const headerLeft = (
-        <Button transparent onPress={() => navigation.navigate('Search')}>
+        <Button transparent onPress={() => navigation.navigate('Setting')}>
           <Text style={styles.headerTitle}>设置</Text>
         </Button>
     );
@@ -61,6 +61,7 @@ class ProfileScreen extends Component {
       isLogin: false,
       user: {
         name: '',
+        avatar: '',
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
@@ -273,7 +274,8 @@ class ProfileScreen extends Component {
                   <Avatar
                     large
                     rounded
-                    source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
+                    containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$blueTextColor }}
+                    source={ require('../../../assets/imgs/avatar.jpg') }
                     onPress={this.login}
                     activeOpacity={0.7}
                   />
@@ -339,6 +341,7 @@ class ProfileScreen extends Component {
             <BlogList 
                blogs={this.state.blogs.data}
                username={this.state.user.name}
+               avatar={this.state.user.avatar}
                scroll={this.fetchUserBlogs}
             />
           </Tab>
