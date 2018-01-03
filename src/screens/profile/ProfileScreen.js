@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Alert } from 'react-native';
+import { View, Text, AsyncStorage, Image, Alert, Picker, Dimensions } from 'react-native';
 import { Avatar, Badge } from 'react-native-elements';
 import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
@@ -7,12 +7,14 @@ import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
 import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
+import { PostApi } from '../../../constants/index';
 
 const wordpressApi = new WordpressApi();
+const postApi = new PostApi();
 
 class ProfileScreen extends Component {
   static defaultProps = {
-    wordpressApi,
+    wordpressApi, postApi,
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -24,7 +26,7 @@ class ProfileScreen extends Component {
       borderStyle: 'solid',
     };
     const headerLeft = (
-        <Button transparent onPress={() => navigation.navigate('Search')}>
+        <Button transparent onPress={() => navigation.navigate('Setting')}>
           <Text style={styles.headerTitle}>设置</Text>
         </Button>
     );
@@ -52,9 +54,14 @@ class ProfileScreen extends Component {
         page: 1,
         data: [],
       },
+      blogs:{
+        page: 1,
+        data: [],
+      },
       isLogin: false,
       user: {
         name: '',
+        avatar: '',
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
@@ -66,6 +73,7 @@ class ProfileScreen extends Component {
     this.charge = this.charge.bind(this);
     this.fetchUserArticle = this.fetchUserArticle.bind(this);
     this.fetchUserStock = this.fetchUserStock.bind(this);
+    this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
@@ -144,6 +152,17 @@ class ProfileScreen extends Component {
     }
   }
 
+  async fetchUserBlogs(){
+    // if (undefined !== this.state.user.user_id) {
+      const request = {
+        type: 'get_post_status',
+        userId: 1,
+      };
+      const blogs = await this.props.postApi.getPost(request);
+      this.setState({ blogs: { page: this.state.blogs.page + 1, data: blogs } });
+    // }
+  }
+
   async deleteArticleRecord(id) {
     if (id) {
       const request = {
@@ -158,7 +177,6 @@ class ProfileScreen extends Component {
         ],
         { cancelable: false }
       );
-      // this.articleCard._onRefresh();
       this.setState({ myArticle: { page: this.state.myArticle.page, data: this.state.myArticle.data.filter((item) => item.id !== id) } });
     }
   }
@@ -246,19 +264,23 @@ class ProfileScreen extends Component {
   }
 
   render() {
+    const {height, width} = Dimensions.get('window');
     return (
       <View style={styles.root}>
+        {/* <Image source={require('../../../assets/imgs/background.jpg')}   style={{width: width, height: height}} /> */}
         <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
           <Tab heading='我的新历'>
             <View style={styles.layout}>
               <View style={styles.top}>
                 <View style={styles.avatarContainer}>
                   <Avatar
-                    large
                     rounded
-                    source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
+                    height={80}
+                    width={80}
+                    containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$black }}
+                    source={ require('../../../assets/imgs/avatar.jpg') }
                     onPress={this.login}
-                    activeOpacity={0.7}
+                    // activeOpacity={0.7}
                   />
                 </View>
                 <View style={styles.settingContainer}>
@@ -268,8 +290,17 @@ class ProfileScreen extends Component {
                   <View style={styles.settingBtn}>
                     <Button transparent info onPress={this.changeAvatar} >
                       <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                      <Text style={styles.label}>编辑头像</Text>
+                      {/* <Text style={styles.label}>编辑头像</Text> */}
                     </Button>
+                    {/* <Picker
+                      selectedValue={this.state.language}
+                      mode="dialog"
+                      >
+                      <Picker.Item label="Java" value="Java"/>
+                      <Picker.Item label="JavaScript" value="js"/>
+                      <Picker.Item label="C语音" value="c"/>
+                      <Picker.Item label="PHP开发" value="php"/>
+                    </Picker> */}
                   </View>
                 </View>
                 <View style={styles.myCollectContainer}>
@@ -319,7 +350,12 @@ class ProfileScreen extends Component {
             </View>
           </Tab>
           <Tab heading='博客' >
-            <BlogList />
+            <BlogList 
+               blogs={this.state.blogs.data}
+               username={this.state.user.name}
+               avatar={this.state.user.avatar}
+               scroll={this.fetchUserBlogs}
+            />
           </Tab>
           <Tab heading='收藏夹' >
             <NewsInfo
