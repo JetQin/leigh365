@@ -10,9 +10,6 @@ import { authenticate, register } from './actions';
 import CheckBox from './components/CheckBox';
 import Input from './components/Input';
 import CountDownButton from './components/CountDownButton';
-import { WordpressApi } from '../../../constants/api';
-
-const api = new WordpressApi();
 
 @connect(
   state => ({
@@ -25,7 +22,6 @@ const api = new WordpressApi();
 class SigninScreen extends Component {
   static defaultProps = {
     password: true,
-    api,
   };
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: '个人信息',
@@ -76,8 +72,8 @@ class SigninScreen extends Component {
       validateFlag: true,
       phoneNum: '',
       state: '这里显示状态',
-      signup: 'cellphone-iphone',
-      verifyImg: 'http://synebusiness.cn/verify.php',
+      signup: 'cellphone',
+      verifyImg: 'http://synebusiness.cn/verify.php?' + Math.random(),
     };
     this.signin = this.signin.bind(this);
     this.login = this.login.bind(this);
@@ -187,28 +183,28 @@ class SigninScreen extends Component {
       });
       return;
     }
-    this.validateRUsername();
-    if (!this.state.validateFlag) {
-      this.rusernameInput._myInput.setNativeProps({
-        style: { borderColor: 'red' },
-      });
-      return;
-    }
+    // this.validateRUsername();
+    // if (!this.state.validateFlag) {
+    //   this.rusernameInput._myInput.setNativeProps({
+    //     style: { borderColor: 'red' },
+    //   });
+    //   return;
+    // }
 
-    this.validateRPassword();
-    if (!this.state.validateFlag) {
-      this.rPasswordInput._myInput.setNativeProps({
-        style: { borderColor: 'red' },
-      });
-      return;
-    }
-    this.validateRPasswordRe();
-    if (!this.state.validateFlag) {
-      this.rPasswordReInput._myInput.setNativeProps({
-        style: { borderColor: 'red' },
-      });
-      return;
-    }
+    // this.validateRPassword();
+    // if (!this.state.validateFlag) {
+    //   this.rPasswordInput._myInput.setNativeProps({
+    //     style: { borderColor: 'red' },
+    //   });
+    //   return;
+    // }
+    // this.validateRPasswordRe();
+    // if (!this.state.validateFlag) {
+    //   this.rPasswordReInput._myInput.setNativeProps({
+    //     style: { borderColor: 'red' },
+    //   });
+    //   return;
+    // }
     const formData = {
       type: 'register',
       user_name: this.state.rUsername,
@@ -291,9 +287,8 @@ class SigninScreen extends Component {
   }
 
   changeVerifyImg() {
-    const response = this.props.api.getVerifyImg();
     this.setState({
-      verifyImg: 'http://synebusiness.cn/verify.php',
+      verifyImg: 'http://synebusiness.cn/verify.php?rand=' + Math.random(),
     });
   }
 

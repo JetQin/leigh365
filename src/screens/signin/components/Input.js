@@ -3,11 +3,12 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 const styles = StyleSheet.create({
   inputStyle: {
-    borderRadius: 3,
-    margin: '2%',
-    marginLeft: '2%',
+    // borderRadius: 3,
+    margin: '1%',
+    marginLeft: '4%',
+    marginRight: '4%',
     padding: '1%',
-    height: 45,
+    height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
   },
