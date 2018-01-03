@@ -75,7 +75,7 @@ class SigninScreen extends Component {
       signup: 'cellphone',
       verifyImg: 'http://synebusiness.cn/verify.php?' + Math.random(),
     };
-    this.signin = this.signin.bind(this);
+    this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
@@ -174,55 +174,56 @@ class SigninScreen extends Component {
    * @returns
    * @memberof SigninScreen
    */
-  signin() {
-    this.validatedEmail();
-    // this.emailInput._myInput
-    if (!this.state.validateFlag) {
-      this.emailInput._myInput.setNativeProps({
-        style: { borderColor: 'red' },
-      });
-      return;
-    }
-    // this.validateRUsername();
-    // if (!this.state.validateFlag) {
-    //   this.rusernameInput._myInput.setNativeProps({
-    //     style: { borderColor: 'red' },
-    //   });
-    //   return;
-    // }
-
-    // this.validateRPassword();
-    // if (!this.state.validateFlag) {
-    //   this.rPasswordInput._myInput.setNativeProps({
-    //     style: { borderColor: 'red' },
-    //   });
-    //   return;
-    // }
-    // this.validateRPasswordRe();
-    // if (!this.state.validateFlag) {
-    //   this.rPasswordReInput._myInput.setNativeProps({
-    //     style: { borderColor: 'red' },
-    //   });
-    //   return;
-    // }
-    const formData = {
-      type: 'register',
-      user_name: this.state.rUsername,
-      password: this.state.rPassword,
-      email: this.state.email,
-    };
-
-    this.props.register(formData)
-      .then((response) => {
-        try {
-          if (JSON.stringify(response.value.status)) {
-            this.props.navigation.navigate('Signin');
+  signup() {
+    if(this.state.signup === 'mailbox' ){
+      this.validatedEmail();
+      // this.emailInput._myInput
+      if (!this.state.validateFlag) {
+        this.emailInput.setNativeProps({
+          style: { borderColor: 'red' },
+        });
+        return;
+      }
+      // this.validateRUsername();
+      // if (!this.state.validateFlag) {
+      //   this.rusernameInput._myInput.setNativeProps({
+      //     style: { borderColor: 'red' },
+      //   });
+      //   return;
+      // }
+  
+      // this.validateRPassword();
+      // if (!this.state.validateFlag) {
+      //   this.rPasswordInput._myInput.setNativeProps({
+      //     style: { borderColor: 'red' },
+      //   });
+      //   return;
+      // }
+      // this.validateRPasswordRe();
+      // if (!this.state.validateFlag) {
+      //   this.rPasswordReInput._myInput.setNativeProps({
+      //     style: { borderColor: 'red' },
+      //   });
+      //   return;
+      // }
+      const formData = {
+        type: 'register',
+        password: this.state.rPassword,
+        email: this.state.email,
+      };
+  
+      this.props.register(formData)
+        .then((response) => {
+          try {
+            if (JSON.stringify(response.value.status)) {
+              this.props.navigation.navigate('Signin');
+            }
+          } catch (error) {
+            console.log(error);
           }
-        } catch (error) {
-          console.log(error);
-        }
-      })
-      .catch(errors => console.log(errors));
+        })
+        .catch(errors => console.log(errors));
+    }
   }
 
   /**
@@ -340,7 +341,10 @@ class SigninScreen extends Component {
           <View>
             <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
               placeholder={'邮箱' }
+              onChangeText={this.changeEmail}
+              ref={(c) => { this.emailInput = c; }}
             />
+            <Text style={styles.helpInfo} ref={(c) => { this._myText = c; }}>{this.state.helpInfo}</Text>
           </View>
           <View>
             <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
@@ -373,7 +377,7 @@ class SigninScreen extends Component {
           <Tab heading='登录'>
             <View>
               <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
-                placeholder={'手机号' }
+                placeholder={'邮箱/手机号' }
                 value={phoneNum} 
                 onChangeText={(value) => this.changePhoneNum(value)}
                 />
@@ -382,26 +386,6 @@ class SigninScreen extends Component {
               <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
                 placeholder={'密码'}
               />
-            </View>
-            <View style={styles.verifyCodeContainer}>
-              <View style={styles.verifyLeft}>
-                <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
-                    placeholder={'验证码'}
-                />
-              </View>
-              <View style={[styles.borderStyle, styles.verifyRight]}>
-                <CountDownButton
-                  timerTitle={'获取验证码'}
-                   enable={phoneNum.length > 10}
-                  onClick={(shouldStartCounting)=>{
-                    this._requestAPI(shouldStartCounting)
-                  }}
-                  timerEnd={()=>{
-                    this.setState({
-                    state: '倒计时结束'
-                    })
-                }}/>
-              </View>
             </View>
             <View style={styles.buttonContainer}>
               <Button block style={styles.buttonStyle}>
@@ -458,7 +442,7 @@ class SigninScreen extends Component {
           <Tab heading='注册'>
             {signup}
             <View style={styles.buttonContainer}>
-              <Button block style={styles.buttonStyle}>
+              <Button block style={styles.buttonStyle} onPress={this.signup}>
                 <Text style={{ fontSize: 17 }}>注册</Text>
               </Button>
             </View>
