@@ -35,7 +35,7 @@ class SigninScreen extends Component {
     headerLeft: (
       <View style={{ flex: 1, flexDirection: 'row',width: 150 }}>
         <Button transparent onPress={() => navigation.goBack()}>
-          <Icon type='font-awesome' name='close' size={20}  color=''/>
+          <Icon type='font-awesome' name='close' size={20}/>
         </Button>
         <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
         <Text style={styles.titleText}>新历财经</Text>
