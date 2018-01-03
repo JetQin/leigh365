@@ -45,50 +45,50 @@ export default class BlogCard extends Component {
     render() {
         return (
             <ScrollView>
-                <List>
+                <List style={{ marginTop: 0 }}>
                    {
                     this.state.blogs.map((item, i) => {
                     return (
                         <ListItem key={i} itemDivider={false}>
                             <Card>
-                                <CardItem>
+                                <CardItem style={styles.cardItem}>
                                     <Left>
-                                        <Thumbnail source={{uri: item.avatar }} />
+                                        <Thumbnail small source={{uri: item.avatar }} />
                                         <Body>
                                             <Text style={styles.userTitle}>{item.name}</Text>
                                             <Text style={styles.timeTitle} note>{item.date}</Text>
                                         </Body>
                                     </Left>
                                     <Right>
-                                        <Button bordered small>
-                                            <Icon name="check" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+                                        <Button bordered small style={styles.readBtn }>
+                                            <Icon name="check" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={12}/>
                                             <Text style={styles.readTitle}> 已关注 </Text>
                                         </Button>
                                     </Right>
                                 </CardItem>
-                                <CardItem cardBody>
+                                <CardItem style={styles.cardItem}>
                                     <View style={styles.body}>
                                         <View>
                                             <Text style={styles.content}>{item.status}</Text>
                                         </View>
                                         <View style={styles.imageContainer}>
-                                            <Image source={{uri: item.image1}} style={{height: 50, width: 50, flex: 1}}/>
-                                            <Image source={{uri: item.image2}} style={{height: 50, width: 50, flex: 1}}/>
-                                            <Image source={{uri: item.image3}} style={{height: 50, width: 50, flex: 1}}/>
+                                            <Image source={{uri: item.image1}} style={styles.image}/>
+                                            <Image source={{uri: item.image2}} style={styles.image}/>
+                                            <Image source={{uri: item.image3}} style={styles.image}/>
                                         </View>
                                     </View>
                                 </CardItem>
-                                <CardItem>
+                                <CardItem footer style={{paddingTop: 0, paddingBottom: 2}}>
                                     <View style={styles.footer}>
-                                        <Button transparent>
+                                        <Button transparent style={styles.btn}>
                                             <Icon name="share" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
                                             <Text style={styles.footerText}>{item.share}</Text>
                                         </Button>
-                                        <Button transparent>
+                                        <Button transparent style={styles.btn}>
                                             <Icon name="ios-chatbubbles" type='ionicon' color={Colors.$navigationHeaderTextColor} size={16} />
                                             <Text style={styles.footerText}>{item.comments}</Text>
                                         </Button>
-                                        <Button transparent>
+                                        <Button transparent style={styles.btn}>
                                             <Icon name="thumbs-up"  type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16} />
                                             <Text style={styles.footerText}>{item.likes}</Text>
                                         </Button>
