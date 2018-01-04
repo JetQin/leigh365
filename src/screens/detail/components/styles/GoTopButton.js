@@ -9,8 +9,7 @@ const screenWidth = width < height ? width : height;
 const styles = EStyleSheet.create({  
     root: {
         position: 'absolute',
-        right: 10,
-        bottom: 70,
+        right: 10,      
     },
     topBtn: {
         width: 40,

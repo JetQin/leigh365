@@ -130,14 +130,9 @@ class DetailScreen extends Component {
             <Text style={styles.footerItemIconText}>收藏</Text>
           </Button>
         </View>
-        <GoTopButton goTop={this.goTop}/>
-        {/* <View style={{ position: 'absolute',right: 10,bottom: 70}}>
-          <Button transparent onPress={this.goTop} style={{width: 40,height: 40,borderRadius:10, backgroundColor: Colors.$blueTextColor,opacity:0.6, justifyContent:'center', alignItems:'center'}}>
-            <Icon name="angle-up" type='font-awesome' color={Colors.$whiteColor} size={16}/>
-          </Button>
-        </View> */}
-        <View style={{ position: 'absolute',right: 10,bottom: 120}}>
-          <Button transparent onPress={() => this.props.navigation.goBack()} style={{width: 40,height: 40,borderRadius:20, backgroundColor: Colors.$blueTextColor,opacity:0.6, justifyContent:'center', alignItems:'center'}}>
+        <GoTopButton bottomValue = {50} goTop={this.goTop}/>
+        <View style={styles.closeBtnContainer}>
+          <Button transparent onPress={() => this.props.navigation.goBack()} style={styles.closeBtn}>
             <Icon name="close" type='Ionicons' color={Colors.$whiteColor} size={16}/>
           </Button>
         </View>
