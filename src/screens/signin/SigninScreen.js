@@ -10,6 +10,9 @@ import { authenticate, register } from './actions';
 import CheckBox from './components/CheckBox';
 import Input from './components/Input';
 import CountDownButton from './components/CountDownButton';
+import { WordpressApi } from '../../../constants/api';
+
+const api = new WordpressApi();
 
 @connect(
   state => ({
@@ -22,6 +25,7 @@ import CountDownButton from './components/CountDownButton';
 class SigninScreen extends Component {
   static defaultProps = {
     password: true,
+    api,
   };
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: '个人信息',
@@ -74,6 +78,7 @@ class SigninScreen extends Component {
       state: '这里显示状态',
       signup: 'cellphone',
       verifyImg: 'http://synebusiness.cn/verify.php?' + Math.random(),
+      verifyCode: '',
     };
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
@@ -84,6 +89,7 @@ class SigninScreen extends Component {
     this.changeRegisterPassword = this.changeRegisterPassword.bind(this);
     this.changeRegisterPasswordRe = this.changeRegisterPasswordRe.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
+    this._requestAPI = this._requestAPI.bind(this);
   }
   
 
@@ -291,6 +297,34 @@ class SigninScreen extends Component {
     this.setState({
       verifyImg: 'http://synebusiness.cn/verify.php?rand=' + Math.random(),
     });
+  }
+
+  async  _requestAPI(shouldStartCounting){
+    this.setState({
+      state: '正在请求验证码'
+    })
+    
+    setTimeout(()=>{
+      this.generateVerifyCode;
+      const formData = {
+        phoneNum: this.state.phoneNum,
+        verifyCode: this.state.verifyCode,
+      };
+      const response = this.props.api.sendVerifyCode(formData);
+      const requestSucc = response.status;
+      this.setState({
+        state: `验证码获取${requestSucc ? '成功' : '失败'}`
+      })
+      shouldStartCounting && shouldStartCounting(requestSucc)
+    }, 2000);
+  }
+
+  generateVerifyCode() {
+    let verifyCode = ''; 
+    for(let i=0; i<6; i++) { 
+      verifyCode += Math.floor(Math.random()*10); 
+    } 
+    this.state.verifyCode = verifyCode;
   }
 
   render() {
