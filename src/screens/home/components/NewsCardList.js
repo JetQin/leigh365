@@ -16,6 +16,7 @@ class NewsCardList extends Component {
     };
     this.shareNews = this.shareNews.bind(this);
     this.showResult = this.showResult.bind(this);
+    this.goTop = this.goTop.bind(this);
   }
 
   async componentDidMount() {
@@ -68,12 +69,17 @@ class NewsCardList extends Component {
     }
   }
 
+  goTop() {
+    this.toTop.scrollTo({x:0,y: 0,animated:true});
+  }
+
   render() {
     if (!this.props.news) {
       return (<View />);
     }
     return (
       <ScrollView
+        ref={(c) => { this.toTop = c; }}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

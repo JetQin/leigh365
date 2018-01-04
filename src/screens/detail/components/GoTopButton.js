@@ -6,13 +6,9 @@ import { List, ListItem, Card, H3, CardItem, Thumbnail, Button, Left, Body, Righ
 import Colors from '../../../../constants/Colors'
 import styles from './styles/GoTopButton';
 
-const { width, height } = Dimensions.get('window');
-const screenHeight = width < height ? height : width;
-const screenWidth = width < height ? width : height;
-
 class GoTopButton extends Component {
   static defaultProps = {
-
+    bottomValue: 0,
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -23,11 +19,12 @@ class GoTopButton extends Component {
     super(props);
     this._goTop = this._goTop.bind(this);
     this.state = {
-
+      bottomValue: props.bottomValue,
     }
   }
 
   componentDidMount() {
+    this.setState({bottomValue: this.props.bottomValue});
   }
 
   _goTop() {
@@ -35,7 +32,7 @@ class GoTopButton extends Component {
   }
   render() {
     return (
-      <View style={styles.root}>
+      <View style={[styles.root,{ bottom: this.state.bottomValue}]}>
         <Button transparent onPress={this._goTop} style={styles.topBtn}>
           <Icon name="angle-up" type='font-awesome' color={Colors.$whiteColor} size={16}/>
         </Button>

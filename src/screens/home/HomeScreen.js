@@ -8,6 +8,7 @@ import Swiper from 'react-native-swiper';
 import Colors from '../../../constants/Colors';
 import { connect } from 'react-redux';
 import styles from './styles/HomeScreen';
+import GoTopButton from '../detail/components/GoTopButton'
 
 import { fetchData } from './actions';
 
@@ -47,6 +48,7 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.reloadData = this.reloadData.bind(this);
+    this.goTop = this.goTop.bind(this);
   }
   state = {
     page: 1,
@@ -71,6 +73,10 @@ class HomeScreen extends React.Component {
       news: response.action.payload.news,
       page: 1 + this.state.page,
     });
+  }
+
+  goTop() {
+    this.cardList.goTop();
   }
 
   render() {
@@ -113,6 +119,7 @@ class HomeScreen extends React.Component {
         <View style={styles.bottomContainer}>
           <NewsCardList ref={(c) => { this.cardList = c; }} news={this.state.news} scroll={this.reloadData} navigation={this.props.navigation} />
         </View>
+        <GoTopButton goTop={this.goTop}/>
       </View>
     );
   }

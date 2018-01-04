@@ -119,7 +119,7 @@ class NewsScreen extends Component {
   }
 
   changeTab(ref) {
-    if (ref.props.heading === '热点') {
+    if (ref.props.heading === '推荐') {
       this.hot._onRefresh();
     }
     if (ref.props.heading === '科技') {
@@ -137,7 +137,7 @@ class NewsScreen extends Component {
     if (ref.props.heading === '+') {
       this.props.navigation.navigate('Item');
     }
-    if (ref.props.heading === '已关注') {
+    if (ref.props.heading === '关注') {
       //this.props.navigation.navigate('Detail');
     }
     
@@ -148,10 +148,10 @@ class NewsScreen extends Component {
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
           <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
-            <Tab heading='热点'>
+            <Tab heading='推荐'>
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='已关注'>
+            <Tab heading='关注'>
               <BlogCard/>
             </Tab>
             <Tab heading='科技'>
