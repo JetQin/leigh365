@@ -109,12 +109,6 @@ const styles = EStyleSheet.create({
     marginRight: '4%',
     padding: '1%',
   },
-  // buttonStyle: {
-  //   backgroundColor: '#6495ED',
-  //   borderRadius: 3,
-  //   paddingTop: 6,
-  //   paddingBottom: 6,
-  // },
   otherSiginContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -131,6 +125,11 @@ const styles = EStyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
   },
+  helpInfo: {
+    color: 'red',
+    marginLeft: 10,
+  },
+  
 });
 
 export default styles;

@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Alert } from 'react-native';
+import { View, Text, AsyncStorage, Image, Alert, Picker, Dimensions, TouchableHighlight } from 'react-native';
 import { Avatar, Badge } from 'react-native-elements';
 import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
+import Modal from 'react-native-modal';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
 import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
+import { PostApi } from '../../../constants/index';
 
 const wordpressApi = new WordpressApi();
+const postApi = new PostApi();
 
 class ProfileScreen extends Component {
   static defaultProps = {
-    wordpressApi,
+    wordpressApi, postApi,
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -24,7 +27,7 @@ class ProfileScreen extends Component {
       borderStyle: 'solid',
     };
     const headerLeft = (
-        <Button transparent onPress={() => navigation.navigate('Search')}>
+        <Button transparent onPress={() => navigation.navigate('Setting')}>
           <Text style={styles.headerTitle}>设置</Text>
         </Button>
     );
@@ -52,13 +55,34 @@ class ProfileScreen extends Component {
         page: 1,
         data: [],
       },
+      blogs:{
+        page: 1,
+        data: [],
+      },
       isLogin: false,
+      showAvatarPane: false,
       user: {
         name: '',
+        avatar: 'http://synebusiness.cn/avatar/001.jpeg',
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
       },
+      avatars:[
+        'http://synebusiness.cn/avatar/001.jpeg',
+        'http://synebusiness.cn/avatar/002.jpeg',
+        'http://synebusiness.cn/avatar/003.jpeg',
+        'http://synebusiness.cn/avatar/004.jpeg',
+        'http://synebusiness.cn/avatar/005.jpeg',
+        'http://synebusiness.cn/avatar/006.jpeg',
+        'http://synebusiness.cn/avatar/007.jpeg',
+        'http://synebusiness.cn/avatar/008.jpeg',
+        'http://synebusiness.cn/avatar/009.jpeg',
+        'http://synebusiness.cn/avatar/0010.jpeg',
+        'http://synebusiness.cn/avatar/0011.jpeg',
+        'http://synebusiness.cn/avatar/0012.jpeg',
+        'http://synebusiness.cn/avatar/0013.jpeg',
+      ]
     };
     this.login = this.login.bind(this);
     this.changeAvatar = this.changeAvatar.bind(this);
@@ -66,7 +90,9 @@ class ProfileScreen extends Component {
     this.charge = this.charge.bind(this);
     this.fetchUserArticle = this.fetchUserArticle.bind(this);
     this.fetchUserStock = this.fetchUserStock.bind(this);
+    this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
+    // this.selectAvatar = this.selectAvatar.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
   }
@@ -144,6 +170,17 @@ class ProfileScreen extends Component {
     }
   }
 
+  async fetchUserBlogs(){
+    // if (undefined !== this.state.user.user_id) {
+      const request = {
+        type: 'get_post_status',
+        userId: 1,
+      };
+      const blogs = await this.props.postApi.getPost(request);
+      this.setState({ blogs: { page: this.state.blogs.page + 1, data: blogs } });
+    // }
+  }
+
   async deleteArticleRecord(id) {
     if (id) {
       const request = {
@@ -158,7 +195,6 @@ class ProfileScreen extends Component {
         ],
         { cancelable: false }
       );
-      // this.articleCard._onRefresh();
       this.setState({ myArticle: { page: this.state.myArticle.page, data: this.state.myArticle.data.filter((item) => item.id !== id) } });
     }
   }
@@ -177,40 +213,18 @@ class ProfileScreen extends Component {
         ],
         { cancelable: false }
       );
-      // this.fetchUserArticle();
-      // this.stockCard._onRefresh();
       this.setState({ myStock: { page: this.state.myStock.page, data: this.state.myStock.data.filter((item) => item.code !== id) } });
     }
   }
 
   changeAvatar() {
     console.log('change avatar');
+    this.setState({showAvatarPane: !this.state.showAvatarPane });
   }
 
   charge(type) {
     console.log(type);
     console.log('charge');
-    // const products = [
-    //   'com.xyz.abc',
-    // ];
-    // InAppUtils.loadProducts(products, (error, products) => {
-    //   // update store here.
-    // });
-    // InAppUtils.canMakePayments((enabled) => {
-    //   if (enabled) {
-    //     Alert.alert('IAP enabled');
-    //   } else {
-    //     Alert.alert('IAP disabled');
-    //   }
-    // });
-    // const productIdentifier = 'com.xyz.abc';
-    // InAppUtils.purchaseProduct(productIdentifier, (error, response) => {
-    //   // NOTE for v3.0: User can cancel the payment which will be available as error object here.
-    //   if (response && response.productIdentifier) {
-    //     Alert.alert('Purchase Successful', `Your Transaction ID is ${response.transactionIdentifier}`);
-    //     // unlock store here.
-    //   }
-    // });
   }
 
   changeTab(ref) {
@@ -245,7 +259,49 @@ class ProfileScreen extends Component {
     }
   }
 
+
+  selectAvatar(index){
+    let avatarIndex = parseInt(index);
+   
+    let uri = '';
+    if(avatarIndex < this.state.avatars.length)
+    {
+      uri = this.state.avatars[avatarIndex];
+    }
+    console.log(uri);
+    this.setState({ showAvatarPane: false });
+    this.setState({ user: {avatar: uri }});
+  }
+
+  _renderAvatarContent(){
+    let avatars = [];
+    const length = this.state.avatars.length;
+    for (let index= 0; index < length; index=index+4)
+    {
+       if( index % 4 == 0){
+         avatars.push(
+            <View style={styles.avatarViewRow} key={'v'.concat(index)}> 
+              <TouchableHighlight onPress={()=> this.selectAvatar(index)}>
+                <Image key={index} source={{ uri: this.state.avatars[index] }} style={{width: 80, height: 80}}/>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={()=> this.selectAvatar(index+1)}>
+                { index+1 < length ? <Image key={index+1} source={{ uri: this.state.avatars[index+1] }} style={{width: 80, height: 80}} /> : <View/>}
+              </TouchableHighlight>
+              <TouchableHighlight onPress={()=> this.selectAvatar(index+2)}>
+                { index+2 < length ? <Image key={index+2} source={{ uri: this.state.avatars[index+2] }} style={{width: 80, height: 80}} /> : <View/>}
+              </TouchableHighlight>
+              <TouchableHighlight onPress={()=> this.selectAvatar(index+3)}>
+                { index+3 < length ? <Image key={index+3} source={{ uri: this.state.avatars[index+3] }} style={{width: 80, height: 80}} /> : <View/>}
+              </TouchableHighlight>
+            </View>
+          )
+        }
+    }
+    console.log(avatars);
+    return (<View style={{ height: 400, backgroundColor: Colors.$whiteColor }}>{avatars}</View>);
+  }
   render() {
+    const {height, width} = Dimensions.get('window');
     return (
       <View style={styles.root}>
         <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
@@ -254,11 +310,12 @@ class ProfileScreen extends Component {
               <View style={styles.top}>
                 <View style={styles.avatarContainer}>
                   <Avatar
-                    large
                     rounded
-                    source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
+                    height={80}
+                    width={80}
+                    containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$black }}
+                    source={{ uri: this.state.user.avatar }}
                     onPress={this.login}
-                    activeOpacity={0.7}
                   />
                 </View>
                 <View style={styles.settingContainer}>
@@ -268,7 +325,6 @@ class ProfileScreen extends Component {
                   <View style={styles.settingBtn}>
                     <Button transparent info onPress={this.changeAvatar} >
                       <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                      <Text style={styles.label}>编辑头像</Text>
                     </Button>
                   </View>
                 </View>
@@ -316,10 +372,18 @@ class ProfileScreen extends Component {
                   onButtonPress={() => this.charge('6month')}
                 />
               </View>
+              <Modal isVisible={this.state.showAvatarPane} style={styles.avatarPane}>
+                      {this._renderAvatarContent()}
+              </Modal>
             </View>
           </Tab>
           <Tab heading='博客' >
-            <BlogList />
+            <BlogList 
+               blogs={this.state.blogs.data}
+               username={this.state.user.name}
+               avatar={this.state.user.avatar}
+               scroll={this.fetchUserBlogs}
+            />
           </Tab>
           <Tab heading='收藏夹' >
             <NewsInfo

@@ -13,3 +13,5 @@ export * from './webview';
 export * from './reports';
 export * from './item';
 export * from './post';
+export * from './detail';
+export * from './settings';

@@ -3,7 +3,9 @@ import { View, Text, Image, Alert } from 'react-native';
 import { Tabs, ScrollableTab, Tab, Button } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
-import NewsCard from './components/NewsCard';
+// import NewsCard  from './components/NewsCard';
+// import {BlogCard}  from './components/BlogCard';
+import { NewsCard, BlogCard} from './components'
 import styles from './styles/NewsScreen';
 import { WordpressApi } from '../../../constants/api';
 
@@ -117,7 +119,7 @@ class NewsScreen extends Component {
   }
 
   changeTab(ref) {
-    if (ref.props.heading === '热点') {
+    if (ref.props.heading === '推荐') {
       this.hot._onRefresh();
     }
     if (ref.props.heading === '科技') {
@@ -135,15 +137,22 @@ class NewsScreen extends Component {
     if (ref.props.heading === '+') {
       this.props.navigation.navigate('Item');
     }
+    if (ref.props.heading === '关注') {
+      //this.props.navigation.navigate('Detail');
+    }
+    
   }
 
   render() {
     return (
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
-          <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} >
-            <Tab heading='热点'>
+          <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
+            <Tab heading='推荐'>
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
+            </Tab>
+            <Tab heading='关注'>
+              <BlogCard/>
             </Tab>
             <Tab heading='科技'>
               <NewsCard ref={(c) => { this.tech = c; }} news={this.state.techNews.data} scroll={this.updateTechNews} navigation={this.props.navigation} />

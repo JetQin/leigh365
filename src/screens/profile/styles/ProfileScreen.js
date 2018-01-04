@@ -42,8 +42,8 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   settingBtn: {
-    position: 'absolute',
-    right: 5,
+    // position: 'absolute',
+    // right: 5,
     justifyContent: 'center',
   },
   // 我的收藏
@@ -140,6 +140,15 @@ const styles = EStyleSheet.create({
     width: 20,
     height: 20,
   },
+  avatarPane: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  avatarViewRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
 
 });
 
