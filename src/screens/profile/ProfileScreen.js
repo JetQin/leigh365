@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Alert, Picker, Dimensions } from 'react-native';
+import { View, Text, AsyncStorage, Image, Alert, Picker, Dimensions, TouchableHighlight } from 'react-native';
 import { Avatar, Badge } from 'react-native-elements';
 import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
+import Modal from 'react-native-modal';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
 import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
@@ -59,13 +60,29 @@ class ProfileScreen extends Component {
         data: [],
       },
       isLogin: false,
+      showAvatarPane: false,
       user: {
         name: '',
-        avatar: '',
+        avatar: 'http://synebusiness.cn/avatar/001.jpeg',
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
       },
+      avatars:[
+        'http://synebusiness.cn/avatar/001.jpeg',
+        'http://synebusiness.cn/avatar/002.jpeg',
+        'http://synebusiness.cn/avatar/003.jpeg',
+        'http://synebusiness.cn/avatar/004.jpeg',
+        'http://synebusiness.cn/avatar/005.jpeg',
+        'http://synebusiness.cn/avatar/006.jpeg',
+        'http://synebusiness.cn/avatar/007.jpeg',
+        'http://synebusiness.cn/avatar/008.jpeg',
+        'http://synebusiness.cn/avatar/009.jpeg',
+        'http://synebusiness.cn/avatar/0010.jpeg',
+        'http://synebusiness.cn/avatar/0011.jpeg',
+        'http://synebusiness.cn/avatar/0012.jpeg',
+        'http://synebusiness.cn/avatar/0013.jpeg',
+      ]
     };
     this.login = this.login.bind(this);
     this.changeAvatar = this.changeAvatar.bind(this);
@@ -75,6 +92,7 @@ class ProfileScreen extends Component {
     this.fetchUserStock = this.fetchUserStock.bind(this);
     this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
+    // this.selectAvatar = this.selectAvatar.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
   }
@@ -195,40 +213,18 @@ class ProfileScreen extends Component {
         ],
         { cancelable: false }
       );
-      // this.fetchUserArticle();
-      // this.stockCard._onRefresh();
       this.setState({ myStock: { page: this.state.myStock.page, data: this.state.myStock.data.filter((item) => item.code !== id) } });
     }
   }
 
   changeAvatar() {
     console.log('change avatar');
+    this.setState({showAvatarPane: !this.state.showAvatarPane });
   }
 
   charge(type) {
     console.log(type);
     console.log('charge');
-    // const products = [
-    //   'com.xyz.abc',
-    // ];
-    // InAppUtils.loadProducts(products, (error, products) => {
-    //   // update store here.
-    // });
-    // InAppUtils.canMakePayments((enabled) => {
-    //   if (enabled) {
-    //     Alert.alert('IAP enabled');
-    //   } else {
-    //     Alert.alert('IAP disabled');
-    //   }
-    // });
-    // const productIdentifier = 'com.xyz.abc';
-    // InAppUtils.purchaseProduct(productIdentifier, (error, response) => {
-    //   // NOTE for v3.0: User can cancel the payment which will be available as error object here.
-    //   if (response && response.productIdentifier) {
-    //     Alert.alert('Purchase Successful', `Your Transaction ID is ${response.transactionIdentifier}`);
-    //     // unlock store here.
-    //   }
-    // });
   }
 
   changeTab(ref) {
@@ -263,11 +259,51 @@ class ProfileScreen extends Component {
     }
   }
 
+
+  selectAvatar(index){
+    let avatarIndex = parseInt(index);
+   
+    let uri = '';
+    if(avatarIndex < this.state.avatars.length)
+    {
+      uri = this.state.avatars[avatarIndex];
+    }
+    console.log(uri);
+    this.setState({ showAvatarPane: false });
+    this.setState({ user: {avatar: uri }});
+  }
+
+  _renderAvatarContent(){
+    let avatars = [];
+    const length = this.state.avatars.length;
+    for (let index= 0; index < length; index=index+4)
+    {
+       if( index % 4 == 0){
+         avatars.push(
+            <View style={styles.avatarViewRow} key={'v'.concat(index)}> 
+              <TouchableHighlight onPress={()=> this.selectAvatar(index)}>
+                <Image key={index} source={{ uri: this.state.avatars[index] }} style={{width: 80, height: 80}}/>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={()=> this.selectAvatar(index+1)}>
+                { index+1 < length ? <Image key={index+1} source={{ uri: this.state.avatars[index+1] }} style={{width: 80, height: 80}} /> : <View/>}
+              </TouchableHighlight>
+              <TouchableHighlight onPress={()=> this.selectAvatar(index+2)}>
+                { index+2 < length ? <Image key={index+2} source={{ uri: this.state.avatars[index+2] }} style={{width: 80, height: 80}} /> : <View/>}
+              </TouchableHighlight>
+              <TouchableHighlight onPress={()=> this.selectAvatar(index+3)}>
+                { index+3 < length ? <Image key={index+3} source={{ uri: this.state.avatars[index+3] }} style={{width: 80, height: 80}} /> : <View/>}
+              </TouchableHighlight>
+            </View>
+          )
+        }
+    }
+    console.log(avatars);
+    return (<View style={{ height: 400, backgroundColor: Colors.$whiteColor }}>{avatars}</View>);
+  }
   render() {
     const {height, width} = Dimensions.get('window');
     return (
       <View style={styles.root}>
-        {/* <Image source={require('../../../assets/imgs/background.jpg')}   style={{width: width, height: height}} /> */}
         <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
           <Tab heading='我的新历'>
             <View style={styles.layout}>
@@ -278,9 +314,8 @@ class ProfileScreen extends Component {
                     height={80}
                     width={80}
                     containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$black }}
-                    source={ require('../../../assets/imgs/avatar.jpg') }
+                    source={{ uri: this.state.user.avatar }}
                     onPress={this.login}
-                    // activeOpacity={0.7}
                   />
                 </View>
                 <View style={styles.settingContainer}>
@@ -290,17 +325,7 @@ class ProfileScreen extends Component {
                   <View style={styles.settingBtn}>
                     <Button transparent info onPress={this.changeAvatar} >
                       <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                      {/* <Text style={styles.label}>编辑头像</Text> */}
                     </Button>
-                    {/* <Picker
-                      selectedValue={this.state.language}
-                      mode="dialog"
-                      >
-                      <Picker.Item label="Java" value="Java"/>
-                      <Picker.Item label="JavaScript" value="js"/>
-                      <Picker.Item label="C语音" value="c"/>
-                      <Picker.Item label="PHP开发" value="php"/>
-                    </Picker> */}
                   </View>
                 </View>
                 <View style={styles.myCollectContainer}>
@@ -347,6 +372,9 @@ class ProfileScreen extends Component {
                   onButtonPress={() => this.charge('6month')}
                 />
               </View>
+              <Modal isVisible={this.state.showAvatarPane} style={styles.avatarPane}>
+                      {this._renderAvatarContent()}
+              </Modal>
             </View>
           </Tab>
           <Tab heading='博客' >
