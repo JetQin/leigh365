@@ -140,6 +140,15 @@ const styles = EStyleSheet.create({
     width: 20,
     height: 20,
   },
+  avatarPane: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  avatarViewRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
 
 });
 

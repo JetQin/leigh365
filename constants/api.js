@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const apiUrl = 'http://synebusiness.cn/wordpressApi.php';
 const authenticationUrl = 'http://synebusiness.cn/authentication.php';
+const smsUrl = 'http://synebusiness.cn/test_sms.php';
 
 class WordpressApi {
   async fetchData(page) {
@@ -160,6 +161,15 @@ class WordpressApi {
     params.append('type', data.type);
     params.append('userId', data.userId);
     const response = await axios.post(wordpressApiUrl, params);
+    return response.data;
+  }
+
+  async sendVerifyCode(data) {
+    const sendVerifyCodeUrl = smsUrl;
+    const params = new FormData();
+    params.append('phoneNum', data.phoneNum);
+    params.append('verifyCode', data.verifyCode);
+    const response = await axios.post(sendVerifyCodeUrl, params);
     return response.data;
   }
 }

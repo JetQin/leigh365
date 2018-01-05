@@ -31,6 +31,7 @@
     "react-native-extended-stylesheet": "^0.7.0",
     "react-native-image-picker": "^0.26.7",
     "react-native-in-app-utils": "^6.0.0",
+    "react-native-modal": "^4.1.1",
     "react-native-swiper": "^1.5.13",
     "react-native-timeline-listview": "^0.2.2",
     "react-native-wechat": "^1.9.9",

@@ -35,6 +35,7 @@ const styles = EStyleSheet.create({
   },
   buttonContainer: {
     margin: '4%',
+    marginBottom: '8%',
   },
   buttonStyle: {   
     backgroundColor: '#6A97BE',
@@ -113,7 +114,6 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-    marginTop: '4%',
     marginBottom: '1%',
     marginLeft: '12%',
     marginRight: '12%',
