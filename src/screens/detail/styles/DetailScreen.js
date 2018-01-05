@@ -75,6 +75,20 @@ const styles = EStyleSheet.create({
         opacity:0.6, 
         justifyContent:'center', 
         alignItems:'center',
+      },
+      rewardBtn: {
+        width: 40,
+        height: 40,
+        borderRadius:20, 
+        backgroundColor: 'transparent',
+        justifyContent:'center', 
+        alignItems:'center',
+        borderColor: Colors.$CommentBgColor,
+        borderWidth:1,
+      },
+      rewardText: {
+        color: Colors.$orangeTextColor,
+        fontSize:14
       }
 
       
