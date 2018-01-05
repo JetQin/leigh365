@@ -303,28 +303,27 @@ class SigninScreen extends Component {
     this.setState({
       state: '正在请求验证码'
     })
-    
+    this.state.verifyCode = '';
+    let verifyCode = '';
+    for(let i=0; i<6; i++) { 
+      verifyCode += Math.floor(Math.random()*10); 
+    } 
+    this.state.verifyCode = verifyCode;
+    const formData = {
+      phoneNum: this.state.phoneNum,
+      verifyCode: this.state.verifyCode,
+    };
+    const response = await this.props.api.sendVerifyCode(formData);
+    const requestSucc = response.status;
+    if(!requestSucc){
+      Alert.alert("短信发送失败");
+    }
     setTimeout(()=>{
-      this.generateVerifyCode;
-      const formData = {
-        phoneNum: this.state.phoneNum,
-        verifyCode: this.state.verifyCode,
-      };
-      const response = this.props.api.sendVerifyCode(formData);
-      const requestSucc = response.status;
       this.setState({
         state: `验证码获取${requestSucc ? '成功' : '失败'}`
       })
       shouldStartCounting && shouldStartCounting(requestSucc)
     }, 2000);
-  }
-
-  generateVerifyCode() {
-    let verifyCode = ''; 
-    for(let i=0; i<6; i++) { 
-      verifyCode += Math.floor(Math.random()*10); 
-    } 
-    this.state.verifyCode = verifyCode;
   }
 
   render() {

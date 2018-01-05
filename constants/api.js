@@ -170,6 +170,7 @@ class WordpressApi {
     params.append('phoneNum', data.phoneNum);
     params.append('verifyCode', data.verifyCode);
     const response = await axios.post(sendVerifyCodeUrl, params);
+    return response.data;
   }
 }
 
