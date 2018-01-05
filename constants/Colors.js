@@ -16,4 +16,6 @@ export default {
   $chartColor: '#2980B9',
   $blueTextColor: '#4987EF',
   $grayTextColor: '#949494',
+  $orangeTextColor:'#F48309',
+  $CommentBgColor:'#F7F7F7',
 };
