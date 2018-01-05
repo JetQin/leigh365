@@ -46,14 +46,14 @@ export default class BlogList extends Component {
                                 <Card>
                                     <CardItem>
                                         <Left>
-                                            <Thumbnail source={{uri: item.avatar }} />
+                                            <Thumbnail source={{uri: this.props.avatar }} />
                                             <Body>
                                                 <Text style={styles.userTitle}>{item.name}</Text>
                                                 <Text style={styles.timeTitle} note>{item.timestamp}</Text>
                                             </Body>
                                         </Left>
                                         <Right>
-                                            <Button bordered small><Text style={styles.readTitle}> {item.reading} 阅读 </Text></Button>
+                                            <Button bordered small><Text style={styles.readTitle}> {item.readings} 阅读 </Text></Button>
                                         </Right>
                                     </CardItem>
                                     <CardItem cardBody>

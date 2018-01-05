@@ -12,7 +12,7 @@ const styles = EStyleSheet.create({
         left: 0,
         bottom: 0,
         width: screenWidth,
-        height: 60,
+        height: 50,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -62,6 +62,20 @@ const styles = EStyleSheet.create({
         width:screenWidth,
         paddingTop: 10,
       },
+      closeBtnContainer: {
+        position: 'absolute',
+        right: 10,
+        bottom: 100,
+      },
+      closeBtn: {
+        width: 40,
+        height: 40,
+        borderRadius:20, 
+        backgroundColor: Colors.$blueTextColor,
+        opacity:0.6, 
+        justifyContent:'center', 
+        alignItems:'center',
+      }
 
       
 
