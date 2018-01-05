@@ -69,7 +69,7 @@ class SigninScreen extends Component {
       emailHelp: '',
       rUsername: '',
       rUsernameHelp: '',
-      rPassword: '',
+      password: '',
       rPasswordHelp: '',
       rPasswordRe: '',
       rPasswordReHelp: '',
@@ -79,6 +79,7 @@ class SigninScreen extends Component {
       signup: 'cellphone',
       verifyImg: 'http://synebusiness.cn/verify.php?' + Math.random(),
       verifyCode: '',
+      confirmVerifyCode: '',
     };
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
@@ -90,6 +91,7 @@ class SigninScreen extends Component {
     this.changeRegisterPasswordRe = this.changeRegisterPasswordRe.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
     this._requestAPI = this._requestAPI.bind(this);
+    this.changeVerifyCode = this.changeVerifyCode.bind(this);
   }
   
 
@@ -99,6 +101,10 @@ class SigninScreen extends Component {
 
   changePassword(passw) {
     this.setState({ password: passw });
+  }
+
+  changeVerifyCode(code) {
+    this.setState({ confirmVerifyCode: code});
   }
 
   changeEmail(mail) {
@@ -118,6 +124,7 @@ class SigninScreen extends Component {
   }
 
   validatedEmail() {
+    this.state.validateFlag = true;
     if (this.state.email === '' || this.state.email === null) {
       this.emailInput.setState({ helpInfo: '* 邮箱不能为空' });
       this.state.validateFlag = false;
@@ -133,6 +140,7 @@ class SigninScreen extends Component {
     }
   }
   validateRUsername() {
+    this.state.validateFlag = true;
     if (this.state.rUsername === '' || this.state.rUsername === null) {
       this.rusernameInput.setState({ helpInfo: '* 用户名不能为空' });
       this.state.validateFlag = false;
@@ -140,9 +148,19 @@ class SigninScreen extends Component {
       this.state.validateFlag = true;
     }
   }
-  validateRPassword() {
+  validatePassword() {
+    this.state.validateFlag = true;
     if (this.state.rPassword === '' || this.state.rPassword === null) {
-      this.rPasswordInput.setState({ helpInfo: '* 密码不能为空' });
+      this.passwordInput.setState({ helpInfo: '* 密码不能为空' });
+      this.state.validateFlag = false;
+    } else {
+      this.state.validateFlag = true;
+    }
+  }
+  validateVerifyCode() {
+    this.state.validateFlag = true;
+    if(this.state.confirmVerifyCode === '' || this.state.confirmVerifyCode === null
+       || this.state.confirmVerifyCode != this.state.verifyCode) {
       this.state.validateFlag = false;
     } else {
       this.state.validateFlag = true;
@@ -183,39 +201,56 @@ class SigninScreen extends Component {
   signup() {
     if(this.state.signup === 'mailbox' ){
       this.validatedEmail();
-      // this.emailInput._myInput
       if (!this.state.validateFlag) {
         this.emailInput.setNativeProps({
           style: { borderColor: 'red' },
         });
         return;
       }
-      // this.validateRUsername();
-      // if (!this.state.validateFlag) {
-      //   this.rusernameInput._myInput.setNativeProps({
-      //     style: { borderColor: 'red' },
-      //   });
-      //   return;
-      // }
-  
-      // this.validateRPassword();
-      // if (!this.state.validateFlag) {
-      //   this.rPasswordInput._myInput.setNativeProps({
-      //     style: { borderColor: 'red' },
-      //   });
-      //   return;
-      // }
-      // this.validateRPasswordRe();
-      // if (!this.state.validateFlag) {
-      //   this.rPasswordReInput._myInput.setNativeProps({
-      //     style: { borderColor: 'red' },
-      //   });
-      //   return;
-      // }
+      this.validatePassword();
+      if (!this.state.validateFlag) {
+        this.passwordInput.setNativeProps({
+          style: { borderColor: 'red' },
+        });
+        return;
+      }
       const formData = {
         type: 'register',
         password: this.state.rPassword,
         email: this.state.email,
+      };
+  
+      this.props.register(formData)
+        .then((response) => {
+          try {
+            if (JSON.stringify(response.value.status)) {
+              this.props.navigation.navigate('Signin');
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        })
+        .catch(errors => console.log(errors));
+    }
+    else if(this.state.signup === 'cellphone') {
+      this.validatePassword();
+      if (!this.state.validateFlag) {
+        this.passwordInput.setNativeProps({
+          style: { borderColor: 'red' },
+        });
+        return;
+      }
+      this.validateVerifyCode();
+      if (!this.state.validateFlag) {
+        this.verifyCodeInput.setNativeProps({
+          style: { borderColor: 'red' },
+        });
+        return;
+      }
+      const formData = {
+        type: 'register',
+        password: this.state.password,
+        email: this.state.phoneNum,
       };
   
       this.props.register(formData)
@@ -343,12 +378,14 @@ class SigninScreen extends Component {
             <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
               placeholder={'密码'}
               secureTextEntry= {true}
+              ref={(c) => { this.passwordInput = c; }}
             />
           </View>
           <View style={styles.verifyCodeContainer}>
             <View style={styles.verifyLeft}>
               <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
-                  placeholder={'验证码'}
+                placeholder={'验证码'}
+                ref={(c) => { this.verifyCodeInput = c; }}
               />
             </View>
             <View style={[styles.borderStyle, styles.verifyRight]}>
@@ -377,17 +414,19 @@ class SigninScreen extends Component {
               onChangeText={this.changeEmail}
               ref={(c) => { this.emailInput = c; }}
             />
-            <Text style={styles.helpInfo} ref={(c) => { this._myText = c; }}>{this.state.helpInfo}</Text>
           </View>
           <View>
             <TextInput style={[styles.borderStyle, styles.inputStyle, styles.textStyle]} underlineColorAndroid='transparent'
               placeholder={'密码'}
               secureTextEntry= {true}
+              onChangeText={this.changePassword}
+              ref={(c) => { this.passwordInput = c; }}
             />
           </View>
           <View style={styles.verifyCodeContainer}>
             <View style={styles.verifyLeft}>
               <TextInput style={[styles.borderStyle, styles.textStyle]} underlineColorAndroid='transparent'
+                  onChangeText={this.changeVerifyCode}
                   placeholder={'验证码'}
               />
             </View>
@@ -427,51 +466,45 @@ class SigninScreen extends Component {
               </Button>
             </View>
             <View style={styles.otherSiginContainer}>
-              <View>
               <Icon
-                  name='mailbox'
-                  type='material-community'
-                  color='#EEC900'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
-                  onPress= {(name) => this.changeSignup(name)}
-                />
-                <Text style={ {fontSize: 12} }>账号</Text>
-              </View>
-              <View>
-                <Icon
-                  name='weibo'
-                  type='zocial'
-                  color='#EE0000'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
-                  onPress= {(name) => this.changeSignup(name)}
-                />
-                <Text style={ {fontSize: 12} }>微博</Text>
-              </View>
-              <View>
-                <Icon
-                  name='cellphone-iphone'
-                  type='material-community'
-                  color='#EE3B3B'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
-                  onPress= {(name) => this.changeSignup(name)}
-                />
-                <Text style={ {fontSize: 12} }>手机</Text>
-              </View>
-              <View>
-                <Icon
-                  name='weixin'
-                  type='font-awesome'
-                  color='#32CD32'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
-                  onPress= {(name) => this.changeSignup(name)}
-                />
-                <Text style={ {fontSize: 12} }>微信</Text>
-              </View>
+                name='mailbox'
+                type='material-community'
+                color='#EEC900'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
+                onPress= {() => this.changeSignup('mailbox')}
+              />
+              <Icon
+                name='weibo'
+                type='zocial'
+                color='#EE0000'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
+                onPress= {() => this.changeSignup('weibo')}
+              />
+              <Icon
+                name='cellphone-iphone'
+                type='material-community'
+                color='#EE3B3B'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
+                onPress= {() => this.changeSignup('cellphone')}
+              />
+              <Icon
+                name='weixin'
+                type='font-awesome'
+                color='#32CD32'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
+                onPress= {() => this.changeSignup('weixin')}
+              />
             </View>
+            <View style={styles.otherSiginContainer}>
+              <Text style={ {fontSize: 12} }>账号</Text>
+              <Text style={ {fontSize: 12} }>微博</Text>
+              <Text style={ {fontSize: 12} }>手机</Text>
+              <Text style={ {fontSize: 12} }>微信</Text>
+            </View> 
           </Tab>
           <Tab heading='注册'>
             {signup}
@@ -481,109 +514,45 @@ class SigninScreen extends Component {
               </Button>
             </View>
             <View style={styles.otherSiginContainer}>
-              <View>
-                <Icon
-                  name='mailbox'
-                  type='material-community'
-                  color='#EEC900'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
-                  onPress= {() => this.changeSignup('mailbox')}
-                />
-                <Text style={ {fontSize: 12} }>账号</Text>
-              </View>
-              <View>
-                <Icon
-                  name='weibo'
-                  type='zocial'
-                  color='#EE0000'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
-                  onPress= {() => this.changeSignup('weibo')}
-                />
-                <Text style={ {fontSize: 12} }>微博</Text>
-              </View>
-              <View>
-                <Icon
-                  name='cellphone-iphone'
-                  type='material-community'
-                  color='#EE3B3B'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
-                  onPress= {() => this.changeSignup('cellphone')}
-                />
-                <Text style={ {fontSize: 12} }>手机</Text>
-              </View>
-              <View>
-                <Icon
-                  name='weixin'
-                  type='font-awesome'
-                  color='#32CD32'
-                  size={20}
-                  containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
-                  onPress= {() => this.changeSignup('weixin')}
-                />
-                <Text style={ {fontSize: 12} }>微信</Text>
-              </View>
+              <Icon
+                name='mailbox'
+                type='material-community'
+                color='#EEC900'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#EEC900'}]}
+                onPress= {() => this.changeSignup('mailbox')}
+              />
+              <Icon
+                name='weibo'
+                type='zocial'
+                color='#EE0000'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#EE0000'}]}
+                onPress= {() => this.changeSignup('weibo')}
+              />
+              <Icon
+                name='cellphone-iphone'
+                type='material-community'
+                color='#EE3B3B'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#EE3B3B'}]}
+                onPress= {() => this.changeSignup('cellphone')}
+              />
+              <Icon
+                name='weixin'
+                type='font-awesome'
+                color='#32CD32'
+                size={20}
+                containerStyle={[styles.iconContainer, {borderColor: '#32CD32'}]}
+                onPress= {() => this.changeSignup('weixin')}
+              />
             </View>
-
-            {/* <View style={styles.formTitle}>
-              <Title>注册新账户</Title>
-            </View>
-            <View>
-              <View>
-                <Input
-                  placeholder='请输入您的邮箱地址'
-                  onChange={this.changeEmail}
-                  helpInfo={this.state.emailHelp}
-                  ref={(c) => { this.emailInput = c; }}
-                />
-              </View>
-              <View>
-                <Input
-                  placeholder='请输入用户名'
-                  onChange={this.changeRegisterusername}
-                  helpInfo={this.state.rUsernameHelp}
-                  ref={(c) => { this.rusernameInput = c; }}
-                />
-              </View>
-              <View>
-                <Input
-                  placeholder='请输入密码'
-                  password={this.props.password}
-                  onChange={this.changeRegisterPassword}
-                  helpInfo={this.state.rPasswordHelp}
-                  ref={(c) => { this.rPasswordInput = c; }}
-                />
-              </View>
-              <View>
-                <Input
-                  placeholder='重复密码'
-                  password={this.props.password}
-                  onChange={this.changeRegisterPasswordRe}
-                  helpInfo={this.state.rPasswordReHelp}
-                  ref={(c) => { this.rPasswordReInput = c; }}
-                />
-              </View>
-            </View>
-            <View style={styles.flexContainer}>
-              <View style={styles.cell}>
-                <Button style={styles.buttonStyle} onPress={this.signin} >
-                  <Icon type='material-community' name='lead-pencil' size={20} color={Colors.$whiteColor } />
-                  <Text>注册</Text>
-                </Button>
-              </View>
-              <View style={[styles.cell, styles.smallBtn]}>
-                <Button small style={styles.buttonStyle}>
-                  <Text>微信登陆</Text>
-                </Button>
-              </View>
-              <View style={[styles.cell, styles.smallBtn]}>
-                <Button small style={styles.buttonStyle}>
-                  <Text>微博注册</Text>
-                </Button>
-              </View>
-            </View> */}
+            <View style={styles.otherSiginContainer}>
+              <Text style={ {fontSize: 12} }>账号</Text>
+              <Text style={ {fontSize: 12} }>微博</Text>
+              <Text style={ {fontSize: 12} }>手机</Text>
+              <Text style={ {fontSize: 12} }>微信</Text>
+            </View>           
           </Tab>
         </Tabs>
 

@@ -103,9 +103,9 @@ class ProfileScreen extends Component {
   }
 
   login() {
-    // if (!this.state.isLogin) {
+    if (!this.state.isLogin) {
       this.props.navigation.navigate('Signin');
-    // }
+    }
   }
 
   async loginSuccesful() {
