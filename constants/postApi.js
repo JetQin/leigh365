@@ -6,12 +6,6 @@ class PostApi {
   
   async post(post) {
 
-    // type:post_status
-    // userId:1
-    // timestamp:2018-01-01
-    // content:Happy new year
-    // image:'',
-    // city:'',
     let postApiUrl = apiUrl;
     const params = new FormData();
     params.append('type', post.type);

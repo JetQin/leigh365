@@ -344,7 +344,7 @@ class ProfileScreen extends Component {
                 </View>
               </View>
               <View style={styles.bottom}>
-                <PricingCard
+                {/* <PricingCard
                   color='#4f9deb'
                   title='每天'
                   price='¥10'
@@ -370,7 +370,7 @@ class ProfileScreen extends Component {
                   titleFont='Montserrat-Bold'
                   button={{ title: '充值' }}
                   onButtonPress={() => this.charge('6month')}
-                />
+                /> */}
               </View>
               <Modal isVisible={this.state.showAvatarPane} style={styles.avatarPane}>
                       {this._renderAvatarContent()}
