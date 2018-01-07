@@ -8,11 +8,11 @@ import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
 import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
-import { PostApi } from '../../../constants/index';
+import { PostApi,UserFollowApi } from '../../../constants/index';
 
 const wordpressApi = new WordpressApi();
 const postApi = new PostApi();
-
+const userFollowApi = new UserFollowApi();
 class ProfileScreen extends Component {
   static defaultProps = {
     wordpressApi, postApi,
@@ -260,17 +260,23 @@ class ProfileScreen extends Component {
   }
 
 
-  selectAvatar(index){
+  async selectAvatar(index){
     let avatarIndex = parseInt(index);
    
     let uri = '';
     if(avatarIndex < this.state.avatars.length)
     {
       uri = this.state.avatars[avatarIndex];
+      const request = {
+        userId: this.state.user.user_id,
+        user_avatar: uri,
+      }
+      const response = await this.props.userFollowApi.changeAvatar(request);
+      if(response.data.status === 1){
+        this.setState({ user: {avatar: uri }});
+      }
     }
-    console.log(uri);
     this.setState({ showAvatarPane: false });
-    this.setState({ user: {avatar: uri }});
   }
 
   _renderAvatarContent(){
