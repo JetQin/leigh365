@@ -24,9 +24,10 @@ class IndexCard extends Component {
 
   render() {
     return (
-      <Swiper>
-        {this._rendPageCard()}
-      </Swiper>
+      // <Swiper>
+      //   {this._rendPageCard()}
+      // </Swiper>
+      <View/>
     );
   }
 }
