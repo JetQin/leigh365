@@ -3,49 +3,49 @@ import axios from 'axios';
 const apiUrl = 'synebusiness.cn/userFollowApi.php';
 
 class UserFollowApi {
-  async followUser(params) {
+  async followUser(request) {
     const params = new FormData();
     params.append('type', 'follow_user');
-    params.append('userId', params.userId);
-    params.append('follower_id', params.follower_id);
+    params.append('userId', request.userId);
+    params.append('follower_id', request.follower_id);
     const response = await axios.post(apiUrl, params);
     console.log(response);
     return response.data;
   }
   
-  async unfollowUser(params) {
+  async unfollowUser(request) {
     const params = new FormData();
     params.append('type', 'unfollow_user');
-    params.append('userId', params.userId);
-    params.append('follower_id', params.follower_id);
+    params.append('userId', request.userId);
+    params.append('follower_id', request.follower_id);
     const response = await axios.post(apiUrl, params);
     console.log(response);
     return response.data;
   }
 
-  async getFans(params) {
+  async getFans(request) {
     const params = new FormData();
     params.append('type', 'get_user_fans');
-    params.append('userId', params.userId);
+    params.append('userId', request.userId);
     const response = await axios.post(apiUrl, params);
     console.log(response);
     return response.data;
   }
  
-  async getFollower(params) {
+  async getFollower(request) {
     const params = new FormData();
     params.append('type', 'get_user_follower');
-    params.append('userId', params.userId);
+    params.append('userId', request.userId);
     const response = await axios.post(apiUrl, params);
     console.log(response);
     return response.data;
   }
 
-  async changeAvatar(params) {
+  async changeAvatar(request) {
     const params = new FormData();
     params.append('type', 'change_avatar');
-    params.append('userId', params.userId);
-    params.append('user_avatar', params.user_avatar);
+    params.append('userId', request.userId);
+    params.append('user_avatar', request.user_avatar);
     const response = await axios.post(apiUrl, params);
     console.log(response);
     return response.data;
