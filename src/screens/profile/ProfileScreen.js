@@ -15,7 +15,7 @@ const postApi = new PostApi();
 const userFollowApi = new UserFollowApi();
 class ProfileScreen extends Component {
   static defaultProps = {
-    wordpressApi, postApi,
+    wordpressApi, postApi, userFollowApi
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -270,11 +270,12 @@ class ProfileScreen extends Component {
     {
       uri = this.state.avatars[avatarIndex];
       const request = {
-        userId: this.state.user.user_id,
+        // userId: this.state.user.user_id,
+        userId: 1,
         user_avatar: uri,
       }
       const response = await this.props.userFollowApi.changeAvatar(request);
-      if(response.data.status === 1){
+      if(!repsponse && response.data.status === 1){
         this.setState({ user: {avatar: uri }});
       }
     }
