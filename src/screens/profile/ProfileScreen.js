@@ -92,9 +92,11 @@ class ProfileScreen extends Component {
     this.fetchUserStock = this.fetchUserStock.bind(this);
     this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
-    // this.selectAvatar = this.selectAvatar.bind(this);
+    this.selectAvatar = this.selectAvatar.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
+    this.goToFansScreen = this.goToFansScreen.bind(this);
+    this.goToFollowerScreen = this.goToFollowerScreen.bind(this);
   }
 
   componentDidMount() {
@@ -279,6 +281,14 @@ class ProfileScreen extends Component {
     this.setState({ showAvatarPane: false });
   }
 
+  goToFollowerScreen(){
+    this.props.navigation.navigate('Follower');
+  }
+
+  goToFansScreen(){
+    this.props.navigation.navigate('Fans');
+  }
+
   _renderAvatarContent(){
     let avatars = [];
     const length = this.state.avatars.length;
@@ -335,16 +345,20 @@ class ProfileScreen extends Component {
                 </View>
                 <View style={styles.myCollectContainer}>
                   <Badge style={styles.collectContainer}>
-                    <View style={styles.collectText}>
-                      <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
-                      <Text style={styles.label}>已关注</Text>
-                    </View>
+                    <TouchableOpacity onPress={this.goToFollowerScreen}>
+                      <View style={styles.collectText}>
+                        <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
+                        <Text style={styles.label}>已关注</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Badge>
                   <Badge style={styles.collectContainer}>
-                    <View style={styles.collectText}>
-                      <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
-                      <Text style={styles.label}>粉丝</Text>
-                    </View>
+                    <TouchableOpacity onPress={this.goToFansScreen}>
+                      <View style={styles.collectText}>
+                        <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
+                        <Text style={styles.label}>粉丝</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Badge>
                 </View>
               </View>
