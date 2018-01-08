@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Alert, Picker, Dimensions, TouchableHighlight } from 'react-native';
+import { View, Text, AsyncStorage, Image, Alert, Dimensions, TouchableOpacity } from 'react-native';
 import { Avatar, Badge } from 'react-native-elements';
 import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
@@ -8,11 +8,11 @@ import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
 import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
 import { WordpressApi } from '../../../constants/api';
-import { PostApi } from '../../../constants/index';
+import { PostApi,UserFollowApi } from '../../../constants/index';
 
 const wordpressApi = new WordpressApi();
 const postApi = new PostApi();
-
+const userFollowApi = new UserFollowApi();
 class ProfileScreen extends Component {
   static defaultProps = {
     wordpressApi, postApi,
@@ -78,10 +78,10 @@ class ProfileScreen extends Component {
         'http://synebusiness.cn/avatar/007.jpeg',
         'http://synebusiness.cn/avatar/008.jpeg',
         'http://synebusiness.cn/avatar/009.jpeg',
-        'http://synebusiness.cn/avatar/0010.jpeg',
-        'http://synebusiness.cn/avatar/0011.jpeg',
-        'http://synebusiness.cn/avatar/0012.jpeg',
-        'http://synebusiness.cn/avatar/0013.jpeg',
+        'http://synebusiness.cn/avatar/010.jpeg',
+        'http://synebusiness.cn/avatar/011.jpeg',
+        'http://synebusiness.cn/avatar/012.jpeg',
+        'http://synebusiness.cn/avatar/013.jpeg',
       ]
     };
     this.login = this.login.bind(this);
@@ -92,9 +92,11 @@ class ProfileScreen extends Component {
     this.fetchUserStock = this.fetchUserStock.bind(this);
     this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
-    // this.selectAvatar = this.selectAvatar.bind(this);
+    this.selectAvatar = this.selectAvatar.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
+    this.goToFansScreen = this.goToFansScreen.bind(this);
+    this.goToFollowerScreen = this.goToFollowerScreen.bind(this);
   }
 
   componentDidMount() {
@@ -103,9 +105,9 @@ class ProfileScreen extends Component {
   }
 
   login() {
-    // if (!this.state.isLogin) {
+    if (!this.state.isLogin) {
       this.props.navigation.navigate('Signin');
-    // }
+    }
   }
 
   async loginSuccesful() {
@@ -260,45 +262,58 @@ class ProfileScreen extends Component {
   }
 
 
-  selectAvatar(index){
+  async selectAvatar(index){
     let avatarIndex = parseInt(index);
    
     let uri = '';
     if(avatarIndex < this.state.avatars.length)
     {
       uri = this.state.avatars[avatarIndex];
+      const request = {
+        userId: this.state.user.user_id,
+        user_avatar: uri,
+      }
+      const response = await this.props.userFollowApi.changeAvatar(request);
+      if(response.data.status === 1){
+        this.setState({ user: {avatar: uri }});
+      }
     }
-    console.log(uri);
     this.setState({ showAvatarPane: false });
-    this.setState({ user: {avatar: uri }});
+  }
+
+  goToFollowerScreen(){
+    this.props.navigation.navigate('Follower');
+  }
+
+  goToFansScreen(){
+    this.props.navigation.navigate('Fans');
   }
 
   _renderAvatarContent(){
     let avatars = [];
     const length = this.state.avatars.length;
-    for (let index= 0; index < length; index=index+4)
+    for (let index= 0; index < length;index=index+4)
     {
        if( index % 4 == 0){
-         avatars.push(
+          avatars.push(
             <View style={styles.avatarViewRow} key={'v'.concat(index)}> 
-              <TouchableHighlight onPress={()=> this.selectAvatar(index)}>
-                <Image key={index} source={{ uri: this.state.avatars[index] }} style={{width: 80, height: 80}}/>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={()=> this.selectAvatar(index+1)}>
-                { index+1 < length ? <Image key={index+1} source={{ uri: this.state.avatars[index+1] }} style={{width: 80, height: 80}} /> : <View/>}
-              </TouchableHighlight>
-              <TouchableHighlight onPress={()=> this.selectAvatar(index+2)}>
-                { index+2 < length ? <Image key={index+2} source={{ uri: this.state.avatars[index+2] }} style={{width: 80, height: 80}} /> : <View/>}
-              </TouchableHighlight>
-              <TouchableHighlight onPress={()=> this.selectAvatar(index+3)}>
-                { index+3 < length ? <Image key={index+3} source={{ uri: this.state.avatars[index+3] }} style={{width: 80, height: 80}} /> : <View/>}
-              </TouchableHighlight>
+              <TouchableOpacity onPress={()=> this.selectAvatar(index)}>
+                <Image key={index} source={{ uri: this.state.avatars[index] }} style={styles.avatarImage} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> this.selectAvatar(index+1)}>
+                { index+1 < length ? <Image key={index+1}  source={{ uri: this.state.avatars[index+1] }} style={styles.avatarImage}  /> : <View/>}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> this.selectAvatar(index+2)}>
+                { index+2 < length ? <Image key={index+2} source={{ uri: this.state.avatars[index+2] }} style={styles.avatarImage} /> : <View/>}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> this.selectAvatar(index+3)}>
+                { index+3 < length ? <Image key={index+3} source={{ uri: this.state.avatars[index+3] }} style={styles.avatarImage} /> : <View/>}
+              </TouchableOpacity>
             </View>
           )
         }
     }
-    console.log(avatars);
-    return (<View style={{ height: 400, backgroundColor: Colors.$whiteColor }}>{avatars}</View>);
+    return (<View style={{ height: 320, backgroundColor: Colors.$whiteColor }}>{avatars}</View>);
   }
   render() {
     const {height, width} = Dimensions.get('window');
@@ -309,37 +324,41 @@ class ProfileScreen extends Component {
             <View style={styles.layout}>
               <View style={styles.top}>
                 <View style={styles.avatarContainer}>
-                  <Avatar
-                    rounded
-                    height={80}
-                    width={80}
-                    containerStyle={{ borderStyle:'solid', borderWidth: 5, borderColor: Colors.$black }}
-                    source={{ uri: this.state.user.avatar }}
-                    onPress={this.login}
-                  />
-                </View>
-                <View style={styles.settingContainer}>
-                  <View style={styles.headerTitleContainer}>
-                    <Text style={styles.title}>{this.state.user.name}</Text>
-                  </View>
+                  <TouchableOpacity onPress={this.login}>
+                    <View style={styles.avatarBackground}>
+                      <Image source={{ uri: this.state.user.avatar }} style={styles.avatar}/>
+                    </View>
+                  </TouchableOpacity> 
                   <View style={styles.settingBtn}>
                     <Button transparent info onPress={this.changeAvatar} >
                       <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
                     </Button>
                   </View>
                 </View>
+                <View style={styles.settingContainer}>
+                  <View style={styles.headerTitleContainer}>
+                    <Text style={styles.title}>{this.state.user.name}</Text>
+                  </View>
+                  <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
+                    <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
+                  </TouchableOpacity>
+                </View>
                 <View style={styles.myCollectContainer}>
                   <Badge style={styles.collectContainer}>
-                    <View style={styles.collectText}>
-                      <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
-                      <Text style={styles.label}>已收藏文章</Text>
-                    </View>
+                    <TouchableOpacity onPress={this.goToFollowerScreen}>
+                      <View style={styles.collectText}>
+                        <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
+                        <Text style={styles.label}>已关注</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Badge>
                   <Badge style={styles.collectContainer}>
-                    <View style={styles.collectText}>
-                      <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
-                      <Text style={styles.label}>已自选行情</Text>
-                    </View>
+                    <TouchableOpacity onPress={this.goToFansScreen}>
+                      <View style={styles.collectText}>
+                        <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
+                        <Text style={styles.label}>粉丝</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Badge>
                 </View>
               </View>
@@ -372,8 +391,11 @@ class ProfileScreen extends Component {
                   onButtonPress={() => this.charge('6month')}
                 /> */}
               </View>
-              <Modal isVisible={this.state.showAvatarPane} style={styles.avatarPane}>
-                      {this._renderAvatarContent()}
+              <Modal 
+                isVisible={this.state.showAvatarPane} 
+                style={styles.avatarPane}
+                >
+                {this._renderAvatarContent()}
               </Modal>
             </View>
           </Tab>

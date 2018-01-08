@@ -95,7 +95,6 @@ class HomeScreen extends React.Component {
               (
                 <View style={styles.backdrop}>
                   <Image source={{ uri: item.picUrl }} style={styles.image} />
-                  {/* <Text style={styles.text}>{item.name}</Text> */}
                 </View>
 
               )
@@ -119,7 +118,7 @@ class HomeScreen extends React.Component {
         <View style={styles.bottomContainer}>
           <NewsCardList ref={(c) => { this.cardList = c; }} news={this.state.news} scroll={this.reloadData} navigation={this.props.navigation} />
         </View>
-        <GoTopButton goTop={this.goTop}/>
+        {/* <GoTopButton goTop={this.goTop}/> */}
       </View>
     );
   }
