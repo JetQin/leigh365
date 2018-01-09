@@ -76,7 +76,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) 想要使用你的相机</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) 想要访问你的麦克风</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

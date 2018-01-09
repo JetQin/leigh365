@@ -15,3 +15,5 @@ export * from './item';
 export * from './post';
 export * from './detail';
 export * from './settings';
+export * from './fans';
+export * from './follower';

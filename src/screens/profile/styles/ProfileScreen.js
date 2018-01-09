@@ -10,17 +10,13 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 0.6,
-    // width: Dimensions.get('window').width,
-    // height: (Dimensions.get('window').width - 100) / 2,
-    // borderBottomLeftRadius: Dimensions.get('window').width / 2,
-    // borderBottomRightRadius: Dimensions.get('window').width / 2,
+    flex: 0.5,
     backgroundColor: '#F1F8FF',
     borderBottomLeftRadius: 300,
     borderBottomRightRadius: 300,
   },
   bottom: {
-    flex: 0.4,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -28,27 +24,48 @@ const styles = EStyleSheet.create({
   },
   // 头像
   avatarContainer: {
-    flex: 0.4,
+    flex: 0.3,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 20,
-    // paddingLeft: (Dimensions.get('window').width / 2) - 100,
+  },
+  avatarBackground: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    left: 5,
+    height:84,
+    width:84,
+    borderRadius: 42,
+    backgroundColor: Colors.$avatarBackground,
+  },
+  avatar:{
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: Colors.$whiteColor,
   },
   // 设置
   settingContainer: {
-    flex: 0.1,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   settingBtn: {
-    // position: 'absolute',
-    // right: 5,
-    justifyContent: 'center',
+    position: 'relative',
+    left: -5,
+    top: 30,
+    alignItems: 'flex-end',
+  },
+  registerBtn: {
+    height:30,
+    width: 85,
   },
   // 我的收藏
   myCollectContainer: {
-    flex: 0.4,
+    flex: 0.1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -58,9 +75,9 @@ const styles = EStyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#D2D4D7',
+    backgroundColor: Colors.$whiteColor,
+    borderWidth: 2,
+    borderColor: Colors.$followCircle,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 30,
@@ -119,7 +136,6 @@ const styles = EStyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: '10%',
-    // color: '#58A6F1',
   },
   moneyText: {
     width: '20%',
@@ -143,6 +159,10 @@ const styles = EStyleSheet.create({
   avatarPane: {
     justifyContent: 'flex-end',
     margin: 0,
+  },
+  avatarImage: {
+    width: 80, 
+    height: 80,
   },
   avatarViewRow: {
     flexDirection: 'row',

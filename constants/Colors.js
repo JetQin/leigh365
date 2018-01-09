@@ -18,4 +18,7 @@ export default {
   $grayTextColor: '#949494',
   $orangeTextColor:'#F48309',
   $CommentBgColor:'#F7F7F7',
+  $avatarBackground: '#619AE3',
+  $followCircle: '#6B97BF',
+  $followBackgroundColor: '#4987EF',
 };
