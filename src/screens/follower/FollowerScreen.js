@@ -42,7 +42,7 @@ class FollowerScreen extends Component {
         //    const params = JSON.parse(loginInfo);
            const request = { userId: 1}
            const response = await this.props.userFollowApi.getFollower(request);
-           this.setState({follower: response.data.follower });
+           this.setState({follower: response });
         // }
     }
 
@@ -63,14 +63,14 @@ class FollowerScreen extends Component {
                     this.state.follower.map((l, i) => (
                     <ListItem
                         roundAvatar
-                        avatar={{uri:l.user_avatar}}
+                        hideChevron
+                        avatar={{uri:l.userAvatar}}
                         key={i}
-                        title={l.name}
-                        rightTitle={
-                            <Button bordered>
-                                <Text>已关注</Text>
-                            </Button>
-                        }
+                        title={l.username}
+                        rightTitle={'√已关注'}
+                        rightTitleStyle={styles.rightTitle}
+                        rightTitleContainerStyle={styles.rightTitleContainer}
+
                     />
                     ))
                 }

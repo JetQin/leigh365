@@ -37,13 +37,14 @@ class FansScreen extends Component {
     };
 
     async componentDidMount(){
-        const loginInfo = await AsyncStorage.getItem('@login');
-        if (loginInfo) {
-           const params = JSON.parse(loginInfo);
-           const request = { userId: params.data.user_id }
+        // const loginInfo = await AsyncStorage.getItem('@login');
+        // if (loginInfo) {
+        //    const params = JSON.parse(loginInfo);
+        //    const request = { userId: params.data.user_id }
+           const request = { userId: 1 }
            const response = await this.props.userFollowApi.getFans(request);
-           this.setState({fans: response.data.fans });
-        }
+           this.setState({fans: response });
+        // }
     }
 
 
@@ -63,14 +64,14 @@ class FansScreen extends Component {
                     this.state.fans.map((l, i) => (
                     <ListItem
                         roundAvatar
-                        avatar={{uri:l.user_avatar}}
+                        hideChevron
+                        avatar={{uri:l.userAvatar}}
                         key={i}
-                        title={l.name}
-                        rightTitle={
-                            <Button bordered>
-                                <Text>+关注</Text>
-                            </Button>
-                        }
+                        title={l.username}
+                        rightTitle={'+关注'}
+                        rightTitleStyle={styles.rightTitle}
+                        rightTitleContainerStyle={styles.rightTitleContainer}
+
                     />
                     ))
                 }

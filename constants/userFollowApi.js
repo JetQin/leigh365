@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = 'synebusiness.cn/userFollowApi.php';
+const apiUrl = 'http://synebusiness.cn/userFollowApi.php';
 
 class UserFollowApi {
 

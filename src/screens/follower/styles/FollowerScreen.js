@@ -19,7 +19,22 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingTop: 10,
-  }
+  },
+  rightTitle: {
+    color: Colors.$followBackgroundColor,
+    fontSize: 10,
+    fontFamily: 'Montserrat-Regular',
+  },
+  rightTitleContainer: {
+    flex: 0.25,
+    height: 20,
+    top: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: Colors.$followBackgroundColor,
+  },
   
 });
 
