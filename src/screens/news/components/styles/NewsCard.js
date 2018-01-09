@@ -2,68 +2,29 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Colors from '../../../../../constants/Colors';
 
 const styles = EStyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 3,
-  },
   emptyView: {
     width: 0,
     height: 0,
   },
-  avatar: {
-    flex: 0.2,
-  },
-  image: {
-    width: 60,
-    height: 60,
-  },
-  body: {
-    flex: 0.8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    flex: 0.8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 16,
-    fontFamily: 'Montserrat-Regular',
-    color: Colors.$black,
-    backgroundColor: 'transparent',
-  },
+
   footer: {
     flex: 0.2,
     flexDirection: 'row',
+    paddingTop: 5
   },
-  footerText: {
-    fontSize: 12,
-    fontFamily: 'Montserrat-Regular',
-    color: Colors.$black,
-    backgroundColor: 'transparent',
-    flex: 0.5
-  },
-  separator: {
-    flex: 1,
-    height: 3,
-    backgroundColor: Colors.$blackBlueColor,
-  },
-
   icon: {
     marginLeft: 8,
     marginRight: 8,
   },
-  closeBtn: { 
-    width: 20, 
-    height: 20, 
-    borderRadius: 10, 
-    backgroundColor: '#EFF8FF',
-    justifyContent: 'center',
-    alignItems: 'center',
+  subtitlePic:{
+    flex:0.2,
+    marginRight:10,
   },
+  subtitleContent:{
+    flexDirection: 'column', 
+    flex: 0.8,
+  }
+
 });
 
 export default styles;
