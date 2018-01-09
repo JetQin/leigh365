@@ -15,6 +15,12 @@ const styles = EStyleSheet.create({
     fontFamily: 'Montserrat-Bold',
   },
 
+  title: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingTop: 10,
+  }
+  
 });
 
 export default styles;

@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
-import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
+import { NewsInfo, StockInfo, PricingCard, BlogList, PriceCardCarousel } from './components/';
 import { WordpressApi } from '../../../constants/api';
 import { PostApi,UserFollowApi } from '../../../constants/index';
 
@@ -364,33 +364,7 @@ class ProfileScreen extends Component {
                 </View>
               </View>
               <View style={styles.bottom}>
-                {/* <PricingCard
-                  color='#4f9deb'
-                  title='每天'
-                  price='¥10'
-                  info={[]}
-                  titleFont='Montserrat-Bold'
-                  button={{ title: '充值' }}
-                  onButtonPress={() => this.charge('day')}
-                />
-                <PricingCard
-                  color='#4f9deb'
-                  title='包月'
-                  price='¥150'
-                  info={[]}
-                  titleFont='Montserrat-Bold'
-                  button={{ title: '充值' }}
-                  onButtonPress={() => this.charge('1month')}
-                />
-                <PricingCard
-                  color='#4f9deb'
-                  title='包年'
-                  price='¥1500'
-                  info={[]}
-                  titleFont='Montserrat-Bold'
-                  button={{ title: '充值' }}
-                  onButtonPress={() => this.charge('6month')}
-                /> */}
+                <PriceCardCarousel/>
               </View>
               <Modal 
                 isVisible={this.state.showAvatarPane} 

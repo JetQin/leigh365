@@ -1,38 +1,61 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
-
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
+import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import styles from './styles/PriceCardCarousel';
 
 class PriceCardCarousel extends Component {
     
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             entries:[
-              {title:'充值', name: '每日', price: '¥1500'},
-              {title:'充值', name: '每日', price: '¥1500'},
-              {title:'充值', name: '每日', price: '¥1500'},
-              {title:'充值', name: '每日', price: '¥1500'},
+              {title:'充值', url: 'http://synebusiness.cn/price/1small.png'},
+              {title:'充值', url: 'http://synebusiness.cn/price/3small.png'},
+              {title:'充值', url: 'http://synebusiness.cn/price/12small.png'},
+              {title:'充值', url: 'http://synebusiness.cn/price/diamond-small.png'},
             ]
-        });
+        };
+        this.gotoPay = this.gotoPay.bind(this);
     }
 
+    componentDidMount() {
+      this.carousel.snapToNext();
+    }
+
+    gotoPay(){
+        console.log('goto pay');
+    }
+
+    
     _renderItem ({item, index}) {
         return (
             <View style={styles.slide}>
-                <Text style={styles.title}>{ item.title }</Text>
+                <TouchableOpacity style={styles.slideInnerContainer} onPress={this.gotoPay} >
+                    <Image
+                        source={{ uri: item.url }}
+                        style={styles.image}
+                    />
+                </TouchableOpacity>
             </View>
         );
     }
 
     render() {
+
+        const sliderWidth = 200;
+        const itemWidth = 120;
+        const itemHeight = 300;
+
         return (
             <Carousel
-                ref={(c) => { this._carousel = c; }}
-                data={this.state.entries}
-                renderItem={this._renderItem}
-                sliderWidth={sliderWidth}
-                itemWidth={itemWidth}
+              ref={c => { this.carousel = c; } }
+              data={this.state.entries}
+              renderItem={this._renderItem}
+              sliderWidth={sliderWidth}
+              itemWidth={itemWidth}
+              itemHeight={itemHeight}
+              removeClippedSubviews={false}
+              currentIndex={0}
             />
         );
     }

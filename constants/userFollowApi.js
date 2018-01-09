@@ -3,6 +3,7 @@ import axios from 'axios';
 const apiUrl = 'synebusiness.cn/userFollowApi.php';
 
 class UserFollowApi {
+
   async followUser(request) {
     const params = new FormData();
     params.append('type', 'follow_user');
@@ -11,6 +12,7 @@ class UserFollowApi {
     const response = await axios.post(apiUrl, params)
     .catch(function (error) {
       console.log(error);
+      return [];
     });
     console.log(response);
     return response.data;
@@ -24,6 +26,7 @@ class UserFollowApi {
     const response = await axios.post(apiUrl, params)
     .catch(function (error) {
       console.log(error);
+      return [];
     });
     console.log(response);
     return response.data;
@@ -37,6 +40,7 @@ class UserFollowApi {
     const response = await axios.post(apiUrl, params)
     .catch(function (error) {
       console.log(error);
+      return [];
     });
     console.log(response);
     return response.data;
@@ -49,6 +53,7 @@ class UserFollowApi {
     const response = await axios.post(apiUrl, params)
     .catch(function (error) {
       console.log(error);
+      return [];
     });
     console.log(response);
     return response.data;

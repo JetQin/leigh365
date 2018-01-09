@@ -49,13 +49,15 @@ class FansScreen extends Component {
 
     render() {
         if(!this.state.fans){
-            <View>
+            <View style={styles.title}>
                 <Text>全部粉丝</Text>
             </View>
         }
         return (
             <ScrollView>
-                <Text>全部粉丝</Text>
+                <View style={styles.title}>
+                    <Text>全部粉丝</Text>
+                </View>
                 <List containerStyle={{marginBottom: 20}}>
                 {
                     this.state.fans.map((l, i) => (

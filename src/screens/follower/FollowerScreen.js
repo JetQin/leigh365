@@ -3,11 +3,18 @@ import { View, ScrollView, Text, AsyncStorage } from 'react-native';
 import { Button } from 'native-base';
 import { List, ListItem } from 'react-native-elements'
 
+import { UserFollowApi } from '../../../constants/';
 import styles from './styles/FollowerScreen';
 import Colors from '../../../constants/Colors';
 
 
+const userFollowApi = new UserFollowApi();
+
 class FollowerScreen extends Component {
+
+    static defaultProps = {
+        userFollowApi,
+    }
 
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
@@ -30,25 +37,27 @@ class FollowerScreen extends Component {
     }
 
     async componentDidMount(){
-        const loginInfo = await AsyncStorage.getItem('@login');
-        if (loginInfo) {
-           const params = JSON.parse(loginInfo);
-           const request = { userId: params.data.user_id }
+        // const loginInfo = await AsyncStorage.getItem('@login');
+        // if (loginInfo) {
+        //    const params = JSON.parse(loginInfo);
+           const request = { userId: 1}
            const response = await this.props.userFollowApi.getFollower(request);
            this.setState({follower: response.data.follower });
-        }
+        // }
     }
 
 
     render() {
         if(!this.state.follower){
-            <View>
+            <View style={styles.title}>
                 <Text>全部关注</Text>
             </View>
         }
         return (
             <ScrollView>
-                <Text>全部关注</Text>
+                <View style={styles.title}>
+                    <Text>全部关注</Text>
+                </View>
                 <List containerStyle={{marginBottom: 20}}>
                 {
                     this.state.follower.map((l, i) => (
