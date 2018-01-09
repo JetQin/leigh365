@@ -67,6 +67,8 @@ class ProfileScreen extends Component {
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
+        follower: 0,
+        fans: 0,
       },
       avatars:[
         'http://synebusiness.cn/avatar/001.jpeg',
@@ -122,6 +124,8 @@ class ProfileScreen extends Component {
             user_id: params.data.user_id,
             myArticleNum: params.data.post_count,
             myStockNum: params.data.stock_count,
+            follower: params.data.follower,
+            fans: params.data.fans,
           },
         });
         this.props.navigation.setParams({ isLogin: true });
@@ -148,6 +152,8 @@ class ProfileScreen extends Component {
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
+        follower: 0,
+        fans: 0
       },
     });
     this.props.navigation.setParams({ isLogin: false });
@@ -256,6 +262,8 @@ class ProfileScreen extends Component {
           user_id: posts.data.user_id,
           myArticleNum: posts.data.post_count,
           myStockNum: posts.data.stock_count,
+          follower: this.state.user.follower,
+          fans: this.state.user.follower,
         },
       });
     }
@@ -275,8 +283,18 @@ class ProfileScreen extends Component {
         user_avatar: uri,
       }
       const response = await this.props.userFollowApi.changeAvatar(request);
-      if(!repsponse && response.data.status === 1){
-        this.setState({ user: {avatar: uri }});
+      if(response.status === 1){
+        this.setState({ 
+          user: {
+            avatar: uri, 
+            name: this.state.user.name,
+            user_id: this.state.user.user_id,
+            myArticleNum: this.state.user.myArticleNum,
+            myStockNum: this.state.user.myStockNum,
+            follower: this.state.user.follower,
+            fans: this.state.user.fans,
+          }
+        });
       }
     }
     this.setState({ showAvatarPane: false });
@@ -330,25 +348,32 @@ class ProfileScreen extends Component {
                       <Image source={{ uri: this.state.user.avatar }} style={styles.avatar}/>
                     </View>
                   </TouchableOpacity> 
-                  <View style={styles.settingBtn}>
-                    <Button transparent info onPress={this.changeAvatar} >
-                      <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                    </Button>
-                  </View>
+                  <TouchableOpacity onPress={this.changeAvatar} >
+                    {/* <View style={styles.settingBtn} onPress={this.changeAvatar}>  */}
+                      <Icon type='font-awesome' name="gear" size={20} color={'#6A97BE'} containerStyle={styles.settingBtn} />
+                    {/* </View> */}
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.settingContainer}>
-                  <View style={styles.headerTitleContainer}>
-                    <Text style={styles.title}>{this.state.user.name}</Text>
-                  </View>
-                  <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
-                    <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
-                  </TouchableOpacity>
+                  {
+                    this.state.user.name === '' ?
+                    (
+                      <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
+                        <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
+                      </TouchableOpacity>
+                    ) :
+                    (
+                      <View style={styles.headerTitleContainer}>
+                        <Text style={styles.title}>{this.state.user.name}</Text>
+                      </View>
+                    )
+                  }
                 </View>
                 <View style={styles.myCollectContainer}>
                   <Badge style={styles.collectContainer}>
                     <TouchableOpacity onPress={this.goToFollowerScreen}>
                       <View style={styles.collectText}>
-                        <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
+                        <Text style={styles.labelText}>{this.state.user.follower}</Text>
                         <Text style={styles.label}>已关注</Text>
                       </View>
                     </TouchableOpacity>
@@ -356,7 +381,7 @@ class ProfileScreen extends Component {
                   <Badge style={styles.collectContainer}>
                     <TouchableOpacity onPress={this.goToFansScreen}>
                       <View style={styles.collectText}>
-                        <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
+                        <Text style={styles.labelText} >{this.state.user.fans}</Text>
                         <Text style={styles.label}>粉丝</Text>
                       </View>
                     </TouchableOpacity>

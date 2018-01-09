@@ -67,10 +67,9 @@ class UserFollowApi {
     const response = await axios.post(apiUrl, params)
     .catch(function (error) {
       console.log(error);
+      return [];
     });
-    if(!response.data){
-      return response.data;
-    }
+    return response.data;
   }
 }
 
