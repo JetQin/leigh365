@@ -89,7 +89,26 @@ const styles = EStyleSheet.create({
       rewardText: {
         color: Colors.$orangeTextColor,
         fontSize:14
-      }
+      },
+      bottomModal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      commentModal: {
+        //justifyContent: 'center',
+        position: 'absolute',
+        margin: 0,
+        bottom:40,
+        width:'100%',
+      },
 
       
 

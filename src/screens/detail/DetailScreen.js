@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { List, ListItem, Card, H3, CardItem, Thumbnail, Button, Left, Body, Right} from 'native-base';
 import GoTopButton from './components/GoTopButton'
 import ShareAlertDialog from './components/ShareAlertDialog'
+import Modal from 'react-native-modal';
 
 import Colors from '../../../constants/Colors'
 import styles from './styles/DetailScreen';
@@ -34,7 +35,7 @@ class DetailScreen extends Component {
       isThumbs:false,
       isLiked:false,
       isComment:false,
-      showSharePop: false,
+      isShare:false,
       news: {
         title: '苹果将帮助印度政府打造一款防骚扰应用',
         author: 'Pony',
@@ -118,7 +119,7 @@ class DetailScreen extends Component {
   }
 
   doShare() {
-    this.setState({showSharePop: !this.state.showSharePop});
+    this.setState({isShare: !this.state.isShare});
   }
 
   doComment() {
@@ -290,82 +291,7 @@ class DetailScreen extends Component {
 
               </View>
             ))
-          }
-
-
-
-            
-          {/* <View>
-            <View style={{flexDirection: 'row',alignItems: 'center'}}>
-              <View style={{width: '15%',justifyContent: 'center',flexDirection:'row'}}>
-                <Thumbnail small source={{uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }} />
-              </View>
-              <View style={{flexDirection: 'column'}}>
-                <Button transparent onPress={() => console.log('打赏')} style={{ height: 20,marginTop: 3,marginBottom: 3}}>
-                  <Text style={{fontSize: 10,color: Colors.$orangeTextColor,}}>林同学减肥中</Text>
-                </Button>
-                <Text style={{ fontSize: 12}}>AAAAAAA</Text>
-              </View>
-            </View>
-
-            <View style={{flexDirection: 'row'}}>
-              <View style={{width: '15%'}}></View>
-              <View style={{width: '85%',flexDirection: 'row', alignItems:'center',backgroundColor:Colors.$CommentBgColor}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Button transparent onPress={() => console.log('打赏')} style={{height: 20}}>
-                    <Text style={{fontSize: 10,color: Colors.$chartColor}}>林同学减肥中</Text>
-                  </Button>
-                </View>
-                <Text style={{fontSize: 10}}>回复</Text>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Button transparent onPress={() => console.log('打赏')} style={{height: 20}}>
-                    <Text style={{fontSize: 10,color: Colors.$chartColor}}>林同学减肥中</Text>
-                  </Button>
-                </View>
-                <Text style={{fontSize: 10}}>:</Text>
-                <Text style={{fontSize: 10}}>这双起码</Text>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{width: '15%'}}></View>
-              <View style={{width: '85%',flexDirection: 'row', alignItems:'center',backgroundColor:Colors.$CommentBgColor}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Button transparent onPress={() => console.log('打赏')} style={{height: 20}}>
-                    <Text style={{fontSize: 10,color: Colors.$chartColor}}>林同学减肥中</Text>
-                  </Button>
-                </View>
-                <Text style={{fontSize: 10}}>回复</Text>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Button transparent onPress={() => console.log('打赏')} style={{height: 20}}>
-                    <Text style={{fontSize: 10,color: Colors.$chartColor}}>林同学减肥中</Text>
-                  </Button>
-                </View>
-                <Text style={{fontSize: 10}}>:</Text>
-                <Text style={{fontSize: 10}}>这双起码</Text>
-              </View>
-            </View>
-
-            <View style={{flexDirection: 'row',marginRight:20}}>
-              <View style={{width: '15%'}}></View>
-              <View  style={{width: '85%',flexDirection: 'row',justifyContent: 'space-between',alignItems:'center'}}>
-                <View style={{}}>
-                  <Text style={{fontSize: 10}}>1017-12-25</Text>
-                </View>
-                <View style={{flexDirection: 'row',justifyContent: 'space-around'}}>
-                  <Button transparent style={{marginLeft:10,marginRight:10,height:25}} onPress={() => console.log('打赏')}>
-                    <Icon name="share-square-o" type='font-awesome' color={Colors.$grayColor} size={12}/>
-                  </Button>
-                  <Button transparent style={{marginLeft:10,marginRight:10,height:25}} onPress={() => console.log('打赏')}>
-                    <Icon name="comment-processing-outline" type='material-community' color={Colors.$grayColor} size={12}/>
-                  </Button>
-                  <Button transparent style={{marginLeft:10,marginRight:10,height:25}} onPress={() => console.log('打赏')}>
-                    <Icon name="thumbs-o-up" type='font-awesome' color={Colors.$grayColor} size={12}/>
-                  </Button>
-                </View>
-              </View>
-            </View>
-          </View> */}
-          
+          }         
         </ScrollView>
         <View style={styles.footer}>
           <Button transparent style={styles.footBtn} onPress={this.doShare}>
@@ -391,9 +317,26 @@ class DetailScreen extends Component {
             <Icon name="close" type='Ionicons' color={Colors.$whiteColor} size={16}/>
           </Button>
         </View>
-        <ShareAlertDialog show={this.state.showSharePop} closeModal={(show) => {
-            this.setState({showSharePop: show})
-        }} {...this.props}/>
+        <Modal
+          isVisible={this.state.isShare}
+          style={styles.bottomModal}
+          onBackdropPress={() => this.setState({ isShare: false })}
+        >
+          <View style={styles.modalContent}>
+            <Text>Hellooooooo!</Text>
+          </View>
+        </Modal>
+
+        <Modal
+          isVisible={this.state.isComment}
+          style={styles.commentModal}
+          onBackdropPress={() => this.setState({ isComment: false })}
+        >
+          <View style={styles.modalContent}>
+            <Text>Hello!</Text>
+          </View>
+        </Modal>
+
       </View>
     )
   }
