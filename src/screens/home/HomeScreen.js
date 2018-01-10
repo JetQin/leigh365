@@ -21,27 +21,26 @@ import { fetchData } from './actions';
 )
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    // const tabBarLabel ='主页';
-    // const headerStyle = headerstyles.headerStyle ;
-    // const headerLeft= (
-    //   <View style={headerstyles.headerLeft}>
-    //     <Image source={require('../../../assets/imgs/logo.png')} style={headerstyles.logo} />
-    //     <Text style={headerstyles.title}>新历财经</Text>
-    //   </View>
-    // );
-    // const headerRight = (
-    //   <View style={headerstyles.headerRight}>
-    //     <Button transparent onPress={() => navigation.navigate('Search')}>
-    //       <Icon type='ionicon' name='md-search' size={20} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} />
-    //     </Button>
-    //   </View>
-    // );
+    const tabBarLabel ='主页';
+    const headerStyle = headerstyles.headerStyle;
+    const headerLeft= (
+      <View style={headerstyles.headerLeft}>
+        <Image source={require('../../../assets/imgs/logo.png')} style={headerstyles.logo} />
+        <Text style={headerstyles.title}>新历财经</Text>
+      </View>
+    );
+    const headerRight = (
+      <View style={headerstyles.headerRight}>
+        <Button transparent onPress={() => navigation.navigate('Search')}>
+          <Icon type='ionicon' name='md-search' size={26} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} />
+        </Button>
+      </View>
+    );
     const tabBarIcon = ({ focused }) => (
       focused ? <Image source={require('../../../assets/imgs/home.jpeg')} style={headerstyles.tabbarIcon} /> 
               : <Image source={require('../../../assets/imgs/inactive_home.jpeg')} style={headerstyles.tabbarIcon} /> 
     );
-    // return { tabBarLabel,headerStyle, headerLeft,headerRight, tabBarIcon}
-    return { tabBarIcon }
+    return { tabBarLabel,headerStyle, headerLeft,headerRight, tabBarIcon}
   };
 
   constructor(props) {

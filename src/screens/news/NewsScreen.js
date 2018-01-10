@@ -15,31 +15,28 @@ class NewsScreen extends Component {
     wordpressApi,
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: '商业新闻',
-    headerStyle: {
-      borderBottomWidth: 3,
-      borderBottomColor: Colors.$navigationHeaderTextColor,
-      borderStyle: 'solid',
-    },
-    headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row',width: 120}}>
-        <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
-        <Text style={styles.headerTitle}>新历财经</Text>
+  static navigationOptions = ({ navigation }) => {
+    const tabBarLabel = '商业新闻';
+    const headerStyle = headerstyles.headerStyle;
+    const headerLeft = (
+      <View style={headerstyles.headerLeft}>
+        <Image source={require('../../../assets/imgs/logo.png')} style={headerstyles.logo} />
+        <Text style={headerstyles.title}>新历财经</Text>
       </View>
-    ),
-    headerRight: (
-      <View style={{ flex: 1, flexDirection: 'row'}}>
+    );
+    const headerRight =(
+      <View style={headerstyles.headerRight}>
         <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
+          <Icon type='ionicon' name='md-search' size={26} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} />
         </Button>
       </View>
-    ),
-    tabBarIcon: ({ focused }) => (
+    );
+    const tabBarIcon= ({ focused }) => (
       focused ? <Image source={require('../../../assets/imgs/news.jpeg')} style={headerstyles.tabbarIcon} /> 
               : <Image source={require('../../../assets/imgs/inactive_news.jpeg')} style={headerstyles.tabbarIcon} /> 
     )
-  });
+    return { tabBarLabel,headerStyle, headerLeft,headerRight, tabBarIcon}
+  };
 
   constructor(props) {
     super(props);

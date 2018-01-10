@@ -23,22 +23,21 @@ class ProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     const tabBarLabel = '个人信息';
-    const headerStyle = {
-      backgroundColor: Colors.$whiteColor,
-      borderBottomWidth: 3,
-      borderBottomColor: Colors.$navigationHeaderTextColor,
-      borderStyle: 'solid',
-    };
+    const headerStyle = headerstyles.headerStyle;
     const headerLeft = (
+      <View style={headerstyles.headerLeft}>
         <Button transparent onPress={() => navigation.navigate('Setting')}>
-          <Text style={styles.headerTitle}>设置</Text>
+          <Text style={headerstyles.text}>设置</Text>
         </Button>
+      </View>
     );
 
     const headerRight = (
+      <View style={headerstyles.headerRight}>
         <Button transparent onPress={() => navigation.navigate('Post')}>
-          <Icon type='ionicon' name='md-add' size={30} color={Colors.$navigationHeaderTextColor} iconStyle={{ paddingRight: 10}}/>
+          <Icon type='ionicon' name='md-add' size={26} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} iconStyle={{ paddingRight: 10}}/>
         </Button>
+      </View>
     );
 
     const tabBarIcon = ({ focused }) => (

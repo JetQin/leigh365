@@ -18,21 +18,32 @@ const headerstyles = EStyleSheet.create({
     flexDirection: 'row' ,
   },
   iconContainer:{
-
+    padding: 10,
+    bottom: 5,
   },
   logo:{
+    padding: 10,
     left: 10,
     width: 15,
     height: 15,
+    top: 3,
   },
   tabbarIcon: {
-    height:18,
-    width: 18,
+    height: 23,
+    width: 23,
   },
   title: {
     color: Colors.$navigationHeaderTextColor,
+    top: 2,
     left: 15,
-    fontSize: 12,
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+  },
+  text: {
+    bottom: 10,
+    left: 15,
+    color: Colors.$navigationHeaderTextColor,
+    fontSize: 16,
     fontFamily: 'Montserrat-Regular',
   }
 });

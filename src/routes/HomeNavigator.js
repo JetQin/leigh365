@@ -31,12 +31,11 @@ export const HomeNavigator = TabNavigator({
     activeTintColor: Colors.$navigationHeaderTextColor,
     indicatorStyle: { backgroundColor: Colors.$redColor },
     labelStyle: {
-      fontSize: 8,
+      fontSize: 10,
     },
     style: {
       backgroundColor: Colors.$whiteColor,
       padding: 2,
-      // height: 30,
     },
   },
 });
