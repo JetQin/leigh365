@@ -12,7 +12,6 @@ class PriceCardCarousel extends Component {
               {title:'充值', url: 'http://synebusiness.cn/price/1small.png'},
               {title:'充值', url: 'http://synebusiness.cn/price/3small.png'},
               {title:'充值', url: 'http://synebusiness.cn/price/12small.png'},
-              {title:'充值', url: 'http://synebusiness.cn/price/diamond-small.png'},
             ]
         };
         this.gotoPay = this.gotoPay.bind(this);
