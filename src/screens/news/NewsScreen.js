@@ -134,9 +134,6 @@ class NewsScreen extends Component {
     if (ref.props.heading === '发现') {
       this.find._onRefresh();
     }
-    if (ref.props.heading === '+') {
-      this.props.navigation.navigate('Item');
-    }
     if (ref.props.heading === '关注') {
       //this.props.navigation.navigate('Detail');
     }
@@ -147,29 +144,71 @@ class NewsScreen extends Component {
     return (
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
-          <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
-            <Tab heading='推荐'>
+          <Tabs 
+            tabBarUnderlineStyle={{ backgroundColor: '#049CDB'}}
+            onChangeTab={({ ref }) => this.changeTab(ref)} 
+            renderTabBar={()=> <ScrollableTab/>}>
+            
+            <Tab 
+              heading='推荐' 
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='关注'>
+            <Tab 
+              heading='关注'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <BlogCard/>
             </Tab>
-            <Tab heading='科技'>
+            <Tab 
+              heading='科技'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.tech = c; }} news={this.state.techNews.data} scroll={this.updateTechNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='金融'>
+            <Tab 
+              heading='金融'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.finance = c; }} news={this.state.financeNews.data} scroll={this.updateFinanceNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='地产'>
+            <Tab 
+              heading='地产'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.house = c; }} news={this.state.houseNews.data} scroll={this.updateHouseNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='发现'>
-              <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
-            </Tab>
-            <Tab heading='+'>
+            <Tab 
+              heading='发现'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
             </Tab>
           </Tabs>
+        </View>
+        <View style={{position: 'absolute',right: 0,top:0}}>
+          <Button transparent onPress={() => (this.props.navigation.navigate('Item'))} style={{width: 30,height: 48, backgroundColor: '#F3FAFF', justifyContent:'center', alignItems:'center'}}>
+            <Icon name="md-add" type='ionicon' color='#6B97BF' size={16}/>
+          </Button>
         </View>
       </View>
     );

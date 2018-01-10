@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, AsyncStorage} from 'react-native';
-import { Button, Icon } from 'native-base'; 
+import { Button} from 'native-base'; 
+import { Icon} from 'react-native-elements';
 import styles from './styles/ItemScreen';
 import { ItemCard, ItemDeleteCard } from './components/';
 import Colors from '../../../constants/Colors';
@@ -48,6 +49,9 @@ class ItemScreen extends Component {
       {name: '华尔街',id: '028'}
     ]
   };
+  static navigationOptions = ({ navigation }) => ({
+    header: null,
+  });
 
   constructor(props) {
     super(props);
@@ -160,6 +164,11 @@ class ItemScreen extends Component {
   render() {
     return (
     <View style={styles.container}>
+      <View style={{height:30}}>
+        <Button transparent onPress={() => this.props.navigation.goBack()} style={{marginLeft:10}}>
+          <Icon type='ionicon'  name="md-close" size={20} color={Colors.$black} />
+        </Button>
+      </View>
       <View style={styles.myInterest}>
         <View style={styles.header}>
           <Text style={styles.headerLeft}>我的频道</Text>

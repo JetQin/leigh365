@@ -4,6 +4,7 @@ import Colors from '../../../../constants/Colors';
 const styles = EStyleSheet.create({
   container:{
     flex: 1,
+    backgroundColor:'#FFFFFF',
   },
   header: {
     flexDirection: 'row',

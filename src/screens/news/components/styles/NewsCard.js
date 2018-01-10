@@ -1,69 +1,104 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Colors from '../../../../../constants/Colors';
+import {Dimensions} from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+const screenHeight = width < height ? height : width;
+const screenWidth = width < height ? width : height;
 
 const styles = EStyleSheet.create({
-  root: {
+  titleContainer:{
+    flexDirection: 'row', 
+    flex: 1, 
+    justifyContent: 'space-between',
+  },
+  leftTitleContainer:{
+    flexDirection: 'row', 
+    alignItems: 'center',
+    paddingLeft:10,
+  },
+  loginInfo:{
+    flexDirection:'column',
+    paddingLeft:10 
+  },
+  loginText:{
+    color:'#949494',
+    fontWeight:'bold',
+  },
+  rightTitleContainer:{
+    flexDirection: 'row', 
+    alignItems: 'center',
+    paddingRight: 30
+  },
+  btnContainer:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  interestBtn:{
+    justifyContent:'center',
+    alignItems:'center', 
+    borderColor: '#2C89F6',
+    backgroundColor:'#2C89F6',  
+    height: 20,
+    width:40
+  },
+  subTitleContainer:{
+    flexDirection: 'row', 
     flex: 1,
-    flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 3,
+  },
+  subtitlePic:{
+    flex:0.2, 
+    marginRight:10,  
   },
   emptyView: {
     width: 0,
     height: 0,
   },
-  avatar: {
-    flex: 0.2,
+  imgView:{
+    width:screenWidth*0.2,
+    height:screenWidth*0.2
   },
-  image: {
-    width: 60,
-    height: 60,
-  },
-  body: {
+  subtitleContent:{
+    flexDirection: 'column', 
     flex: 0.8,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  title: {
-    flex: 0.8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 16,
+  content:{
+    fontWeight:'bold',
+    textAlign:'left',
+    fontSize: 12,
     fontFamily: 'Montserrat-Regular',
-    color: Colors.$black,
+    lineHeight:24,
+    color: '#336DA4',
     backgroundColor: 'transparent',
   },
   footer: {
-    flex: 0.2,
-    flexDirection: 'row',
-  },
-  footerText: {
-    fontSize: 12,
-    fontFamily: 'Montserrat-Regular',
-    color: Colors.$black,
-    backgroundColor: 'transparent',
-    flex: 0.5
-  },
-  separator: {
     flex: 1,
-    height: 3,
-    backgroundColor: Colors.$blackBlueColor,
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    paddingTop: 5
   },
-
+  footerMargin:{
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    paddingTop: 5,
+    marginLeft:'10%',
+    marginRight:'10%',
+  },
+  timeContainer:{
+    fontWeight:'bold',
+    fontSize: 10,
+    color: '#C9C9C9',
+    backgroundColor: 'transparent',
+  },
   icon: {
-    marginLeft: 8,
-    marginRight: 8,
+    marginRight: 5,
   },
-  closeBtn: { 
-    width: 20, 
-    height: 20, 
-    borderRadius: 10, 
-    backgroundColor: '#EFF8FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  
+  
+
 });
 
 export default styles;

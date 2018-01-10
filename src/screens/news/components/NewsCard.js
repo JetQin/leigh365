@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, RefreshControl, AsyncStorage, Alert } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, AsyncStorage, Alert,Image } from 'react-native';
 import { Icon, ListItem, Avatar } from 'react-native-elements';
 import { Button } from 'native-base';
 import moment from 'moment';
 import styles from './styles/NewsCard';
 import { WordpressApi } from '../../../../constants/api';
+import Colors from '../../../../constants/Colors'
 
 const wordpressApi = new WordpressApi();
 
@@ -18,6 +19,7 @@ class NewsCard extends Component {
     this.state = {
       refreshing: false,
       news: [],
+      isLiked:false,
     };
   }
 
@@ -52,6 +54,7 @@ class NewsCard extends Component {
         ],
         { cancelable: false }
       );
+      this.setState({isLiked: !this.state.isLiked});
     }
   }
 
@@ -92,45 +95,66 @@ class NewsCard extends Component {
               key={i} //this.props.navigation.navigate('Item');
               //onPress={() => (this.props.navigation.navigate('ViewHtml', { uri: item.url }))}
               onPress={() => (this.props.navigation.navigate('Detail'))}
+              wrapperStyle={{marginLeft:5}}
+              containerStyle={{paddingRight:5,paddingTop:3,paddingBottom:3}}
               title={
-                <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', paddingLeft: 10}}>
-                    <View style={{flexDirection: 'row', flex: 0.5, alignItems: 'center'}}>
+                <View style={styles.titleContainer}>
+                    <View style={styles.leftTitleContainer}>
                       <Avatar medium small rounded source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-                      <Text style={{paddingLeft:20}}>张三</Text>
+                      <View style={styles.loginInfo}>
+                        <Text style={[styles.loginText,{fontSize:12}]}>张三</Text>
+                        <Text style={[styles.loginText,{fontSize:8}]}>2017-12-30</Text>
+                      </View>
                     </View>
-                    <View  style={{flexDirection: 'row', alignItems: 'center',paddingRight: 30}}>
-                      <Button bordered onPress={() => this.addInterest(item.id)} style={{ borderColor: '#EB7C23',  height: '60%'}}>
-                        <Text style={{ color: '#EB7C23' }}>+ 关注</Text>
-                      </Button>
-                      <Button transparent onPress={() => this.deleteInterest(item.id)} style={[styles.closeBtn,{marginLeft:10}]}>
-                        <Icon type='font-awesome'  name="close" size={10} color={'#BAB7B5'} />
-                      </Button>
+                    <View  style={styles.rightTitleContainer}>
+                      <View style={styles.btnContainer}>
+                        <Button bordered onPress={() => this.addInterest(item.id)} style={styles.interestBtn}>
+                          <Text style={{ color: '#fff',fontSize:10}}>+ 关注</Text>
+                        </Button>
+                      </View>
+                      <View style={styles.btnContainer}>
+                        <Button transparent onPress={() => this.deleteInterest(item.id)} style={{marginLeft:10}}>
+                          <Icon type='material-community'  name="close-circle-outline" size={20} color={'#C9C9C9'} />
+                        </Button>
+                      </View>
                     </View>
                   </View>
               }
-              titleStyle={{ paddingLeft: 10 }}
+              titleStyle={{}}
               hideChevron
               subtitle={
-                <View style={{flexDirection: 'row', flex: 1}}>
-                  <View style={{flex: 0.18}}>
-                    {item.picUrl === '' ? <View style={styles.emptyView} /> : <Avatar medium source={{ uri: item.picUrl }} />}
-                  </View>
-                  <View style={{flexDirection: 'column', flex: 0.82}}>
+                <View style={styles.subTitleContainer}>
+                  {item.picUrl === '' ?
+                    null:
+                    <View style={styles.subtitlePic}>
+                      <Image source={{uri: item.picUrl}} style={styles.imgView}></Image>
+                    </View>
+                  }
+                  <View style={item.picUrl === '' ?{flexDirection: 'column', flex: 1}:styles.subtitleContent}>
                     <View>
-                      <Text numberOfLines={1} style={styles.footerText}>{item.name}</Text>
+                      <Text  style={styles.content}>{item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}</Text>
                     </View>
-                    <View style={[styles.footer,{ paddingTop: 5}]}>
-                      <Text style={styles.footerText}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>
-                      <Icon size={12} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                      <Text numberOfLines={1} style={styles.footerText}>{item.category}</Text>
-                      <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')}/>
-                      <Icon size={12} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => this.addPostList(item.id)} />
-                      <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <View style={item.picUrl === '' ? styles.footerMargin:styles.footer}>
+                      <View style={{flexDirection:'row',flex:0.3}}>
+                        <Icon size={12} name='tags' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                        <Text style={styles.timeContainer}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>
+                      </View>
+                      <View style={{flexDirection:'row',flex:0.3}}>
+                        <Icon size={12} name='comments' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')}/>
+                        <Text numberOfLines={1} style={{fontWeight:'bold',fontSize: 10,color: '#C9C9C9',backgroundColor: 'transparent',flex:0.8}}>{item.category}</Text>
+                      </View>
+                      <View style={{flex:0.1}}>
+                        <Icon size={12}  name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color='#6E99BF' onPress={() => this.addPostList(item.id)}/>
+                      </View>
+                      <View style={{flex:0.1}}>
+                        <Icon size={12} name='share' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                      </View>
                     </View>
+                    
                   </View>
                 </View>
               }
-              subtitleContainerStyle={{ paddingLeft:4, paddingTop: 0, paddingBottom: 0 }}
+              subtitleContainerStyle={{}}
             />
           ))
         }
