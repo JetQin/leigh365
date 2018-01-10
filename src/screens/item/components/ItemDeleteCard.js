@@ -26,12 +26,12 @@ class ItemDeleteCard extends Component {
           this.props.items.map((item, i) => (
             <View key={i} style={styles.itemContainer}>
               <Button small light style={styles.btnContainer}>
-                <Text>{item.name}</Text>                    
+                <Text style={{fontSize:12,color:Colors.$black}}>{item.name}</Text>                    
               </Button> 
               {
                 this.props.delete? 
               <Button light iconLeft onPress={() => this._doRemoveItem(item.id)} style={styles.deleteBtnContainer}>
-                <Icon type='font-awesome' name='close' style={styles.deleteIconContainer}/>
+                <Icon type='font-awesome' name='close'  style={styles.deleteIconContainer}/>
               </Button>
               :<View/>  
               }

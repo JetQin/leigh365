@@ -19,13 +19,14 @@ const styles = EStyleSheet.create({
     },
     btnContainer: {
         width: btnWidth, 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor:'#F4F5F7',
     },
     icoContainer: {
         marginLeft: 3, 
         marginRight: 3,
         fontSize: 15, 
-        color: 'grey',
+        color: 'black',
     }
 });
 

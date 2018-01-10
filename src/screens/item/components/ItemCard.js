@@ -3,6 +3,7 @@ import { View, Text, ScrollView, RefreshControl, AsyncStorage, Alert } from 'rea
 import { Button, Icon } from 'native-base';
 import styles from './styles/ItemCard';
 import { Dimensions } from 'react-native';
+import Colors from '../../../../constants/Colors';
 
 class ItemCard extends Component {
 
@@ -26,7 +27,7 @@ class ItemCard extends Component {
             <View key={i} style={styles.itemContainer}>
               <Button small light style={styles.btnContainer} onPress={() => this._doAddItem(item.id)}>
                 <Icon type='ionicon' name='add' style={styles.icoContainer}/>
-                <Text>{item.name}</Text>                    
+                <Text style={{color:Colors.$black,fontSize:12}}>{item.name}</Text>                    
               </Button> 
             </View>
           ))
