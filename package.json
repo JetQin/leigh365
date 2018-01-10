@@ -17,16 +17,14 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./ios/leigh365/main.jsbundle' --dev=false --platform='ios'",
-    "build:android": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./android/leigh365/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "moment": "^2.19.2",
     "native-base": "^2.3.2",
-    "react": "16.0.0",
-    "react-native": "0.50.0",
+    "react": "16.2.0",
+    "react-native": "0.52.0",
     "react-native-elements": "^0.17.0",
     "react-native-extended-stylesheet": "^0.7.0",
     "react-native-image-picker": "^0.26.7",
@@ -34,6 +32,7 @@
     "react-native-modal": "^4.1.1",
     "react-native-snap-carousel": "^3.5.0",
     "react-native-swiper": "^1.5.13",
+    "react-native-vector-icons": "^4.5.0",
     "react-native-wechat": "^1.9.9",
     "react-navigation": "^1.0.0-beta.13",
     "react-redux": "^5.0.6",

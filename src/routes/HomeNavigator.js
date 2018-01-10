@@ -35,7 +35,8 @@ export const HomeNavigator = TabNavigator({
     },
     style: {
       backgroundColor: Colors.$whiteColor,
-      padding: 2
+      padding: 2,
+      // height: 30,
     },
   },
 });

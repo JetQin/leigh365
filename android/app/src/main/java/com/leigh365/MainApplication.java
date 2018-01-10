@@ -3,11 +3,9 @@ package com.leigh365;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-// import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.theweflex.react.WeChatPackage;
-import com.theweflex.react.WeChatPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.theweflex.react.WeChatPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -28,11 +26,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            // new PickerPackage(),
-            new ImagePickerPackage(),
+            new VectorIconsPackage(),
             new WeChatPackage(),
-            new WeChatPackage(),
-            new VectorIconsPackage()
+            new ImagePickerPackage()
       );
     }
 
