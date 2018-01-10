@@ -5,7 +5,10 @@ import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Colors from '../../../constants/Colors';
+
+import headerstyles from '../../commons/styles/HeaderStyle';
 import styles from './styles/ProfileScreen';
+
 import { NewsInfo, StockInfo, PricingCard, BlogList, PriceCardCarousel } from './components/';
 import { WordpressApi } from '../../../constants/api';
 import { PostApi,UserFollowApi } from '../../../constants/index';
@@ -19,27 +22,27 @@ class ProfileScreen extends Component {
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-    const tabBarLabel = '个人信息';
-    const headerStyle = {
-      backgroundColor: Colors.$whiteColor,
-      borderBottomWidth: 3,
-      borderBottomColor: Colors.$navigationHeaderTextColor,
-      borderStyle: 'solid',
-    };
+    const tabBarLabel = '我';
+    const headerStyle = headerstyles.headerStyle;
     const headerLeft = (
+      <View style={headerstyles.headerLeft}>
         <Button transparent onPress={() => navigation.navigate('Setting')}>
-          <Text style={styles.headerTitle}>设置</Text>
+          <Text style={headerstyles.text}>设置</Text>
         </Button>
+      </View>
     );
 
     const headerRight = (
+      <View style={headerstyles.headerRight}>
         <Button transparent onPress={() => navigation.navigate('Post')}>
-          <Icon type='ionicon' name='md-add' size={30} color={Colors.$navigationHeaderTextColor} iconStyle={{ paddingRight: 10}}/>
+          <Icon type='ionicon' name='md-add' size={26} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} iconStyle={{ paddingRight: 10}}/>
         </Button>
+      </View>
     );
 
-    const tabBarIcon = ({ tintColor }) => (
-      <Icon type='material-community' name="account-circle" size={25} color={tintColor} />
+    const tabBarIcon = ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/profile.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_profile.jpeg')} style={headerstyles.tabbarIcon} /> 
     );
     return { tabBarLabel, headerStyle, headerLeft, headerRight, tabBarIcon };
   };
@@ -67,6 +70,8 @@ class ProfileScreen extends Component {
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
+        follower: 0,
+        fans: 0,
       },
       avatars:[
         'http://synebusiness.cn/avatar/001.jpeg',
@@ -122,6 +127,8 @@ class ProfileScreen extends Component {
             user_id: params.data.user_id,
             myArticleNum: params.data.post_count,
             myStockNum: params.data.stock_count,
+            follower: params.data.follower,
+            fans: params.data.fans,
           },
         });
         this.props.navigation.setParams({ isLogin: true });
@@ -148,6 +155,8 @@ class ProfileScreen extends Component {
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
+        follower: 0,
+        fans: 0
       },
     });
     this.props.navigation.setParams({ isLogin: false });
@@ -256,6 +265,8 @@ class ProfileScreen extends Component {
           user_id: posts.data.user_id,
           myArticleNum: posts.data.post_count,
           myStockNum: posts.data.stock_count,
+          follower: this.state.user.follower,
+          fans: this.state.user.follower,
         },
       });
     }
@@ -275,8 +286,18 @@ class ProfileScreen extends Component {
         user_avatar: uri,
       }
       const response = await this.props.userFollowApi.changeAvatar(request);
-      if(!repsponse && response.data.status === 1){
-        this.setState({ user: {avatar: uri }});
+      if(response.status === 1){
+        this.setState({ 
+          user: {
+            avatar: uri, 
+            name: this.state.user.name,
+            user_id: this.state.user.user_id,
+            myArticleNum: this.state.user.myArticleNum,
+            myStockNum: this.state.user.myStockNum,
+            follower: this.state.user.follower,
+            fans: this.state.user.fans,
+          }
+        });
       }
     }
     this.setState({ showAvatarPane: false });
@@ -330,25 +351,32 @@ class ProfileScreen extends Component {
                       <Image source={{ uri: this.state.user.avatar }} style={styles.avatar}/>
                     </View>
                   </TouchableOpacity> 
-                  <View style={styles.settingBtn}>
-                    <Button transparent info onPress={this.changeAvatar} >
-                      <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                    </Button>
-                  </View>
+                  <TouchableOpacity onPress={this.changeAvatar} >
+                    {/* <View style={styles.settingBtn} onPress={this.changeAvatar}>  */}
+                      <Icon type='font-awesome' name="gear" size={20} color={'#6A97BE'} containerStyle={styles.settingBtn} />
+                    {/* </View> */}
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.settingContainer}>
-                  <View style={styles.headerTitleContainer}>
-                    <Text style={styles.title}>{this.state.user.name}</Text>
-                  </View>
-                  <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
-                    <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
-                  </TouchableOpacity>
+                  {
+                    this.state.user.name === '' ?
+                    (
+                      <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
+                        <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
+                      </TouchableOpacity>
+                    ) :
+                    (
+                      <View style={styles.headerTitleContainer}>
+                        <Text style={styles.title}>{this.state.user.name}</Text>
+                      </View>
+                    )
+                  }
                 </View>
                 <View style={styles.myCollectContainer}>
                   <Badge style={styles.collectContainer}>
                     <TouchableOpacity onPress={this.goToFollowerScreen}>
                       <View style={styles.collectText}>
-                        <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
+                        <Text style={styles.labelText}>{this.state.user.follower}</Text>
                         <Text style={styles.label}>已关注</Text>
                       </View>
                     </TouchableOpacity>
@@ -356,7 +384,7 @@ class ProfileScreen extends Component {
                   <Badge style={styles.collectContainer}>
                     <TouchableOpacity onPress={this.goToFansScreen}>
                       <View style={styles.collectText}>
-                        <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
+                        <Text style={styles.labelText} >{this.state.user.fans}</Text>
                         <Text style={styles.label}>粉丝</Text>
                       </View>
                     </TouchableOpacity>

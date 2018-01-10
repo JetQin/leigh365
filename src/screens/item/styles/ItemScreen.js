@@ -4,6 +4,7 @@ import Colors from '../../../../constants/Colors';
 const styles = EStyleSheet.create({
   container:{
     flex: 1,
+    backgroundColor:'#FFFFFF',
   },
   header: {
     flexDirection: 'row',
@@ -15,7 +16,7 @@ const styles = EStyleSheet.create({
     fontSize: 16,
   },
   headerMid: {
-    flex: 0.5, 
+    flex: 0.65, 
   },
   myInterest: {
 

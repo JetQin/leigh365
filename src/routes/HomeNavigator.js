@@ -19,11 +19,6 @@ export const HomeNavigator = TabNavigator({
     title: '个人中心',
     screen: ProfileScreen,
   },
-  // More: {
-  //   title: '关于',
-  //   screen: MoreScreen,
-  // },
-
 },
 {
   swipeEnabled: false,
@@ -35,8 +30,12 @@ export const HomeNavigator = TabNavigator({
     inactiveTintColor: Colors.$blackBlueColor,
     activeTintColor: Colors.$navigationHeaderTextColor,
     indicatorStyle: { backgroundColor: Colors.$redColor },
+    labelStyle: {
+      fontSize: 10,
+    },
     style: {
       backgroundColor: Colors.$whiteColor,
+      padding: 2,
     },
   },
 });

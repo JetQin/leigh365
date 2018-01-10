@@ -38,6 +38,32 @@ export default class BlogCard extends Component {
                     comments: '5',
                     likes: '20',
                   },
+                  {
+                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    name: 'Pony',
+                    date: '1小时前',
+                    reading: '10',
+                    status: '联想为ThinkPad设定了新目标：更轻薄更智能更安全，开创智能商务计算新纪元！',
+                    image1: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    image2: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    image3: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    share: '4',
+                    comments: '5',
+                    likes: '20',
+                  },
+                  {
+                    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    name: 'Pony',
+                    date: '1小时前',
+                    reading: '10',
+                    status: '联想为ThinkPad设定了新目标：更轻薄更智能更安全，开创智能商务计算新纪元！',
+                    image1: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    image2: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    image3: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                    share: '4',
+                    comments: '5',
+                    likes: '20',
+                  },
               ],
         }
     }
@@ -49,9 +75,9 @@ export default class BlogCard extends Component {
                    {
                     this.state.blogs.map((item, i) => {
                     return (
-                        <ListItem key={i} itemDivider={false}>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
+                        <ListItem key={i} itemDivider={false} style={styles.ListItemContainer}>
+                            <Card style={styles.cardItemContainer}>
+                                <CardItem>
                                     <Left>
                                         <Thumbnail small source={{uri: item.avatar }} />
                                         <Body>
@@ -81,15 +107,15 @@ export default class BlogCard extends Component {
                                 <CardItem footer style={{paddingTop: 0, paddingBottom: 2}}>
                                     <View style={styles.footer}>
                                         <Button transparent style={styles.btn}>
-                                            <Icon name="share" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+                                            <Icon name="share" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={12}/>
                                             <Text style={styles.footerText}>{item.share}</Text>
                                         </Button>
                                         <Button transparent style={styles.btn}>
-                                            <Icon name="ios-chatbubbles" type='ionicon' color={Colors.$navigationHeaderTextColor} size={16} />
+                                            <Icon name="ios-chatbubbles" type='ionicon' color={Colors.$navigationHeaderTextColor} size={12} />
                                             <Text style={styles.footerText}>{item.comments}</Text>
                                         </Button>
                                         <Button transparent style={styles.btn}>
-                                            <Icon name="thumbs-up"  type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16} />
+                                            <Icon name="thumbs-up"  type='font-awesome' color={Colors.$navigationHeaderTextColor} size={12} />
                                             <Text style={styles.footerText}>{item.likes}</Text>
                                         </Button>
                                     </View>

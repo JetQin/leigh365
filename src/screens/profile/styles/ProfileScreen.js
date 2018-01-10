@@ -55,7 +55,6 @@ const styles = EStyleSheet.create({
   },
   settingBtn: {
     position: 'relative',
-    left: -5,
     top: 30,
     alignItems: 'flex-end',
   },

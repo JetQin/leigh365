@@ -7,8 +7,9 @@ import styles from './styles/IndexCard';
 class Card extends Component {
   render() {
     const index = this.props.index;
-    const icon = index.change_value > 0 ? (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} />) 
-            :  (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} />);
+    const icon = index.change_value > 0 ?
+              (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} containerStyle={styles.sortUp} />) 
+            :  (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} containerStyle={styles.sortDown} />);
     return (
       <View style={styles.root}>
         <View style={styles.titleContainer}>

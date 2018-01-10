@@ -3,10 +3,9 @@ import { View, Text, Image, Alert } from 'react-native';
 import { Tabs, ScrollableTab, Tab, Button } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
-// import NewsCard  from './components/NewsCard';
-// import {BlogCard}  from './components/BlogCard';
 import { NewsCard, BlogCard} from './components'
 import styles from './styles/NewsScreen';
+import headerstyles from '../../commons/styles/HeaderStyle';
 import { WordpressApi } from '../../../constants/api';
 
 const wordpressApi = new WordpressApi();
@@ -16,30 +15,28 @@ class NewsScreen extends Component {
     wordpressApi,
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: '商业新闻',
-    headerStyle: {
-      borderBottomWidth: 3,
-      borderBottomColor: Colors.$navigationHeaderTextColor,
-      borderStyle: 'solid',
-    },
-    headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row',width: 120}}>
-        <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
-        <Text style={styles.headerTitle}>新历财经</Text>
+  static navigationOptions = ({ navigation }) => {
+    const tabBarLabel = '新闻';
+    const headerStyle = headerstyles.headerStyle;
+    const headerLeft = (
+      <View style={headerstyles.headerLeft}>
+        <Image source={require('../../../assets/imgs/logo.png')} style={headerstyles.logo} />
+        <Text style={headerstyles.title}>新历财经</Text>
       </View>
-    ),
-    headerRight: (
-      <View style={{ flex: 1, flexDirection: 'row'}}>
+    );
+    const headerRight =(
+      <View style={headerstyles.headerRight}>
         <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
+          <Icon type='ionicon' name='md-search' size={26} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} />
         </Button>
       </View>
-    ),
-    tabBarIcon: ({ tintColor }) => (
-      <Icon type='material-community' name="newspaper" size={25} color={tintColor} />
-    ),
-  });
+    );
+    const tabBarIcon= ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/news.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_news.jpeg')} style={headerstyles.tabbarIcon} /> 
+    )
+    return { tabBarLabel,headerStyle, headerLeft,headerRight, tabBarIcon}
+  };
 
   constructor(props) {
     super(props);
@@ -134,9 +131,6 @@ class NewsScreen extends Component {
     if (ref.props.heading === '发现') {
       this.find._onRefresh();
     }
-    if (ref.props.heading === '+') {
-      this.props.navigation.navigate('Item');
-    }
     if (ref.props.heading === '关注') {
       //this.props.navigation.navigate('Detail');
     }
@@ -147,29 +141,71 @@ class NewsScreen extends Component {
     return (
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
-          <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} renderTabBar={()=> <ScrollableTab />}>
-            <Tab heading='推荐'>
+          <Tabs 
+            tabBarUnderlineStyle={{ backgroundColor: '#049CDB'}}
+            onChangeTab={({ ref }) => this.changeTab(ref)} 
+            renderTabBar={()=> <ScrollableTab/>}>
+            
+            <Tab 
+              heading='推荐' 
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='关注'>
+            <Tab 
+              heading='关注'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <BlogCard/>
             </Tab>
-            <Tab heading='科技'>
+            <Tab 
+              heading='科技'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.tech = c; }} news={this.state.techNews.data} scroll={this.updateTechNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='金融'>
+            <Tab 
+              heading='金融'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.finance = c; }} news={this.state.financeNews.data} scroll={this.updateFinanceNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='地产'>
+            <Tab 
+              heading='地产'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.house = c; }} news={this.state.houseNews.data} scroll={this.updateHouseNews} navigation={this.props.navigation} />
             </Tab>
-            <Tab heading='发现'>
-              <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
-            </Tab>
-            <Tab heading='+'>
+            <Tab 
+              heading='发现'
+              tabStyle={{backgroundColor:'#F3FAFF'}}
+              activeTabStyle={{backgroundColor:'#F3FAFF'}}
+              textStyle={{color:'#6B97BF'}}
+              activeTextStyle={{color:'#6B97BF'}}
+            >
               <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
             </Tab>
           </Tabs>
+        </View>
+        <View style={{position: 'absolute',right: 0,top:0}}>
+          <Button transparent onPress={() => (this.props.navigation.navigate('Item'))} style={{width: 30,height: 48, backgroundColor: '#F3FAFF', justifyContent:'center', alignItems:'center'}}>
+            <Icon name="md-add" type='ionicon' color='#6B97BF' size={16}/>
+          </Button>
         </View>
       </View>
     );

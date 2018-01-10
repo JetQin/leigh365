@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+import Colors from '../../../../../constants/Colors';
 
 const DimensionsWidth = Dimensions.get('window').width;
 const DimensionsHeight = Dimensions.get('window').height * 0.5;
@@ -12,18 +13,19 @@ const styles = EStyleSheet.create({
     },
     deleteBtnContainer: {
         justifyContent: 'center',
-        width: 20,
-        height: 20, 
-        borderRadius: 10,  
+        width: 16,
+        height: 16, 
+        borderRadius: 8,  
         position: 'relative',
-        right: 12 ,
-        bottom: 8,   
+        right: 10 ,
+        bottom: 8, 
+        backgroundColor:'#C9C9C9', 
     },
     deleteIconContainer: {
         marginLeft: 0, 
         marginRight: 0,
-        color: 'grey', 
-        fontSize: 16,
+        color: Colors.$whiteColor, 
+        fontSize: 12,
     },
     itemContainer: {
         marginLeft: (DimensionsWidth/4-btnContainerWidth)/2, 
@@ -31,10 +33,12 @@ const styles = EStyleSheet.create({
         width:btnContainerWidth,
         padding:10, 
         flexDirection: 'row',
+        
     },
     btnContainer: {
         width: btnWidth, 
         justifyContent: 'center',
+        backgroundColor:'#F4F5F7',
     }
 });
 

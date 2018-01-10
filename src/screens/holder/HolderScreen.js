@@ -5,7 +5,10 @@ import { ButtonGroup, Icon } from 'react-native-elements';
 
 import { StockCard } from './components';
 import Colors from '../../../constants/Colors';
+
+import headerstyles from '../../commons/styles/HeaderStyle';
 import styles from './styles/HolderScreen';
+
 import { WordpressApi } from '../../../constants/api';
 
 const api = new WordpressApi();
@@ -15,30 +18,28 @@ class HolderScreen extends Component {
     api,
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    headerStyle: {
-      borderBottomWidth: 3,
-      borderBottomColor: Colors.$navigationHeaderTextColor,
-      borderStyle: 'solid',
-    },
-    tabBarLabel: '市场行情',
-    headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row', width: 120 }}>
-        <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
-        <Text style={styles.title}>新历财经</Text>
+  static navigationOptions = ({ navigation }) => {
+    const tabBarLabel = '行情';
+    const headerStyle = headerstyles.headerStyle;
+    const headerLeft =(
+      <View style={headerstyles.headerLeft}>
+        <Image source={require('../../../assets/imgs/logo.png')} style={headerstyles.logo} />
+        <Text style={headerstyles.title}>新历财经</Text>
       </View>
-    ),
-    headerRight: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+    );
+    const headerRight=(
+      <View style={headerstyles.headerRight}>
         <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
+          <Icon type='ionicon' name='md-search' size={26} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} />
         </Button>
       </View>
-    ),
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="account-card-details" type='material-community' size={25} color={tintColor} />
-    ),
-  });
+    );
+    const tabBarIcon = ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/market.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_market.jpeg')} style={headerstyles.tabbarIcon} /> 
+    )
+    return { tabBarLabel,headerStyle, headerLeft,headerRight, tabBarIcon}
+  };
 
   constructor(props) {
     super(props);
