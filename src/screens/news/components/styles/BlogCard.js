@@ -18,9 +18,11 @@ const styles = EStyleSheet.create({
   cardItemContainer:{
     borderLeftWidth:0,
     borderRightWidth:0,
+    borderTopWidth:0,
     borderRadius:0,
     marginLeft:0,
     marginRight:0,
+    marginTop:0,
   },
   userTitle: {
     fontSize: 13,
