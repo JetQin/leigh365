@@ -19,7 +19,7 @@ class HolderScreen extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const tabBarLabel = '市场行情';
+    const tabBarLabel = '行情';
     const headerStyle = headerstyles.headerStyle;
     const headerLeft =(
       <View style={headerstyles.headerLeft}>

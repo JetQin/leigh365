@@ -16,7 +16,7 @@ class NewsScreen extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const tabBarLabel = '商业新闻';
+    const tabBarLabel = '新闻';
     const headerStyle = headerstyles.headerStyle;
     const headerLeft = (
       <View style={headerstyles.headerLeft}>

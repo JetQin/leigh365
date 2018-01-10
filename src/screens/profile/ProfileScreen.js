@@ -22,7 +22,7 @@ class ProfileScreen extends Component {
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-    const tabBarLabel = '个人信息';
+    const tabBarLabel = '我';
     const headerStyle = headerstyles.headerStyle;
     const headerLeft = (
       <View style={headerstyles.headerLeft}>
