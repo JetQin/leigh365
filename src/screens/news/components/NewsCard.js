@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, RefreshControl, AsyncStorage, Alert,Dimensions,Image } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, AsyncStorage, Alert,Image } from 'react-native';
 import { Icon, ListItem, Avatar } from 'react-native-elements';
 import { Button } from 'native-base';
 import moment from 'moment';
 import styles from './styles/NewsCard';
 import { WordpressApi } from '../../../../constants/api';
 import Colors from '../../../../constants/Colors'
-const { width, height } = Dimensions.get('window');
-const screenHeight = width < height ? height : width;
-const screenWidth = width < height ? width : height;
 
 const wordpressApi = new WordpressApi();
 
@@ -101,21 +98,21 @@ class NewsCard extends Component {
               wrapperStyle={{marginLeft:5}}
               containerStyle={{paddingRight:5,paddingTop:3,paddingBottom:3}}
               title={
-                <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between'}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center',paddingLeft:10}}>
+                <View style={styles.titleContainer}>
+                    <View style={styles.leftTitleContainer}>
                       <Avatar medium small rounded source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-                      <View style={{ flexDirection:'column',paddingLeft:10 }}>
-                        <Text style={{fontSize:12,color:'#949494',fontWeight:'bold'}}>张三</Text>
-                        <Text style={{fontSize:8,color:'#949494',fontWeight:'bold'}}>2017-12-30</Text>
+                      <View style={styles.loginInfo}>
+                        <Text style={[styles.loginText,{fontSize:12}]}>张三</Text>
+                        <Text style={[styles.loginText,{fontSize:8}]}>2017-12-30</Text>
                       </View>
                     </View>
-                    <View  style={{flexDirection: 'row', alignItems: 'center',paddingRight: 30}}>
-                      <View style={{justifyContent:'center',alignItems:'center'}}>
-                        <Button bordered onPress={() => this.addInterest(item.id)} style={{justifyContent:'center',alignItems:'center', borderColor: '#2C89F6',backgroundColor:'#2C89F6',  height: 20,width:40}}>
+                    <View  style={styles.rightTitleContainer}>
+                      <View style={styles.btnContainer}>
+                        <Button bordered onPress={() => this.addInterest(item.id)} style={styles.interestBtn}>
                           <Text style={{ color: '#fff',fontSize:10}}>+ 关注</Text>
                         </Button>
                       </View>
-                      <View style={{justifyContent:'center',alignItems:'center'}}>
+                      <View style={styles.btnContainer}>
                         <Button transparent onPress={() => this.deleteInterest(item.id)} style={{marginLeft:10}}>
                           <Icon type='material-community'  name="close-circle-outline" size={20} color={'#C9C9C9'} />
                         </Button>
@@ -126,22 +123,34 @@ class NewsCard extends Component {
               titleStyle={{}}
               hideChevron
               subtitle={
-                <View style={{flexDirection: 'row', flex: 1}}>
-                  <View style={styles.subtitlePic}>
-                    {item.picUrl === '' ? <View style={styles.emptyView} /> : <Image source={{uri: item.picUrl}} style={{width:screenWidth*0.2,height:screenWidth*0.2}}></Image>}
-                  </View>
-                  <View style={styles.subtitleContent}>
+                <View style={styles.subTitleContainer}>
+                  {item.picUrl === '' ?
+                    null:
+                    <View style={styles.subtitlePic}>
+                      <Image source={{uri: item.picUrl}} style={styles.imgView}></Image>
+                    </View>
+                  }
+                  <View style={item.picUrl === '' ?{flexDirection: 'column', flex: 1}:styles.subtitleContent}>
                     <View>
-                      <Text numberOfLines={2}  style={{fontWeight:'bold',textAlign:'left',fontSize: 12,fontFamily: 'Montserrat-Regular',lineHeight:24,color: '#336DA4',backgroundColor: 'transparent'}}>{item.name}</Text>
+                      <Text  style={styles.content}>{item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}</Text>
                     </View>
-                    <View style={styles.footer}>
-                      <Text style={{fontWeight:'bold',fontSize: 10,color: '#C9C9C9',backgroundColor: 'transparent'}}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>
-                      <Icon size={12} name='tags' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                      <Text numberOfLines={1} style={{fontWeight:'bold',fontSize: 10,color: '#C9C9C9',backgroundColor: 'transparent',width:'30%'}}>{item.category}</Text>
-                      <Icon size={12} name='comments' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')}/>
-                      <Icon size={12}  name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color='#6E99BF' onPress={() => this.addPostList(item.id)}/>
-                      <Icon size={12} name='share' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <View style={item.picUrl === '' ? styles.footerMargin:styles.footer}>
+                      <View style={{flexDirection:'row',flex:0.3}}>
+                        <Icon size={12} name='tags' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                        <Text style={styles.timeContainer}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>
+                      </View>
+                      <View style={{flexDirection:'row',flex:0.3}}>
+                        <Icon size={12} name='comments' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')}/>
+                        <Text numberOfLines={1} style={{fontWeight:'bold',fontSize: 10,color: '#C9C9C9',backgroundColor: 'transparent',flex:0.8}}>{item.category}</Text>
+                      </View>
+                      <View style={{flex:0.1}}>
+                        <Icon size={12}  name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color='#6E99BF' onPress={() => this.addPostList(item.id)}/>
+                      </View>
+                      <View style={{flex:0.1}}>
+                        <Icon size={12} name='share' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                      </View>
                     </View>
+                    
                   </View>
                 </View>
               }
