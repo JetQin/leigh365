@@ -134,7 +134,7 @@ class NewsCard extends Component {
                     <View>
                       <Text  style={styles.content}>{item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}</Text>
                     </View>
-                    <View style={item.picUrl === '' ? styles.footerMargin:styles.footer}>
+                    <View style={styles.footer}>
                       <View style={{flexDirection:'row',flex:0.3}}>
                         <Icon size={12} name='tags' type='font-awesome' color='#6E99BF' iconStyle={styles.icon} onPress={() => console.log('hello')} />
                         <Text style={styles.timeContainer}>{moment(item.date, 'YYYY-MM-DD').startOf('day').fromNow()}</Text>

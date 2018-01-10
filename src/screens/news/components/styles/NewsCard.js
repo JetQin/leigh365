@@ -28,7 +28,7 @@ const styles = EStyleSheet.create({
   rightTitleContainer:{
     flexDirection: 'row', 
     alignItems: 'center',
-    paddingRight: 30
+    paddingRight: 5
   },
   btnContainer:{
     justifyContent:'center',
@@ -77,15 +77,6 @@ const styles = EStyleSheet.create({
     justifyContent:'space-between',
     alignItems:'center',
     paddingTop: 5
-  },
-  footerMargin:{
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    paddingTop: 5,
-    marginLeft:'10%',
-    marginRight:'10%',
   },
   timeContainer:{
     fontWeight:'bold',
