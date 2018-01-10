@@ -31,9 +31,9 @@ class App extends React.Component {
 
 
   render() {
-    if (!this.state.splashLoaded) {
-        return <SplashScreen />;
-      }
+    // if (!this.state.splashLoaded) {
+    //     return <SplashScreen />;
+    // }
     return (<Provider store={store}>
       <Root />
     </Provider>);

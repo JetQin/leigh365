@@ -5,7 +5,10 @@ import { ButtonGroup, Icon } from 'react-native-elements';
 
 import { StockCard } from './components';
 import Colors from '../../../constants/Colors';
+
+import headerstyles from '../../commons/styles/HeaderStyle';
 import styles from './styles/HolderScreen';
+
 import { WordpressApi } from '../../../constants/api';
 
 const api = new WordpressApi();
@@ -35,9 +38,10 @@ class HolderScreen extends Component {
         </Button>
       </View>
     ),
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="account-card-details" type='material-community' size={25} color={tintColor} />
-    ),
+    tabBarIcon: ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/market.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_market.jpeg')} style={headerstyles.tabbarIcon} /> 
+    )
   });
 
   constructor(props) {

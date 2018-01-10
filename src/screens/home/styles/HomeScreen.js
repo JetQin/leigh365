@@ -26,17 +26,15 @@ const styles = EStyleSheet.create({
     flex: 0.5,
   },
   title: {
-    color: '$blackColor',
+    color: Colors.$navigationHeaderTextColor,
     left: 15,
-    fontSize: 18,
-    paddingTop: 12,
+    fontSize: 12,
     fontFamily: 'Montserrat-Regular',
   },
   logo: {
-    top: 15,
     left: 10,
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
   },
   slide: {
     flex: 1,

@@ -5,7 +5,10 @@ import { Button, Tabs, Tab, ScrollableTab } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Colors from '../../../constants/Colors';
+
+import headerstyles from '../../commons/styles/HeaderStyle';
 import styles from './styles/ProfileScreen';
+
 import { NewsInfo, StockInfo, PricingCard, BlogList, PriceCardCarousel } from './components/';
 import { WordpressApi } from '../../../constants/api';
 import { PostApi,UserFollowApi } from '../../../constants/index';
@@ -38,8 +41,9 @@ class ProfileScreen extends Component {
         </Button>
     );
 
-    const tabBarIcon = ({ tintColor }) => (
-      <Icon type='material-community' name="account-circle" size={25} color={tintColor} />
+    const tabBarIcon = ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/profile.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_profile.jpeg')} style={headerstyles.tabbarIcon} /> 
     );
     return { tabBarLabel, headerStyle, headerLeft, headerRight, tabBarIcon };
   };

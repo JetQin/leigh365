@@ -59,7 +59,12 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
     textAlign: 'center',
   },
-
+  sortUp: {
+    top: 5,
+  },
+  sortDown: {
+    bottom: 5,
+  },
 });
 
 export default styles;

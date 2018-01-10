@@ -3,10 +3,9 @@ import { View, Text, Image, Alert } from 'react-native';
 import { Tabs, ScrollableTab, Tab, Button } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
-// import NewsCard  from './components/NewsCard';
-// import {BlogCard}  from './components/BlogCard';
 import { NewsCard, BlogCard} from './components'
 import styles from './styles/NewsScreen';
+import headerstyles from '../../commons/styles/HeaderStyle';
 import { WordpressApi } from '../../../constants/api';
 
 const wordpressApi = new WordpressApi();
@@ -36,9 +35,10 @@ class NewsScreen extends Component {
         </Button>
       </View>
     ),
-    tabBarIcon: ({ tintColor }) => (
-      <Icon type='material-community' name="newspaper" size={25} color={tintColor} />
-    ),
+    tabBarIcon: ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/news.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_news.jpeg')} style={headerstyles.tabbarIcon} /> 
+    )
   });
 
   constructor(props) {

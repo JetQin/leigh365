@@ -8,6 +8,7 @@ import Swiper from 'react-native-swiper';
 import Colors from '../../../constants/Colors';
 import { connect } from 'react-redux';
 import styles from './styles/HomeScreen';
+import headerstyles from '../../commons/styles/HeaderStyle';
 import GoTopButton from '../detail/components/GoTopButton'
 
 import { fetchData } from './actions';
@@ -19,31 +20,29 @@ import { fetchData } from './actions';
   { fetchData }
 )
 class HomeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: '主页',
-    titleStyle: { color: Colors.$redColor },
-    headerStyle: {
-      borderBottomWidth: 3,
-      borderBottomColor: Colors.$navigationHeaderTextColor,
-      borderStyle: 'solid',
-    },
-    headerLeft: (
-      <View style={{ flex: 1, flexDirection: 'row', width: 120 }}>
-        <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
-        <Text style={styles.title}>新历财经</Text>
-      </View>
-    ),
-    headerRight: (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon type='ionicon' name='md-search' size={30} color={Colors.$navigationHeaderTextColor} />
-        </Button>
-      </View>
-    ),
-    tabBarIcon: ({ tintColor }) => (
-      <Icon type='font-awesome' name="home" size={25} color={tintColor} />
-    ),
-  });
+  static navigationOptions = ({ navigation }) => {
+    // const tabBarLabel ='主页';
+    // const headerStyle = headerstyles.headerStyle ;
+    // const headerLeft= (
+    //   <View style={headerstyles.headerLeft}>
+    //     <Image source={require('../../../assets/imgs/logo.png')} style={headerstyles.logo} />
+    //     <Text style={headerstyles.title}>新历财经</Text>
+    //   </View>
+    // );
+    // const headerRight = (
+    //   <View style={headerstyles.headerRight}>
+    //     <Button transparent onPress={() => navigation.navigate('Search')}>
+    //       <Icon type='ionicon' name='md-search' size={20} color={Colors.$navigationHeaderTextColor} containerStyle={headerstyles.iconContainer} />
+    //     </Button>
+    //   </View>
+    // );
+    const tabBarIcon = ({ focused }) => (
+      focused ? <Image source={require('../../../assets/imgs/home.jpeg')} style={headerstyles.tabbarIcon} /> 
+              : <Image source={require('../../../assets/imgs/inactive_home.jpeg')} style={headerstyles.tabbarIcon} /> 
+    );
+    // return { tabBarLabel,headerStyle, headerLeft,headerRight, tabBarIcon}
+    return { tabBarIcon }
+  };
 
   constructor(props) {
     super(props);
