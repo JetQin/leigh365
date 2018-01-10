@@ -4,7 +4,6 @@ import { LoadingScreen,SplashScreen } from './src/commons';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 import Colors from './constants/Colors';
-// import { cachedFonts } from './helpers';
 import Root from './src/Root';
 import store from './src/redux/store';
 
@@ -22,8 +21,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this._loadAssetsAsync();
-    this.timer = setInterval(this.splash, 3000);
+    this.timer = setInterval(this.splash, 2000);
   }
 
   splash() {
@@ -31,30 +29,8 @@ class App extends React.Component {
     clearInterval(this.timer);
   }
 
-  // async _loadAssetsAsync() {
-  //   const fontAssets = cachedFonts([
-  //     {
-  //       Montserrat-Regular: require('./assets/fonts/Montserrat-Regular-Regular.ttf'),
-  //     },
-  //     {
-  //       Montserrat-Bold: require('./assets/fonts/Montserrat-Regular-Bold.ttf'),
-  //     },
-  //     {
-  //       montserratLight: require('./assets/fonts/Montserrat-Regular-Light.ttf'),
-  //     },
-  //     {
-  //       montserratMed: require('./assets/fonts/Montserrat-Regular-Medium.ttf'),
-  //     },
-  //   ]);
-
-  //   await Promise.all(fontAssets);
-  //   this.setState({ fontLoaded: true });
-  // }
 
   render() {
-    // if (!this.state.fontLoaded) {
-    //   return <LoadingScreen />;
-    // }
     if (!this.state.splashLoaded) {
         return <SplashScreen />;
       }
