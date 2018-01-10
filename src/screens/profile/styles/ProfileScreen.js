@@ -10,13 +10,13 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 0.6,
+    flex: 0.5,
     backgroundColor: '#F1F8FF',
     borderBottomLeftRadius: 300,
     borderBottomRightRadius: 300,
   },
   bottom: {
-    flex: 0.4,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -24,16 +24,11 @@ const styles = EStyleSheet.create({
   },
   // 头像
   avatarContainer: {
-    flex: 0.4,
+    flex: 0.3,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10,
-    // height: 100,
-    // width: 100,
-    // borderRadius: 50,
-    // backgroundColor: Colors.$blueTextColor,
-    // paddingLeft: (Dimensions.get('window').width / 2) - 100,
+    paddingTop: 20,
   },
   avatarBackground: {
     alignItems: 'center',
@@ -53,14 +48,13 @@ const styles = EStyleSheet.create({
   },
   // 设置
   settingContainer: {
-    flex: 0.1,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   settingBtn: {
     position: 'relative',
-    left: -5,
     top: 30,
     alignItems: 'flex-end',
   },
@@ -70,7 +64,7 @@ const styles = EStyleSheet.create({
   },
   // 我的收藏
   myCollectContainer: {
-    flex: 0.4,
+    flex: 0.1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

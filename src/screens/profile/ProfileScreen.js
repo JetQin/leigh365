@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Colors from '../../../constants/Colors';
 import styles from './styles/ProfileScreen';
-import { NewsInfo, StockInfo, PricingCard, BlogList } from './components/';
+import { NewsInfo, StockInfo, PricingCard, BlogList, PriceCardCarousel } from './components/';
 import { WordpressApi } from '../../../constants/api';
 import { PostApi,UserFollowApi } from '../../../constants/index';
 
@@ -15,7 +15,7 @@ const postApi = new PostApi();
 const userFollowApi = new UserFollowApi();
 class ProfileScreen extends Component {
   static defaultProps = {
-    wordpressApi, postApi,
+    wordpressApi, postApi, userFollowApi
   }
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -67,6 +67,8 @@ class ProfileScreen extends Component {
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
+        follower: 0,
+        fans: 0,
       },
       avatars:[
         'http://synebusiness.cn/avatar/001.jpeg',
@@ -92,9 +94,11 @@ class ProfileScreen extends Component {
     this.fetchUserStock = this.fetchUserStock.bind(this);
     this.fetchUserBlogs = this.fetchUserBlogs.bind(this);
     this.changeTab = this.changeTab.bind(this);
-    // this.selectAvatar = this.selectAvatar.bind(this);
+    this.selectAvatar = this.selectAvatar.bind(this);
     this.deleteStockRecord = this.deleteStockRecord.bind(this);
     this.deleteArticleRecord = this.deleteArticleRecord.bind(this);
+    this.goToFansScreen = this.goToFansScreen.bind(this);
+    this.goToFollowerScreen = this.goToFollowerScreen.bind(this);
   }
 
   componentDidMount() {
@@ -120,6 +124,8 @@ class ProfileScreen extends Component {
             user_id: params.data.user_id,
             myArticleNum: params.data.post_count,
             myStockNum: params.data.stock_count,
+            follower: params.data.follower,
+            fans: params.data.fans,
           },
         });
         this.props.navigation.setParams({ isLogin: true });
@@ -146,6 +152,8 @@ class ProfileScreen extends Component {
         user_id: '',
         myArticleNum: 0,
         myStockNum: 0,
+        follower: 0,
+        fans: 0
       },
     });
     this.props.navigation.setParams({ isLogin: false });
@@ -254,6 +262,8 @@ class ProfileScreen extends Component {
           user_id: posts.data.user_id,
           myArticleNum: posts.data.post_count,
           myStockNum: posts.data.stock_count,
+          follower: this.state.user.follower,
+          fans: this.state.user.follower,
         },
       });
     }
@@ -268,15 +278,34 @@ class ProfileScreen extends Component {
     {
       uri = this.state.avatars[avatarIndex];
       const request = {
-        userId: this.state.user.user_id,
+        // userId: this.state.user.user_id,
+        userId: 1,
         user_avatar: uri,
       }
       const response = await this.props.userFollowApi.changeAvatar(request);
-      if(response.data.status === 1){
-        this.setState({ user: {avatar: uri }});
+      if(response.status === 1){
+        this.setState({ 
+          user: {
+            avatar: uri, 
+            name: this.state.user.name,
+            user_id: this.state.user.user_id,
+            myArticleNum: this.state.user.myArticleNum,
+            myStockNum: this.state.user.myStockNum,
+            follower: this.state.user.follower,
+            fans: this.state.user.fans,
+          }
+        });
       }
     }
     this.setState({ showAvatarPane: false });
+  }
+
+  goToFollowerScreen(){
+    this.props.navigation.navigate('Follower');
+  }
+
+  goToFansScreen(){
+    this.props.navigation.navigate('Fans');
   }
 
   _renderAvatarContent(){
@@ -319,63 +348,48 @@ class ProfileScreen extends Component {
                       <Image source={{ uri: this.state.user.avatar }} style={styles.avatar}/>
                     </View>
                   </TouchableOpacity> 
-                  <View style={styles.settingBtn}>
-                    <Button transparent info onPress={this.changeAvatar} >
-                      <Icon type='font-awesome' name="gear" size={18} color={'#6A97BE'} />
-                    </Button>
-                  </View>
+                  <TouchableOpacity onPress={this.changeAvatar} >
+                    {/* <View style={styles.settingBtn} onPress={this.changeAvatar}>  */}
+                      <Icon type='font-awesome' name="gear" size={20} color={'#6A97BE'} containerStyle={styles.settingBtn} />
+                    {/* </View> */}
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.settingContainer}>
-                  <View style={styles.headerTitleContainer}>
-                    <Text style={styles.title}>{this.state.user.name}</Text>
-                  </View>
-                  <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
-                    <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
-                  </TouchableOpacity>
+                  {
+                    this.state.user.name === '' ?
+                    (
+                      <TouchableOpacity onPress={()=> this.props.navigation.navigate('Signin')}>
+                        <Image source={require('../../../assets/imgs/register.png')} style={styles.registerBtn} />
+                      </TouchableOpacity>
+                    ) :
+                    (
+                      <View style={styles.headerTitleContainer}>
+                        <Text style={styles.title}>{this.state.user.name}</Text>
+                      </View>
+                    )
+                  }
                 </View>
                 <View style={styles.myCollectContainer}>
                   <Badge style={styles.collectContainer}>
-                    <View style={styles.collectText}>
-                      <Text style={styles.labelText}>{this.state.user.myArticleNum}</Text>
-                      <Text style={styles.label}>已关注</Text>
-                    </View>
+                    <TouchableOpacity onPress={this.goToFollowerScreen}>
+                      <View style={styles.collectText}>
+                        <Text style={styles.labelText}>{this.state.user.follower}</Text>
+                        <Text style={styles.label}>已关注</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Badge>
                   <Badge style={styles.collectContainer}>
-                    <View style={styles.collectText}>
-                      <Text style={styles.labelText} >{this.state.user.myStockNum}</Text>
-                      <Text style={styles.label}>粉丝</Text>
-                    </View>
+                    <TouchableOpacity onPress={this.goToFansScreen}>
+                      <View style={styles.collectText}>
+                        <Text style={styles.labelText} >{this.state.user.fans}</Text>
+                        <Text style={styles.label}>粉丝</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Badge>
                 </View>
               </View>
               <View style={styles.bottom}>
-                <PricingCard
-                  color='#4f9deb'
-                  title='每天'
-                  price='¥10'
-                  info={[]}
-                  titleFont='Montserrat-Bold'
-                  button={{ title: '充值' }}
-                  onButtonPress={() => this.charge('day')}
-                />
-                <PricingCard
-                  color='#4f9deb'
-                  title='包月'
-                  price='¥150'
-                  info={[]}
-                  titleFont='Montserrat-Bold'
-                  button={{ title: '充值' }}
-                  onButtonPress={() => this.charge('1month')}
-                />
-                <PricingCard
-                  color='#4f9deb'
-                  title='包年'
-                  price='¥1500'
-                  info={[]}
-                  titleFont='Montserrat-Bold'
-                  button={{ title: '充值' }}
-                  onButtonPress={() => this.charge('6month')}
-                />
+                <PriceCardCarousel/>
               </View>
               <Modal 
                 isVisible={this.state.showAvatarPane} 
