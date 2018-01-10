@@ -16,7 +16,7 @@ const styles = EStyleSheet.create({
     fontSize: 16,
   },
   headerMid: {
-    flex: 0.5, 
+    flex: 0.65, 
   },
   myInterest: {
 

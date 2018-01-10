@@ -164,8 +164,8 @@ class ItemScreen extends Component {
   render() {
     return (
     <View style={styles.container}>
-      <View style={{height:30}}>
-        <Button transparent onPress={() => this.props.navigation.goBack()} style={{marginLeft:10}}>
+      <View style={{height:45}}>
+        <Button transparent onPress={() => this.props.navigation.goBack()} style={{marginLeft:10,marginTop:20,height:25}}>
           <Icon type='ionicon'  name="md-close" size={20} color={Colors.$black} />
         </Button>
       </View>
