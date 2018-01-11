@@ -23,12 +23,10 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
   },
   listContainer:{
-    marginBottom: 10,
-    marginBottom: 10,
+    marginBottom: 5,
+    marginTop: 5,
     backgroundColor: Colors.$whiteColor,
-    borderTopWidth: 5,
-    borderBottomWidth: 5,
-    borderBottomColor: Colors.$newsCardBackgroundColor,
+    borderTopWidth: 8,
     borderTopColor: Colors.$newsCardBackgroundColor,
   },
   emptyView: {
