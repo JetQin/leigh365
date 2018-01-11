@@ -57,7 +57,7 @@ class StockCard extends Component {
                   borderLeftColor: item.price_change > 0 ? Colors.$redColor : Colors.$greenColor,
                 }}
                 key={i}
-                onPress={() => (this.props.navigation.navigate('Report', { code: item.code }))}
+                onPress={() => (this.props.navigation.navigate('Report', { code: item.code, name: item.name }))}
                 title={
                   <View style={styles.header}>
                     <View style={styles.headerLeft}>
