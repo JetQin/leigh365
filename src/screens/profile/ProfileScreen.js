@@ -65,7 +65,7 @@ class ProfileScreen extends Component {
       isLogin: false,
       showAvatarPane: false,
       user: {
-        name: '',
+        name: 'wordpress',
         avatar: 'http://synebusiness.cn/avatar/001.jpeg',
         user_id: '',
         myArticleNum: 0,
@@ -345,6 +345,7 @@ class ProfileScreen extends Component {
           <Tab heading='我的新历'>
             <View style={styles.layout}>
               <View style={styles.top}>
+                <Image source={require('../../../assets/imgs/background.jpg')}  style={styles.topBackgroundImage} resizeMode={Image.resizeMode.sretch}/>
                 <View style={styles.avatarContainer}>
                   <TouchableOpacity onPress={this.login}>
                     <View style={styles.avatarBackground}>
@@ -352,9 +353,7 @@ class ProfileScreen extends Component {
                     </View>
                   </TouchableOpacity> 
                   <TouchableOpacity onPress={this.changeAvatar} >
-                    {/* <View style={styles.settingBtn} onPress={this.changeAvatar}>  */}
                       <Icon type='font-awesome' name="gear" size={20} color={'#6A97BE'} containerStyle={styles.settingBtn} />
-                    {/* </View> */}
                   </TouchableOpacity>
                 </View>
                 <View style={styles.settingContainer}>

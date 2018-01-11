@@ -28,16 +28,15 @@ const styles = EStyleSheet.create({
   },
   slide: {
     width: 120,
-    height: 180,
+    height: 200,
   },
   slideInnerContainer: {
       width: 150,
       flex: 1,
-      // backgroundColor: 'blue',
   },
   image: {
-    height: 180,
-    width: 120,
+    height: 200,
+    width: 150,
   },
 });
 
