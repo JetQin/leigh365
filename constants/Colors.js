@@ -11,7 +11,7 @@ export default {
   $signupButtonColor: '#384259',
   $passButtonColor: '#384259',
   $notpassButtonColor: '#384259',
-  $navigationHeaderTextColor: '#0090D7',
+  $navigationHeaderTextColor: '#4699D6',
   $chartLegend: '#34495E',
   $chartColor: '#2980B9',
   $blueTextColor: '#4987EF',
@@ -21,4 +21,8 @@ export default {
   $avatarBackground: '#619AE3',
   $followCircle: '#6B97BF',
   $followBackgroundColor: '#4987EF',
+  $newsCardBackgroundColor: '#EEEEEE',
+  $grayTextColor: '#949494',
+  $tabbarTextColor: '#049CDB',
+  $grayBackgroundColor: '#EEEEEE',
 };

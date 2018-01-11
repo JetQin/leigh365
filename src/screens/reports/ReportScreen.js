@@ -1,22 +1,46 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Tabs, Tab } from 'native-base';
-import { Icon } from 'react-native-elements';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Tabs, Tab, } from 'native-base';
+import { Icon, Button } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import { LoadingScreen } from '../../commons';
 import { BasicReport, StudyReport, FinancialReport } from './components';
 import { ReportApi } from '../../../constants/reportApi';
+
+import headerstyles from '../../commons/styles/HeaderStyle';
 import styles from './styles/ReportScreen';
 
 const reportApi = new ReportApi();
 
 class ReportScreen extends Component {
-  static navigationOptions = {
-    headerStyle: { backgroundColor: Colors.$whiteColor },
-    tabBarIcon: ({ tintColor }) => (
-      <Icon type='material-community' name="notifications" size={25} color={tintColor} />
-    ),
-  }
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    const headerStyle = headerstyles.headerStyle;
+    const headerLeft = (
+      <View style={headerstyles.headerLeft}>
+        {/* <Button onPress={() => navigation.navigate('Setting')}> */}
+          <Text style={headerstyles.text}>{params.title}</Text>
+        {/* </Button> */}
+      </View>
+    );
+
+    const headerRight = (
+      <View style={headerstyles.headerRight}>
+        <TouchableOpacity onPress={params.addToStockList} >
+          {/* <View style={styles.headerBtn}>
+            <Text style={styles.headerText}>+加入自选行情</Text>
+          </View> */}
+          <Button
+              icon={{ name: 'add' }}
+              backgroundColor='#03A9F4'
+              buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, left: 0, top: 5 }}
+              title='加入自选'
+            />
+        </TouchableOpacity>
+      </View>
+    );
+    return { headerStyle, headerLeft, headerRight };
+  };
   static defaultProps = {
     reportApi,
   }
@@ -44,6 +68,8 @@ class ReportScreen extends Component {
 
     if (params.code) {
       this.setState({ stockCode: params.code });
+      this.props.navigation.setParams({ title: params.name });
+      this.props.navigation.setParams({ addToStockList: this.addToStockList });
       this.loadBaicReport(params.code);
     }
   }
@@ -92,7 +118,7 @@ class ReportScreen extends Component {
     return (
       <View style={styles.root}>
         <Tabs onChangeTab={({ ref }) => this.changeTab(ref)} >
-          <Tab heading='基本信息'>
+          <Tab heading='基本信息' textStyle={styles.tabHeading} activeTextStyle={styles.tabHeading}>
             <BasicReport
               ref={(c) => (this.basic_report_view = c)}
               data={this.state.basic_report}
@@ -100,7 +126,7 @@ class ReportScreen extends Component {
               nav={this.props.navigation}
             />
           </Tab>
-          <Tab heading='研报'>
+          <Tab heading='研报' textStyle={styles.tabHeading} activeTextStyle={styles.tabHeading}>
             <StudyReport
               ref={(c) => (this.study_report_view = c)}
               data={this.state.study_report}
@@ -108,7 +134,7 @@ class ReportScreen extends Component {
               nav={this.props.navigation}
             />
           </Tab>
-          <Tab heading='财报'>
+          <Tab heading='财报' textStyle={styles.tabHeading} activeTextStyle={styles.tabHeading}>
             <FinancialReport
               ref={(c) => (this.financial_report_view = c)}
               data={this.state.financial_report}
@@ -117,6 +143,11 @@ class ReportScreen extends Component {
             />
           </Tab>
         </Tabs>
+        <View style={styles.closeBtnContainer}>
+          <Button transparent onPress={() => this.props.navigation.goBack()} style={styles.closeBtn}>
+            <Icon name="close" type='Ionicons' color={Colors.$whiteColor} size={16}/>
+          </Button>
+        </View>
       </View>
     );
   }

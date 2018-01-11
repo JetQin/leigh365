@@ -27,8 +27,8 @@ export const HomeNavigator = TabNavigator({
   tabBarOptions: {
     showLabel: true,
     showIcon: true,
-    inactiveTintColor: Colors.$blackBlueColor,
-    activeTintColor: Colors.$navigationHeaderTextColor,
+    inactiveTintColor: '#BBC8D4',
+    activeTintColor: '#049CDB',
     indicatorStyle: { backgroundColor: Colors.$redColor },
     labelStyle: {
       fontSize: 10,
