@@ -12,18 +12,19 @@ const styles = EStyleSheet.create({
     // backgroundColor: '$blackBlueColor',
   },
   topContainer: {
-    flex: 0.3,
+    flex: 0.4,
     justifyContent: 'center',
     alignItems: 'center',
   },
   indexContainer: {
-    flex: 0.2,
+    flex: 0.16,
     backgroundColor: Colors.$whiteColor,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomContainer: {
-    flex: 0.5,
+    flex: 0.44,
+    backgroundColor:Colors.$newsCardBackgroundColor,
   },
   title: {
     color: Colors.$navigationHeaderTextColor,

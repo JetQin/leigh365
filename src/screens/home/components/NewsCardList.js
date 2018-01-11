@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, RefreshControl, Share, Alert } from 'react-native';
-import { Icon, ListItem, Avatar } from 'react-native-elements';
+import { View, ScrollView, Text, RefreshControl, Share, Alert, Image } from 'react-native';
+import { Icon, List, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
 import Fonts from '../../../../constants/Fonts';
 import styles from './styles/NewsCardList';
@@ -80,6 +80,7 @@ class NewsCardList extends Component {
     return (
       <ScrollView
         ref={(c) => { this.toTop = c; }}
+        style={styles.root}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -87,30 +88,37 @@ class NewsCardList extends Component {
           />
         }
       >
+        {/* <List containerStyle={styles.listContainer}> */}
         {
           this.state.news.map((item, i) => (
             <ListItem
               key={i}
+              containerStyle={styles.listContainer}
               onPress={() => (this.props.navigation.navigate('ViewHtml', { uri: item.url }))}
-              leftIcon={item.picUrl === '' ? <View style={styles.emptyView} /> : <Avatar medium source={{ uri: item.picUrl }} />}
+              leftIcon={item.picUrl === '' ? <View style={styles.emptyView} /> : <Image source={{ uri: item.picUrl }} style={styles.avatarContainer} />}
               avatarContainerStyle={{ paddingLeft: 0, left: 0 }}
               title={item.name}
-              titleStyle={{ paddingLeft: 10 }}
+              titleNumberOfLines={3}
+              titleStyle={styles.titleName}
               hideChevron
               subtitle={
                 <View style={styles.footer}>
-                  <Text style={styles.footerText}>{ item.date }</Text>
-                  <Icon size={12} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Text style={styles.footerText}>{item.category}</Text>
-                  <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
-                  <Icon size={12} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={this.shareNews} />
+                  <Text style={styles.dateText}>{ item.date }</Text>
+                  <View style={item.picUrl === '' ? styles.footerIconWithNoImage : styles.footerIcon}>
+                    <Icon size={16} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Text style={styles.footerText}>{item.category}</Text>
+                    <Icon size={18} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
+                    <Text style={styles.footerText}>{0}</Text>
+                    <Icon size={18} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Icon size={18} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={this.shareNews} />
+                  </View>
                 </View>
               }
-              subtitleContainerStyle={{ paddingLeft: 10, paddingTop: 8, paddingBottom: 5 }}
+              subtitleContainerStyle={{ paddingLeft: 20, paddingTop: 8, paddingBottom: 5 }}
             />
           ))
         }
+        {/* </List> */}
       </ScrollView>
     );
   }
