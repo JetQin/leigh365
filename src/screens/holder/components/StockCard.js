@@ -53,6 +53,7 @@ class StockCard extends Component {
                 containerStyle={{
                   borderLeftWidth: 5,
                   borderStyle: 'solid',
+                  height: 60,
                   borderLeftColor: item.price_change > 0 ? Colors.$redColor : Colors.$greenColor,
                 }}
                 key={i}
@@ -82,14 +83,16 @@ class StockCard extends Component {
                     <View style={styles.footerRight}>
                       {
                         item.price_change > 0 ?
-                          (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} iconStyle={{ paddingLeft: 20 }} />) :
-                          (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} iconStyle={{ paddingLeft: 20 }} />)
+                          (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} iconStyle={{ paddingLeft: 20, paddingTop: 20 }} />) :
+                          (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} iconStyle={{ paddingLeft: 20, paddingTop: 0}} />)
                       }
+                    </View>
+                    <View style={styles.footerRight}>
                       <Text style={item.price_change > 0 ? styles.footerRedText : styles.footerGreenText}>{ item.p_change }%</Text>
                     </View>
                   </View>
                 }
-                subtitleContainerStyle={{ paddingTop: 3, paddingBottom: 2 }}
+                subtitleContainerStyle={{ paddingTop: 30, paddingBottom: 2 }}
               />
             ))
           }

@@ -21,4 +21,6 @@ export default {
   $avatarBackground: '#619AE3',
   $followCircle: '#6B97BF',
   $followBackgroundColor: '#4987EF',
+  $newsCardBackgroundColor: '#CBD2D9',
+  $grayTextColor: '#C9CCC9',
 };

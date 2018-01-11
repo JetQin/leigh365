@@ -14,8 +14,10 @@ const styles = EStyleSheet.create({
     width: 105,
   },
   titleContainer: {
-    justifyContent: 'center',
+    flex: 0.3,
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    // backgroundColor: 'blue',
   },
   title: {
     fontSize: 20,
@@ -25,22 +27,24 @@ const styles = EStyleSheet.create({
     textAlign: 'center',
   },
   valueContainer: {
-    top: 6,
+    flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'green',
   },
   value: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$black,
     backgroundColor: 'transparent',
     textAlign: 'center',
   },
   footer: {
-    flex: 1,
+    flex: 0.3,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    // backgroundColor: 'yellow',
   },
   footerRedIcon: {
     color: Colors.$redColor,
@@ -53,17 +57,17 @@ const styles = EStyleSheet.create({
     textAlign: 'center',
   },
   footerGreenText: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$greenColor,
     backgroundColor: 'transparent',
     textAlign: 'center',
   },
   sortUp: {
-    top: 5,
+    top: 10,
   },
   sortDown: {
-    bottom: 5,
+    bottom: 10,
   },
 });
 

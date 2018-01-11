@@ -23,6 +23,9 @@ const styles = EStyleSheet.create({
   header: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'blue',
   },
   headerLeft: {
     flex: 0.5,
@@ -35,21 +38,21 @@ const styles = EStyleSheet.create({
     alignItems: 'flex-end',
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$black,
     backgroundColor: 'transparent',
   },
   headerRedText: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$redColor,
     backgroundColor: 'transparent',
   },
   headerGreenText: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$greenColor,
     backgroundColor: 'transparent',
@@ -57,6 +60,7 @@ const styles = EStyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: 'row',
+    backgroundColor: 'yellow',
   },
   footerLeft: {
     flex: 0.5,
@@ -65,8 +69,10 @@ const styles = EStyleSheet.create({
     flex: 0.2,
   },
   footerRight: {
-    flex: 0.3,
-    flexDirection: 'row',
+    flex: 0.15,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'yellow',
   },
   footerText: {
     fontSize: 12,
@@ -75,15 +81,17 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent',
   },
   footerRedText: {
-    marginLeft: 2,
-    fontSize: 18,
+    top: 5,
+    marginLeft: 4,
+    fontSize: 12,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$redColor,
     backgroundColor: 'transparent',
   },
   footerGreenText: {
-    marginLeft: 2,
-    fontSize: 18,
+    top: 5,
+    marginLeft: 4,
+    fontSize: 12,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$greenColor,
     backgroundColor: 'transparent',
