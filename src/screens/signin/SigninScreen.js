@@ -11,6 +11,8 @@ import CheckBox from './components/CheckBox';
 import Input from './components/Input';
 import CountDownButton from './components/CountDownButton';
 import { WordpressApi } from '../../../constants/api';
+import UShare from './share/share'
+import SharePlatform from './share/SharePlatform'
 
 const api = new WordpressApi();
 
@@ -326,6 +328,22 @@ class SigninScreen extends Component {
     this.setState({
       signup: name
     })
+    if(name === 'weixin') {
+      UShare.authLogin(SharePlatform.WECHAT, (result) => {
+        // code: 0成功、1失败、2取消
+        if(result.code === 0) {
+            console.log('授权登录成功:' + 
+                'userId: ' + result.uid + 
+                'accessToken: ' + result.accessToken +
+                'userName: ' + result.userName + 
+                'userGender: ' + result.userGender + 
+                'userAvatar: ' + result.userAvatar
+            );
+        } else {
+            Alert.alert('登录失败');
+        }
+      }); 
+    }
   }
 
   changeVerifyImg() {
