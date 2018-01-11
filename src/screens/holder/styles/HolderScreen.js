@@ -4,6 +4,7 @@ import Colors from '../../../../constants/Colors';
 const styles = EStyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor: Colors.$grayBackgroundColor,
   },
   searchContainer: {
     flex: 0.1,
@@ -18,10 +19,13 @@ const styles = EStyleSheet.create({
   searchBtnContainer: {
     flex: 0.1,
   },
+  topContainer:{
+    flex: 0.07,
+    justifyContent: 'flex-end',
+  },
   stockContainer: {
     flex: 1,
-    marginTop: 5,
-    marginBottom: 5,
+    justifyContent: 'flex-start',
   },
   title: {
     color: '$blackColor',

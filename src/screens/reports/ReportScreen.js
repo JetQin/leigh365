@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Tabs, Tab, Button } from 'native-base';
-import { Icon } from 'react-native-elements';
+import { Tabs, Tab, } from 'native-base';
+import { Icon, Button } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import { LoadingScreen } from '../../commons';
 import { BasicReport, StudyReport, FinancialReport } from './components';
@@ -18,18 +18,24 @@ class ReportScreen extends Component {
     const headerStyle = headerstyles.headerStyle;
     const headerLeft = (
       <View style={headerstyles.headerLeft}>
-        <Button transparent onPress={() => navigation.navigate('Setting')}>
+        {/* <Button onPress={() => navigation.navigate('Setting')}> */}
           <Text style={headerstyles.text}>{params.title}</Text>
-        </Button>
+        {/* </Button> */}
       </View>
     );
 
     const headerRight = (
       <View style={headerstyles.headerRight}>
         <TouchableOpacity onPress={params.addToStockList} >
-          <View style={styles.headerBtn}>
+          {/* <View style={styles.headerBtn}>
             <Text style={styles.headerText}>+加入自选行情</Text>
-          </View>
+          </View> */}
+          <Button
+              icon={{ name: 'add' }}
+              backgroundColor='#03A9F4'
+              buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, left: 0, top: 5 }}
+              title='加入自选'
+            />
         </TouchableOpacity>
       </View>
     );

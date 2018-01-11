@@ -20,9 +20,9 @@ const styles = EStyleSheet.create({
     // backgroundColor: 'blue',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Montserrat-Bold',
-    color: Colors.$blueThemeColor,
+    color: Colors.$followCircle,
     backgroundColor: 'transparent',
     textAlign: 'center',
   },
@@ -30,7 +30,6 @@ const styles = EStyleSheet.create({
     flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'green',
   },
   value: {
     fontSize: 16,
@@ -44,7 +43,6 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    // backgroundColor: 'yellow',
   },
   footerRedIcon: {
     color: Colors.$redColor,
@@ -57,7 +55,7 @@ const styles = EStyleSheet.create({
     textAlign: 'center',
   },
   footerGreenText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$greenColor,
     backgroundColor: 'transparent',

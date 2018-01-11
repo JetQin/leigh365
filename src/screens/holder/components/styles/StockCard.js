@@ -4,11 +4,6 @@ import Colors from '../../../../../constants/Colors';
 const styles = EStyleSheet.create({
   root: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: Colors.$blackBlueColor,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
   },
   redBorder: {
     borderLeftWidth: 5,
