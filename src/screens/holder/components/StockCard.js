@@ -39,6 +39,7 @@ class StockCard extends Component {
   render() {
     return (
       <ScrollView
+        style={styles.root}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

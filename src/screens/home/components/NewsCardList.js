@@ -4,7 +4,7 @@ import { Icon, List, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
 import Fonts from '../../../../constants/Fonts';
 import styles from './styles/NewsCardList';
-// import * as WeChat from 'react-native-wechat';
+import Colors from '../../../../constants/Colors';
 
 class NewsCardList extends Component {
   constructor(props) {
@@ -105,12 +105,12 @@ class NewsCardList extends Component {
                 <View style={styles.footer}>
                   <Text style={styles.dateText}>{ item.date }</Text>
                   <View style={item.picUrl === '' ? styles.footerIconWithNoImage : styles.footerIcon}>
-                    <Icon size={16} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Icon size={16} name='tags' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
                     <Text style={styles.footerText}>{item.category}</Text>
-                    <Icon size={18} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
+                    <Icon size={18} name='comments' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} />
                     <Text style={styles.footerText}>{0}</Text>
-                    <Icon size={18} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                    <Icon size={18} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={this.shareNews} />
+                    <Icon size={18} name='bookmark' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Icon size={18} name='share' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={this.shareNews} />
                   </View>
                 </View>
               }

@@ -37,7 +37,7 @@ const headerstyles = EStyleSheet.create({
     top: 2,
     left: 15,
     fontSize: 16,
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat-Bold',
   },
   text: {
     bottom: 10,

@@ -224,16 +224,18 @@ class HolderScreen extends Component {
     return (
       <View style={styles.root}>
         {/*<Tabs initialPage={1} onChangeTab={({ ref }) => this.changeTab(ref)}>*/}
-        <Tabs>
-          <Tab heading='沪深'>
-            <ButtonGroup
-              buttons={buttons}
-              containerStyle={{ height: 30 }}
-            />
+        {/* <Tabs>
+          <Tab heading='沪深'> */}
+            {/* <View style={styles.topContainer}>
+              <ButtonGroup
+                buttons={buttons}
+                containerStyle={{ height: 30 }}
+              />
+            </View> */}
             <View style={styles.stockContainer}>
               {stock}
             </View>
-          </Tab>
+          {/* </Tab> */}
           {/*<Tab heading='美股' >
             <ButtonGroup
               buttons={nasdaqButtons}
@@ -243,7 +245,7 @@ class HolderScreen extends Component {
               {nasdaqStock}
             </View>
           </Tab>*/}
-        </Tabs>
+        {/* </Tabs> */}
       </View>
     );
   }
