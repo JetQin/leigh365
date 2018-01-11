@@ -10,13 +10,19 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 0.5,
+    flex: 0.6,
     backgroundColor: '#F1F8FF',
     borderBottomLeftRadius: 300,
     borderBottomRightRadius: 300,
   },
+  topBackgroundImage:{
+    position: 'absolute',
+    left: 0,
+    top: -20,
+    zIndex: -1,
+  },
   bottom: {
-    flex: 0.5,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -24,7 +30,7 @@ const styles = EStyleSheet.create({
   },
   // 头像
   avatarContainer: {
-    flex: 0.3,
+    flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -48,10 +54,10 @@ const styles = EStyleSheet.create({
   },
   // 设置
   settingContainer: {
-    flex: 0.4,
+    flex: 0.2,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   settingBtn: {
     position: 'relative',
@@ -59,12 +65,13 @@ const styles = EStyleSheet.create({
     alignItems: 'flex-end',
   },
   registerBtn: {
-    height:30,
-    width: 85,
+    height:80,
+    width: 105,
+    bottom: 50,
   },
   // 我的收藏
   myCollectContainer: {
-    flex: 0.1,
+    flex: 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -110,10 +117,7 @@ const styles = EStyleSheet.create({
   },
   // 充值
   payContainer: {
-    // height: '37%',
     flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
   },
 
   paneContainer: {
