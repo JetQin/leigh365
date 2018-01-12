@@ -43,12 +43,22 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     width: width,
   },
+  textContainer:{
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingRight: 10,
+    paddingLeft: 10,
+  },
   text: {
     color: '$whiteColor',
     fontSize: 16,
     fontFamily: 'Montserrat-Bold',
     textAlign: 'center',
-    paddingTop: 80,
+    paddingLeft: 10, 
+    paddingRight: 10,
+    position:'absolute',
+    bottom: 50,
   },
   backdrop: {
     flex: 1,
@@ -61,7 +71,11 @@ const styles = EStyleSheet.create({
   image: {
     width: width,
     height: height,
-    resizeMode: 'cover',
+    zIndex: -1,
+    position:'absolute',
+    top: 0,
+    left: 0,
+    resizeMode: 'stretch',
   },
 
 });

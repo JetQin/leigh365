@@ -1,10 +1,15 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Colors from '../../../../constants/Colors';
 
 const styles = EStyleSheet.create({
   container: {
     flexDirection: 'row', 
-    borderBottomColor: '$navigationHeaderTextColor', 
+    borderBottomColor: Colors.$navigationHeaderTextColor, 
     borderBottomWidth: 3,
+    borderStyle: 'solid',
+    height: 33,
+    backgroundColor:Colors.$whiteColor,
+    marginTop:20,
   },
   logoContainer: {
     flex: 0.1,
@@ -24,7 +29,7 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   logo: {
-    top: 15,
+    top: 5,
     left: 10,
     width: 20,
     height: 20,
@@ -34,15 +39,18 @@ const styles = EStyleSheet.create({
     margin: '2%', 
     marginLeft: '2%', 
     padding: '1%', 
-    height: 30, 
+    height: 20, 
     borderWidth: 1, 
-    borderColor: '#ccc',
+    borderColor: Colors.$grayBackgroundColor,
+    fontSize:10,
+    fontFamily: 'Montserrat-Regular',
+    backgroundColor:Colors.$grayBackgroundColor,
   },
   closeBtn: { 
-    width: 30, 
-    height: 30, 
-    borderRadius: 15, 
-    backgroundColor: '#EFF8FF',
+    width: 20, 
+    height: 20, 
+    borderRadius: 10, 
+    backgroundColor: Colors.$newsTabBgColor,
     justifyContent: 'center',
     alignItems: 'center',
   },

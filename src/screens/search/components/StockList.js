@@ -68,7 +68,7 @@ class StockList extends Component {
           />
         }
       >
-        <List >
+        <List style={{backgroundColor: Colors.$whiteColor}}>
           {
             this.state.stocks.map((item, i) => (
               <ListItem

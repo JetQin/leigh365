@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, RefreshControl, Share, Alert, Image } from 'react-native';
 import { Icon, List, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
+import { Button } from 'native-base';
 import Fonts from '../../../../constants/Fonts';
 import styles from './styles/NewsCardList';
 import Colors from '../../../../constants/Colors';
@@ -13,6 +14,7 @@ class NewsCardList extends Component {
     this.state = {
       refreshing: false,
       news: [],
+      isLiked:false,
     };
     this.shareNews = this.shareNews.bind(this);
     this.showResult = this.showResult.bind(this);
@@ -97,24 +99,28 @@ class NewsCardList extends Component {
               onPress={() => (this.props.navigation.navigate('ViewHtml', { uri: item.url }))}
               leftIcon={item.picUrl === '' ? <View style={styles.emptyView} /> : <Image source={{ uri: item.picUrl }} style={styles.avatarContainer} />}
               avatarContainerStyle={{ paddingLeft: 0, left: 0 }}
-              title={item.name}
+              title={item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}
               titleNumberOfLines={3}
-              titleStyle={styles.titleName}
+              titleStyle={item.picUrl === '' ?styles.titleName:[{height:70,paddingLeft:10},styles.titleName]}
               hideChevron
               subtitle={
                 <View style={styles.footer}>
-                  <Text style={styles.dateText}>{ item.date }</Text>
+                  <Text style={item.picUrl === '' ?styles.dateText:[{paddingLeft:10},styles.dateText]}>{ item.date }</Text>
                   <View style={item.picUrl === '' ? styles.footerIconWithNoImage : styles.footerIcon}>
-                    <Icon size={16} name='tags' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                    <Text style={styles.footerText}>{item.category}</Text>
-                    <Icon size={18} name='comments' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} />
-                    <Text style={styles.footerText}>{0}</Text>
-                    <Icon size={18} name='bookmark' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Button transparent>
+                      <Icon size={16} name='tags' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                      <Text style={styles.footerText}>{item.category}</Text>
+                    </Button>
+                    <Button transparent>
+                      <Icon size={18} name='comments' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} />
+                      <Text style={styles.footerText}>{0}</Text>
+                    </Button>
+                    <Icon size={18} name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
                     <Icon size={18} name='share' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={this.shareNews} />
                   </View>
                 </View>
               }
-              subtitleContainerStyle={{ paddingLeft: 20, paddingTop: 8, paddingBottom: 5 }}
+              subtitleContainerStyle={{paddingTop: 5, paddingBottom: 0 }}
             />
           ))
         }

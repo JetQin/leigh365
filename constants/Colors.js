@@ -29,4 +29,8 @@ export default {
   $inactiveTabHeaderColor: '#C9C9C9',
   $headerBackgroundColor: '#F3FAFF',
   $unlockBtnBackgroundColor: '#03A9F4',
+  $tabText:'#6B97BF',
+  $activeTabText:'#4699D6',
+  $newsTabBgColor:'#F3FAFF',
+  $proTabBgColor:'#F3FAFF',
 };

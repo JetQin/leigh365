@@ -7,6 +7,7 @@ import styles from './styles/SearchScreen';
 import StockList from './components/StockList';
 import NewsCard from '../news/components/NewsCard';
 import { WordpressApi } from '../../../constants/api';
+import headerstyles from '../../commons/styles/HeaderStyle';
 
 const api = new WordpressApi();
 
@@ -34,6 +35,10 @@ class SearchScreen extends Component {
         data: [],
         page: 1,
       },
+      user: {
+        data: [],
+        page: 1,
+      },
       searchType: '搜行情',
       searchValue: '',
     };
@@ -56,6 +61,11 @@ class SearchScreen extends Component {
       this.state.news.page = 1;
       this.state.news.data = [];
       this.newsCard._onRefresh();
+    }
+    if (this.state.searchType === '搜用户') {
+      this.state.user.page = 1;
+      this.state.user.data = [];
+      //this.userCard._onRefresh();
     }
   }
   async searchStock() {
@@ -118,7 +128,7 @@ class SearchScreen extends Component {
     }
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1,backgroundColor:Colors.$whiteColor }}>
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
@@ -133,25 +143,52 @@ class SearchScreen extends Component {
                 style={styles.searchInput}
               />
             </View>
-            <Button transparent onPress={this.doSearch} style={{right:'10%'}}>
-              <Icon type='ionicon' name="ios-search" size={20} />
+            <Button transparent onPress={this.doSearch} style={{right:'10%',bottom:'25%'}}>
+              <Icon type='ionicon' name="ios-search" size={16} />
             </Button>
           </View>
           <View style={styles.closeContainer}>
             <Button transparent style={styles.closeBtn} onPress={() => this.props.navigation.goBack()} >
-              <Icon type='font-awesome'  name="close" size={20} color={Colors.$navigationHeaderTextColor} />
+              <Icon type='font-awesome'  name="close" size={12} color={Colors.$navigationHeaderTextColor} />
             </Button>
           </View>
         </View>
-        <Tabs initialPage={0} onChangeTab={({ ref }) => this.changeTab(ref)}>
-          <Tab heading='搜行情'>
-            <View style={styles.stockContainer}>
-              {stock}
-            </View>
-          </Tab>
-          <Tab heading='搜新闻'>
+        <Tabs 
+          initialPage={0} 
+          onChangeTab={({ ref }) => this.changeTab(ref)}
+          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor,borderBottomWidth:3,borderBottomColor:Colors.$tabbarTextColor}}
+        >
+          <Tab 
+            heading='搜新闻'
+            tabStyle={{backgroundColor:Colors.$whiteColor}}
+            activeTabStyle={{backgroundColor:Colors.$whiteColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
             <View>
               {news}
+            </View>
+          </Tab>
+          <Tab 
+            heading='搜用户'
+            tabStyle={{backgroundColor:Colors.$whiteColor}}
+            activeTabStyle={{backgroundColor:Colors.$whiteColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
+            <View>
+              
+            </View>
+          </Tab>
+          <Tab 
+            heading='搜行情'
+            tabStyle={{backgroundColor:Colors.$whiteColor}}
+            activeTabStyle={{backgroundColor:Colors.$whiteColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
+            <View style={styles.stockContainer}>
+              {stock}
             </View>
           </Tab>
         </Tabs>

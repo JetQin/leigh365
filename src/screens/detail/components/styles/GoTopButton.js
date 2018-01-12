@@ -15,7 +15,7 @@ const styles = EStyleSheet.create({
         width: 40,
         height: 40,
         borderRadius:10, 
-        backgroundColor: Colors.$blueTextColor,
+        backgroundColor: Colors.$tabText,
         opacity:0.6, 
         justifyContent:'center', 
         alignItems:'center',

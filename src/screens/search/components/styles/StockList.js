@@ -29,7 +29,7 @@ const styles = EStyleSheet.create({
     alignItems: 'flex-end',
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$black,
     backgroundColor: 'transparent',

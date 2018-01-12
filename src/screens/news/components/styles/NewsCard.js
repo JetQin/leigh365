@@ -7,89 +7,77 @@ const screenHeight = width < height ? height : width;
 const screenWidth = width < height ? width : height;
 
 const styles = EStyleSheet.create({
-  titleContainer:{
-    flexDirection: 'row', 
-    flex: 1, 
-    justifyContent: 'space-between',
+  root: {
+    backgroundColor: Colors.$newsCardBackgroundColor,
+    paddingTop: 5,
   },
-  leftTitleContainer:{
-    flexDirection: 'row', 
-    alignItems: 'center',
-    paddingLeft:10,
+  header: {
+    backgroundColor: '$whiteColor',
   },
-  loginInfo:{
-    flexDirection:'column',
-    paddingLeft:10 
-  },
-  loginText:{
-    color:'#949494',
-    fontWeight:'bold',
-  },
-  rightTitleContainer:{
-    flexDirection: 'row', 
-    alignItems: 'center',
-    paddingRight: 5
-  },
-  btnContainer:{
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  interestBtn:{
-    justifyContent:'center',
-    alignItems:'center', 
-    borderColor: '#2C89F6',
-    backgroundColor:'#2C89F6',  
-    height: 20,
-    width:40
-  },
-  subTitleContainer:{
-    flexDirection: 'row', 
+  footer: {
     flex: 1,
   },
-  subtitlePic:{
-    flex:0.2, 
-    marginRight:10,  
+  titleName:{
+    fontSize: 16,
+    fontFamily: 'Montserrat-Bold',
+    color: Colors.$navigationHeaderTextColor,
+    backgroundColor: 'transparent',
+  },
+  listContainer:{
+    marginBottom: 0,
+    marginTop: 0,
+    backgroundColor: Colors.$whiteColor,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
   },
   emptyView: {
     width: 0,
     height: 0,
   },
-  imgView:{
-    width:screenWidth*0.2,
-    height:screenWidth*0.2
+  avatarContainer: {
+    width: 120,
+    height: 100,
   },
-  subtitleContent:{
-    flexDirection: 'column', 
-    flex: 0.8,
-  },
-  content:{
-    fontWeight:'bold',
-    textAlign:'left',
+  dateText: {
     fontSize: 12,
     fontFamily: 'Montserrat-Regular',
-    lineHeight:24,
-    color: '#336DA4',
+    color: Colors.$grayTextColor,
     backgroundColor: 'transparent',
   },
-  footer: {
+  footerText: {
+    fontSize: 12,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$navigationHeaderTextColor,
+    backgroundColor: 'transparent',
+  },
+  footerIcon:{
     flex: 1,
-    flexDirection: 'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    paddingTop: 5
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    height: 40,
+    width: width - 30,
+    left: -120,
+    marginTop:20,
   },
-  timeContainer:{
-    fontWeight:'bold',
-    fontSize: 10,
-    color: '#C9C9C9',
-    backgroundColor: 'transparent',
+  footerIconWithNoImage:{
+    flex: 1,
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    height: 40,
+    width: width - 30,
   },
-  icon: {
-    marginRight: 5,
+  separator: {
+    flex: 1,
+    height: 3,
+    backgroundColor: Colors.$blackBlueColor,
   },
-  
-  
 
+  icon: {
+    marginLeft: 8,
+    marginRight: 8,
+  },
+  
 });
 
 export default styles;

@@ -17,7 +17,7 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '#EEEEEE',
+        backgroundColor: Colors.$whiteColor,
         paddingLeft: 10,
         paddingRight: 10,
       },
@@ -26,7 +26,7 @@ const styles = EStyleSheet.create({
         height: 50,
       },
       footerItemIconText: {
-        color: Colors.$navigationHeaderTextColor,
+        color: Colors.$tabText,
       },
       userTitle: {
         fontSize: 13,
@@ -43,11 +43,13 @@ const styles = EStyleSheet.create({
         backgroundColor: 'transparent',
       },
       readBtn: {
-        height: 20,
-        width: 40,
+        height: 30,
+        width: 50,
         borderRadius: 6,
         borderColor: Colors.$whiteColor,
         backgroundColor: Colors.$navigationHeaderTextColor,
+        justifyContent: 'center',
+        alignItems: 'center',
       },
       readTitle: {
         fontSize: 10,
@@ -71,7 +73,7 @@ const styles = EStyleSheet.create({
         width: 40,
         height: 40,
         borderRadius:20, 
-        backgroundColor: Colors.$blueTextColor,
+        backgroundColor: Colors.$tabText,
         opacity:0.6, 
         justifyContent:'center', 
         alignItems:'center',

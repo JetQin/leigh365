@@ -92,6 +92,9 @@ class HomeScreen extends React.Component {
               ) :
               (
                 <View style={styles.backdrop}>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text} numberOfLines={3}>{item.name}</Text>
+                  </View>
                   <Image source={{ uri: item.picUrl }} style={styles.image} />
                 </View>
 

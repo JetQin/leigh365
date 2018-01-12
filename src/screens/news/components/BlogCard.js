@@ -107,15 +107,15 @@ export default class BlogCard extends Component {
                                 <CardItem footer style={{paddingTop: 0, paddingBottom: 2}}>
                                     <View style={styles.footer}>
                                         <Button transparent style={styles.btn}>
-                                            <Icon name="share" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={12}/>
+                                            <Icon name="share" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
                                             <Text style={styles.footerText}>{item.share}</Text>
                                         </Button>
                                         <Button transparent style={styles.btn}>
-                                            <Icon name="ios-chatbubbles" type='ionicon' color={Colors.$navigationHeaderTextColor} size={12} />
+                                            <Icon name="ios-chatbubbles" type='ionicon' color={Colors.$navigationHeaderTextColor} size={16} />
                                             <Text style={styles.footerText}>{item.comments}</Text>
                                         </Button>
                                         <Button transparent style={styles.btn}>
-                                            <Icon name="thumbs-up"  type='font-awesome' color={Colors.$navigationHeaderTextColor} size={12} />
+                                            <Icon name="thumbs-up"  type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16} />
                                             <Text style={styles.footerText}>{item.likes}</Text>
                                         </Button>
                                     </View>
