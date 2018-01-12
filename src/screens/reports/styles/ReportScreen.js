@@ -9,16 +9,10 @@ const styles = EStyleSheet.create({
     flex: 0.1,
     flexDirection: 'row',
   },
-  headerBtn: {
+  headerLeftContainer: {
+    top: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingRight: 10,
-    right: 10,
-    bottom: 2,
-    height: 25,
-    width: 80,
-    borderWidth: 1,
-    borderColor: Colors.$grayTextColor,
   },
   headerText: {
     fontSize: 10,
@@ -28,7 +22,7 @@ const styles = EStyleSheet.create({
  
   },
   tabHeading:{
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Montserrat-Bold',
     color: Colors.$navigationHeaderTextColor,
     backgroundColor: 'transparent',
