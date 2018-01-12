@@ -341,8 +341,19 @@ class ProfileScreen extends Component {
     const {height, width} = Dimensions.get('window');
     return (
       <View style={styles.root}>
-        <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
-          <Tab heading='账户中心'>
+        <Tabs 
+          initialPage={0} 
+          locked 
+          onChangeTab={({ ref }) => this.changeTab(ref)} 
+          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor}}
+        >
+          <Tab 
+            heading='账户中心'
+            tabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
             <View style={styles.layout}>
               <View style={styles.top}>
                 <Image source={require('../../../assets/imgs/background.jpg')}  style={styles.topBackgroundImage} resizeMode={Image.resizeMode.sretch}/>
@@ -401,7 +412,13 @@ class ProfileScreen extends Component {
               </Modal>
             </View>
           </Tab>
-          <Tab heading='博客' >
+          <Tab 
+            heading='博客' 
+            tabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
             <BlogList 
                blogs={this.state.blogs.data}
                username={this.state.user.name}
@@ -409,7 +426,13 @@ class ProfileScreen extends Component {
                scroll={this.fetchUserBlogs}
             />
           </Tab>
-          <Tab heading='收藏夹' >
+          <Tab 
+            heading='收藏夹' 
+            tabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
             <NewsInfo
               ref={(c) => { this.articleCard = c; }}
               news={this.state.myArticle.data}
@@ -418,7 +441,13 @@ class ProfileScreen extends Component {
               navigation={this.props.navigation}
             />
           </Tab>
-          <Tab heading='自选行情' >
+          <Tab 
+            heading='自选行情'
+            tabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$proTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
             <StockInfo
               ref={(c) => { this.stockCard = c; }}
               stocks={this.state.myStock.data}

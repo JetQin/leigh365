@@ -26,4 +26,9 @@ export default {
   $tabbarTextColor: '#049CDB',
   $grayBackgroundColor: '#EEEEEE',
   $blueBtnBackgroundColor: '#619AE3',
+  $tabText:'#6B97BF',
+  $activeTabText:'#4699D6',
+  $newsTabBgColor:'#F3FAFF',
+  $proTabBgColor:'transparent',
+  $searchTabBgColor:'#F3FAFF',
 };

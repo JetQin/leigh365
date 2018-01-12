@@ -224,63 +224,63 @@ class NewsScreen extends Component {
             
             <Tab 
               heading='推荐' 
-              tabStyle={{backgroundColor:Colors.$CommentBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$CommentBgColor}}
-              textStyle={{color:Colors.$tabbarTextColor}}
-              activeTextStyle={{color:Colors.$tabbarTextColor}}
+              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              textStyle={{color:Colors.$tabText}}
+              activeTextStyle={{color:Colors.$activeTabText}}
             >
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
             </Tab>
             <Tab 
               heading='关注'
-              tabStyle={{backgroundColor:'#F3FAFF'}}
-              activeTabStyle={{backgroundColor:'#F3FAFF'}}
-              textStyle={{color:'#6B97BF'}}
-              activeTextStyle={{color:'#6B97BF'}}
+              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              textStyle={{color:Colors.$tabText}}
+              activeTextStyle={{color:Colors.$activeTabText}}
             >
               <BlogCard/>
             </Tab>
             <Tab 
               heading='科技'
-              tabStyle={{backgroundColor:'#F3FAFF'}}
-              activeTabStyle={{backgroundColor:'#F3FAFF'}}
-              textStyle={{color:'#6B97BF'}}
-              activeTextStyle={{color:'#6B97BF'}}
+              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              textStyle={{color:Colors.$tabText}}
+              activeTextStyle={{color:Colors.$activeTabText}}
             >
               <NewsCard ref={(c) => { this.tech = c; }} news={this.state.techNews.data} scroll={this.updateTechNews} navigation={this.props.navigation} />
             </Tab>
             <Tab 
               heading='金融'
-              tabStyle={{backgroundColor:'#F3FAFF'}}
-              activeTabStyle={{backgroundColor:'#F3FAFF'}}
-              textStyle={{color:'#6B97BF'}}
-              activeTextStyle={{color:'#6B97BF'}}
+              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              textStyle={{color:Colors.$tabText}}
+              activeTextStyle={{color:Colors.$activeTabText}}
             >
               <NewsCard ref={(c) => { this.finance = c; }} news={this.state.financeNews.data} scroll={this.updateFinanceNews} navigation={this.props.navigation} />
             </Tab>
             <Tab 
               heading='地产'
-              tabStyle={{backgroundColor:'#F3FAFF'}}
-              activeTabStyle={{backgroundColor:'#F3FAFF'}}
-              textStyle={{color:'#6B97BF'}}
-              activeTextStyle={{color:'#6B97BF'}}
+              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              textStyle={{color:Colors.$tabText}}
+              activeTextStyle={{color:Colors.$activeTabText}}
             >
               <NewsCard ref={(c) => { this.house = c; }} news={this.state.houseNews.data} scroll={this.updateHouseNews} navigation={this.props.navigation} />
             </Tab>
             <Tab 
               heading='发现'
-              tabStyle={{backgroundColor:'#F3FAFF'}}
-              activeTabStyle={{backgroundColor:'#F3FAFF'}}
-              textStyle={{color:'#6B97BF'}}
-              activeTextStyle={{color:'#6B97BF'}}
+              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+              textStyle={{color:Colors.$tabText}}
+              activeTextStyle={{color:Colors.$activeTabText}}
             >
               <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
             </Tab>
           </Tabs>
         </View>
         <View style={{position: 'absolute',right: 0,top:0}}>
-          <Button transparent onPress={() => (this.props.navigation.navigate('Item'))} style={{width: 30,height: 48, backgroundColor: '#F3FAFF', justifyContent:'center', alignItems:'center'}}>
-            <Icon name="md-add" type='ionicon' color='#6B97BF' size={16}/>
+          <Button transparent onPress={() => (this.props.navigation.navigate('Item'))} style={{width: 20,height: 48, backgroundColor: Colors.$newsTabBgColor, justifyContent:'center', alignItems:'center'}}>
+            <Icon name="md-add" type='ionicon' color={Colors.$tabText} size={16}/>
           </Button>
         </View>
       </View>
