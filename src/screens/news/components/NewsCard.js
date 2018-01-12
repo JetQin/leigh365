@@ -100,7 +100,7 @@ class NewsCard extends Component {
               containerStyle={{paddingBottom:0}}
               title={item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}
               titleNumberOfLines={3}
-              titleStyle={item.picUrl === '' ?styles.titleName:[{height:60,paddingLeft:10},styles.titleName]}
+              titleStyle={item.picUrl === '' ?styles.titleName:[{height:70,paddingLeft:10},styles.titleName]}
               hideChevron
               subtitle={
                 <View style={styles.footer}>
