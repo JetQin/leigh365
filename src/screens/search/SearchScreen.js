@@ -160,8 +160,8 @@ class SearchScreen extends Component {
         >
           <Tab 
             heading='搜新闻'
-            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
-            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            tabStyle={{backgroundColor:Colors.$whiteColor}}
+            activeTabStyle={{backgroundColor:Colors.$whiteColor}}
             textStyle={{color:Colors.$tabText}}
             activeTextStyle={{color:Colors.$activeTabText}}
           >
@@ -171,8 +171,8 @@ class SearchScreen extends Component {
           </Tab>
           <Tab 
             heading='搜用户'
-            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
-            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            tabStyle={{backgroundColor:Colors.$whiteColor}}
+            activeTabStyle={{backgroundColor:Colors.$whiteColor}}
             textStyle={{color:Colors.$tabText}}
             activeTextStyle={{color:Colors.$activeTabText}}
           >
@@ -182,8 +182,8 @@ class SearchScreen extends Component {
           </Tab>
           <Tab 
             heading='搜行情'
-            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
-            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            tabStyle={{backgroundColor:Colors.$whiteColor}}
+            activeTabStyle={{backgroundColor:Colors.$whiteColor}}
             textStyle={{color:Colors.$tabText}}
             activeTextStyle={{color:Colors.$activeTabText}}
           >

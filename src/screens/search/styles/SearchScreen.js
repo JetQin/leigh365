@@ -44,6 +44,7 @@ const styles = EStyleSheet.create({
     borderColor: Colors.$grayBackgroundColor,
     fontSize:10,
     fontFamily: 'Montserrat-Regular',
+    backgroundColor:Colors.$grayBackgroundColor,
   },
   closeBtn: { 
     width: 20, 

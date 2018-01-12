@@ -30,5 +30,4 @@ export default {
   $activeTabText:'#4699D6',
   $newsTabBgColor:'#F3FAFF',
   $proTabBgColor:'transparent',
-  $searchTabBgColor:'#F3FAFF',
 };
