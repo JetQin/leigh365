@@ -128,7 +128,7 @@ class SearchScreen extends Component {
     }
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1,backgroundColor:Colors.$whiteColor }}>
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />

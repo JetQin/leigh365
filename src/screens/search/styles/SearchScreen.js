@@ -9,6 +9,7 @@ const styles = EStyleSheet.create({
     borderStyle: 'solid',
     height: 33,
     backgroundColor:Colors.$whiteColor,
+    marginTop:20,
   },
   logoContainer: {
     flex: 0.1,
