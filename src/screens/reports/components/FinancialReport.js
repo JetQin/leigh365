@@ -9,7 +9,7 @@ class FinancialReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      is_paid: false,
+      is_paid: true,
       code: '',
       loading: false,
       revenue: [[]],
@@ -51,8 +51,8 @@ class FinancialReport extends Component {
     /**
      * 登录时判断此用户是否为付费用户，如果是存储该属性到本地isPaid=true
      */
-    const isPaid = await AsyncStorage.getItem('@isPaid');
-    this.setState({ is_paid: isPaid === undefined ? false : isPaid });
+    // const isPaid = await AsyncStorage.getItem('@isPaid');
+    // this.setState({ is_paid: isPaid === undefined ? false : isPaid });
   }
 
   update() {
@@ -90,9 +90,10 @@ class FinancialReport extends Component {
           !this.state.is_paid ?
             (<View>
               <Button
-                title='解锁更多数据'
-                backgroundColor={Colors.$blackBlueColor}
+                buttonStyle={{ height:30, margin: 0, top: 5 }}
+                backgroundColor={Colors.$unlockBtnBackgroundColor}
                 textStyle={{ color: Colors.$whiteColor }}
+                title='解锁更多数据' 
                 onPress={() => this.props.nav.navigate('Profile')}
               />
             </View>)

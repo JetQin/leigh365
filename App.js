@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(this.splash, 2000);
+    this.timer = setInterval(this.splash, 3000);
   }
 
   splash() {

@@ -115,76 +115,65 @@ class BasicReport extends Component {
             </View>
             <Text style={styles.headerSubText}>{this.getFixedNumber(this.state.priceInfo.price)}</Text>
           </View>
-          <Card>
-            <View style={styles.lineContainer}>
-              <View style={styles.narrowColumnContainer}>
-                <Text style={styles.label}>现价:</Text>
-                <Text style={styles.labelText}>{this.state.priceInfo.price}</Text>
-              </View>
+          <WebView
+            style={styles.chartContainer}
+            scrollEnabled={false}
+            automaticallyAdjustContentInsets
+            source={{ uri: 'http://synebusiness.cn/basic_report_chart.html?code='.concat(this.state.code) }}
+          />
+          <Button
+            rightIcon={{ name: 'add' }}
+            backgroundColor={Colors.$unlockBtnBackgroundColor}
+            fontSize={14}
+            buttonStyle={{ height:30, margin: 0, top: 5 }}
+            title='旋转至横屏查看图表'
+          />
+          <View style={styles.lineContainer}>
+            <View style={styles.leftColumn}>
+              <Text style={styles.label}>今开:</Text>
             </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.narrowColumnContainer}>
-                <Text style={styles.label}>现价:</Text>
-                <Text style={styles.labelText}>{this.state.priceInfo.price}</Text>
-              </View>
+            <View style={styles.rightColumn}>
+              <Text style={styles.labelText}>{this.state.priceInfo.price}</Text>
             </View>
-            <WebView
-              style={styles.chartContainer}
-              scrollEnabled={false}
-              automaticallyAdjustContentInsets
-              source={{ uri: 'http://synebusiness.cn/basic_report_chart.html?code='.concat(this.state.code) }}
-            />
-            <Button
-              rightIcon={{ name: 'add' }}
-              backgroundColor='#03A9F4'
-              fontSize={14}
-              buttonStyle={{ width: 300, height:30, margin: 0, left: 0, top: 5 }}
-              title='旋转至横屏查看图表'
-            />
-            <View style={styles.lineContainer}>
-              <View style={styles.leftColumn}>
-                <Text style={styles.label}>今开:</Text>
-              </View>
-              <View style={styles.rightColumn}>
-                <Text style={styles.labelText}>{this.state.priceInfo.price}</Text>
-              </View>
+          </View>
+          <View style={styles.lineContainer}>
+            <View style={styles.leftColumn}>
+              <Text style={styles.label}>昨收:</Text>
             </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.leftColumn}>
-                <Text style={styles.label}>昨收:</Text>
-              </View>
-              <View style={styles.rightColumn}>
-                <Text style={styles.labelText}>{this.state.priceInfo.close}</Text>
-              </View>
+            <View style={styles.rightColumn}>
+              <Text style={styles.labelText}>{this.state.priceInfo.close}</Text>
             </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.leftColumn}>
-                <Text style={styles.label}>今日最高:</Text>
-              </View>
-              <View style={styles.rightColumn}>
-                <Text style={styles.labelText}>{this.state.priceInfo.max}</Text>
-              </View>
+          </View>
+          <View style={styles.lineContainer}>
+            <View style={styles.leftColumn}>
+              <Text style={styles.label}>今日最高:</Text>
             </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.leftColumn}>
-                <Text style={styles.label}>今日最低:</Text>
-              </View>
-              <View style={styles.rightColumn}>
-                <Text style={styles.labelText}>{this.state.priceInfo.min}</Text>
-              </View>
+            <View style={styles.rightColumn}>
+              <Text style={styles.labelText}>{this.state.priceInfo.max}</Text>
             </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.leftColumn}>
-                <Text style={styles.label}>52周最高:</Text>
-                <Text style={styles.labelText}>{this.state.stockInfo.highprice}</Text>
-              </View>
-              <View style={styles.rightColumn}>
-                <Text style={styles.label}>52周最低:</Text>
-                <Text style={styles.labelText}>{this.state.stockInfo.lowprice}</Text>
-              </View>
+          </View>
+          <View style={styles.lineContainer}>
+            <View style={styles.leftColumn}>
+              <Text style={styles.label}>今日最低:</Text>
             </View>
-          </Card>
-          <Card title='公司概况'>
+            <View style={styles.rightColumn}>
+              <Text style={styles.labelText}>{this.state.priceInfo.min}</Text>
+            </View>
+          </View>
+          <View style={styles.lineContainer}>
+            <View style={styles.leftColumn}>
+              <Text style={styles.label}>52周最高:</Text>
+              <Text style={styles.labelText}>{this.state.stockInfo.highprice}</Text>
+            </View>
+            <View style={styles.rightColumn}>
+              <Text style={styles.label}>52周最低:</Text>
+              <Text style={styles.labelText}>{this.state.stockInfo.lowprice}</Text>
+            </View>
+          </View>
+          <View style={styles.root}>
+            <View style={styles.rowTextContainer}>
+              <Text style={styles.headerText}>公司概况</Text>
+            </View>
             <View style={styles.lineContainer}>
               <View style={styles.leftColumn}>
                 <Text style={styles.label}>所属行业:</Text>
@@ -201,13 +190,13 @@ class BasicReport extends Component {
                 <Text style={styles.labelText}>{this.state.basicInfo.breifInfo}</Text>
               </View>
             </View>
-          </Card>
+          </View>
           {
             !this.state.is_paid ?
               (<View>
                 <Button
                   title='解锁更多数据'
-                  backgroundColor={Colors.$blueBtnBackgroundColor}
+                  backgroundColor={Colors.$unlockBtnBackgroundColor}
                   textStyle={{ color: Colors.$whiteColor }}
                   onPress={() => this.props.nav.navigate('Profile')}
                 />
@@ -215,7 +204,7 @@ class BasicReport extends Component {
               :
               (<View style={styles.root}>
                 <Tabs initialPage={0} locked >
-                  <Tab heading='公司概况'>
+                  <Tab heading='公司概况' textStyle={styles.tabHeading} activeTextStyle={styles.activeTabHeading}>
                     <View style={styles.lineContainer}>
                       <View style={styles.leftColumn}>
                         <Text style={styles.label}>ISIN代码</Text>
@@ -281,7 +270,7 @@ class BasicReport extends Component {
                       </View>
                     </View>
                   </Tab>
-                  <Tab heading='股东'>
+                  <Tab heading='股东' textStyle={styles.tabHeading} activeTextStyle={styles.activeTabHeading}>
                     <View style={styles.lineContainer}>
                       <View style={styles.leftColumn}>
                         <Text style={styles.label}>增减幅度</Text>
@@ -330,63 +319,49 @@ class BasicReport extends Component {
                         <Text style={styles.labelText}>{this.state.stockShare.holdSum}</Text>
                       </View>
                     </View>
+                    <View style={styles.rowContainer}>
+                      <View style={styles.leftColumn}>
+                        <Text style={styles.headerTitle}>股东背景介绍</Text>
+                      </View>
+                      <View style={styles.rightColumn}>
+                        <Text style={styles.labelText}>{this.state.stockShare.holdSum}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.rowContainer}>
+                      <View style={styles.leftColumn}>
+                        <Text style={styles.headerTitle}>大股东</Text>
+                      </View>
+                    </View>
+                    <View style={styles.rowContainer}>
+                      <View style={styles.headerRow}>
+                        <Text style={styles.headerRowText}>大股东地位</Text>
+                      </View>
+                      <View style={styles.headerRow}>
+                        <Text style={styles.headerRowText}>名称</Text>
+                      </View>
+                      <View style={styles.headerRow}>
+                        <Text style={styles.headerRowText}>更新时间</Text>
+                      </View>
+                      <View style={styles.headerRow}>
+                        <Text style={styles.headerRowText}>持股比例</Text>
+                      </View>
+                    </View>
+                    <View style={styles.rowContainer}>
+                      <View style={styles.valueRow}>
+                        <Text style={styles.label}>{this.state.stockShare.institutionHoldProp}</Text>
+                      </View>
+                      <View style={styles.valueRow}>
+                        <Text style={styles.label}>{this.state.stockShare.floatShare}</Text>
+                      </View>
+                      <View style={styles.valueRow}>
+                        <Text style={styles.label}>{this.state.stockShare.institutionHolding}</Text>
+                      </View>
+                      <View style={styles.valueRow}>
+                        <Text style={styles.label}>{this.state.stockShare.institutionHolding}</Text>
+                      </View>
+                    </View>
                   </Tab>
                 </Tabs>
-                {/* 
-                <Card title='机构持股'>
-                  <View style={styles.lineContainer}>
-                    <View style={styles.narrowColumnContainer}>
-                      <Text style={styles.label}>机构持股比例合计(%):</Text>
-                    </View>
-                    <View style={styles.narrowColumnContainer}>
-                      <Text style={styles.label}>流通股份(股):</Text>
-                    </View>
-                    <View style={styles.narrowColumnContainer}>
-                      <Text style={styles.label}>机构持股数量(股):</Text>
-                    </View>
-                  </View>
-                  <View style={styles.lineContainer}>
-                    <View style={styles.narrowColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.institutionHoldProp}</Text>
-                    </View>
-                    <View style={styles.narrowColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.floatShare}</Text>
-                    </View>
-                    <View style={styles.narrowColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.institutionHolding}</Text>
-                    </View>
-                  </View>
-                </Card>
-                <Card title='大股东介绍'>
-                  <View style={styles.lineContainer}>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.label}>大股东地位:</Text>
-                    </View>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.label}>大股东名称:</Text>
-                    </View>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.label}>更新时间:</Text>
-                    </View>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.label}>大股东持股比例:</Text>
-                    </View>
-                  </View>
-                  <View style={styles.lineContainer}>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.institutionHoldProp}</Text>
-                    </View>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.floatShare}</Text>
-                    </View>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.institutionHolding}</Text>
-                    </View>
-                    <View style={styles.normalColumnContainer}>
-                      <Text style={styles.labelText}>{this.state.stockShare.institutionHolding}</Text>
-                    </View>
-                  </View>
-                </Card> */}
               </View>
               )}
         </ScrollView>

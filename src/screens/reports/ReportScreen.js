@@ -158,7 +158,7 @@ class ReportScreen extends Component {
         </Tabs>
         <View style={styles.closeBtnContainer}>
           <Button transparent onPress={() => this.props.navigation.goBack()} style={styles.closeBtn}>
-            <Icon name="close" type='Ionicons' color={Colors.$whiteColor} size={16}/>
+            <Icon name="close" type='font-awesome' color={Colors.$whiteColor} size={16}/>
           </Button>
         </View>
       </View>

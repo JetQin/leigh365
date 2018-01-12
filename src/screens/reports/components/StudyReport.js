@@ -26,14 +26,17 @@ class StudyReport extends Component {
       basic_comment: [],
     };
     this.update = this.update.bind(this);
+    this.getBuyPercent = this.getBuyPercent.bind(this);
+    this.getHoldPercent = this.getHoldPercent.bind(this);
+    this.getSellPercent = this.getSellPercent.bind(this);
   }
 
   async componentDidMount() {
     /**
      * 登录时判断此用户是否为付费用户，如果是存储该属性到本地isPaid=true
      */
-    const isPaid = await AsyncStorage.getItem('@isPaid');
-    this.setState({ is_paid: isPaid === undefined ? false : isPaid });
+    // const isPaid = await AsyncStorage.getItem('@isPaid');
+    // this.setState({ is_paid: isPaid === undefined ? false : isPaid });
   }
 
   update() {
@@ -49,6 +52,27 @@ class StudyReport extends Component {
       basic_comment: this.props.data.basic_comment,
     });
   }
+  
+  getBuyPercent(){
+    if('--' === this.state.basic.buy || '--' === this.state.basic.total){
+      return 0;
+    }
+    return (parseFloat(this.state.basic.buy)/parseFloat(this.state.basic.total) * 100).toFixed(2);
+  }
+
+  getHoldPercent(){
+    if('--' === this.state.basic.buy || '--' === this.state.basic.total){
+      return 0;
+    }
+    return (parseFloat(this.state.basic.hold)/parseFloat(this.state.basic.total) * 100).toFixed(2);
+  }
+
+  getSellPercent(){
+    if('--' === this.state.basic.buy || '--' === this.state.basic.total){
+      return 0;
+    }
+    return (parseFloat(this.state.basic.sell)/parseFloat(this.state.basic.total) * 100).toFixed(2);
+  }
 
   render() {
     let url = 'http://synebusiness.cn/study_report_chart.html?';
@@ -60,37 +84,51 @@ class StudyReport extends Component {
     financialTableUrl.concat(this.state.code);
     return (
       <ScrollView style={styles.root} >
-        <Card title='基本信息'>
-          <View style={styles.chart} >
-            <WebView
-              style={styles.chartContainer}
-              source={{ uri: url }}
-              scrollEnabled={false}
-              automaticallyAdjustContentInsets
-              contentInset={{ top: 0, left: 0 }}
-            />
+        <View style={styles.rowContainer}>
+          <Text style={styles.headerText}>根据{this.state.basic.total}份研报</Text>
+        </View>
+        <View style={styles.chart} >
+          <WebView
+            style={styles.chartContainer}
+            source={{ uri: url }}
+            scrollEnabled={false}
+            automaticallyAdjustContentInsets
+            contentInset={{ top: 0, left: 0 }}
+          />
+        </View>
+        <View style={styles.lineContainer}>
+          <View style={styles.columnContainer}>
+            <View style={styles.redDot}/>
+            <Text style={styles.label}>{this.state.basic.buy} 买入</Text>
           </View>
-          <View style={styles.lineContainer}>
-            <View style={styles.columnContainer}>
-              <View style={styles.rowContainer}>
-                <Button title='买入' backgroundColor={Colors.$redColor} color={Colors.$whiteColor} />
-                <Text style={styles.label}>基于{this.state.basic.total}份评级报告</Text>
-              </View>
-            </View>
-            <View style={styles.columnContainer}>
-              <View style={styles.rowContainer}>
-                <Text style={styles.labelRedText}>{this.state.basic.buy}-买入</Text>
-                <Text style={styles.labelGrayText}>{this.state.basic.hold}-持有</Text>
-                <Text style={styles.labelGreenText}>{this.state.basic.sell}-卖出</Text>
-              </View>
-            </View>
+          <View style={styles.columnContainer}>
+            <View style={styles.grayDot}/>
+            <Text style={styles.label}>{this.state.basic.hold} 持有</Text>
           </View>
-        </Card>
+          <View style={styles.columnContainer}>
+            <View style={styles.greenDot}/>
+            <Text style={styles.label}>{this.state.basic.sell} 卖出</Text>
+          </View>
+        </View>
+        <View style={styles.lineContainer}>
+          <View style={styles.columnValueContainer}>
+            <Text style={styles.labelValue}>{this.getBuyPercent()} %</Text>
+          </View>
+          <View style={styles.columnValueContainer}>
+            <Text style={styles.labelValue}>{this.getHoldPercent()} %</Text>
+          </View>
+          <View style={styles.columnValueContainer}>
+            <Text style={styles.labelValue}>{this.getSellPercent()} %</Text>
+          </View>
+        </View>
         {
-          !this.state.is_paid ?
+            this.state.is_paid ?
             (<View>
               <Button
-                title='解锁更多数据' backgroundColor={Colors.$blackBlueColor} textStyle={{ color: Colors.$whiteColor }}
+                buttonStyle={{ height:30, margin: 0, top: 5 }}
+                backgroundColor={Colors.$unlockBtnBackgroundColor}
+                textStyle={{ color: Colors.$whiteColor }}
+                title='解锁更多数据' 
                 onPress={() => this.props.nav.navigate('Profile')}
               />
             </View>)
