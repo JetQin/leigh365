@@ -245,7 +245,7 @@ class ProfileScreen extends Component {
     if (ref.props.heading === '自选行情') {
       this.fetchUserStock();
     }
-    if (ref.props.heading === '我的新历') {
+    if (ref.props.heading === '账户中心') {
       this.fetchUserCollectNum();
     }
   }
@@ -342,7 +342,7 @@ class ProfileScreen extends Component {
     return (
       <View style={styles.root}>
         <Tabs initialPage={0} locked onChangeTab={({ ref }) => this.changeTab(ref)} >
-          <Tab heading='我的新历'>
+          <Tab heading='账户中心'>
             <View style={styles.layout}>
               <View style={styles.top}>
                 <Image source={require('../../../assets/imgs/background.jpg')}  style={styles.topBackgroundImage} resizeMode={Image.resizeMode.sretch}/>

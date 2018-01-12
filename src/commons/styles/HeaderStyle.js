@@ -3,8 +3,8 @@ import Colors from '../../../constants/Colors';
 
 const headerstyles = EStyleSheet.create({
   headerStyle: {
-    height: 30,
-    borderBottomWidth: 1,
+    height: 33,
+    borderBottomWidth: 3,
     borderBottomColor: Colors.$navigationHeaderTextColor,
     borderStyle: 'solid',
   },
