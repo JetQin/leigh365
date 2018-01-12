@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert, AsyncStorage, ScrollView, Dimensions, Image} from 'react-native';
+import { View, Text, Alert, AsyncStorage, ScrollView, Dimensions, Image, Platform, WebView} from 'react-native';
 import { Icon } from 'react-native-elements'; 
 import { List, ListItem, Card, H3, CardItem, Thumbnail, Button, Left, Body, Right} from 'native-base';
 import GoTopButton from './components/GoTopButton'
@@ -175,8 +175,9 @@ class DetailScreen extends Component {
     this.toTop.scrollTo({x:0,y: 0,animated:true});
   }
   render() {
+    const url = this.props.navigation.state.params.uri;
     return (
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <View style={{flex: 1, backgroundColor: Colors.$whiteColor,paddingTop:10}}>
         <ScrollView style={{height: screenHeight - 200}} ref={(c) => { this.toTop = c; }}>
           <View style={{padding:15}}>
             <H3>{this.state.news.title}</H3>
@@ -191,15 +192,19 @@ class DetailScreen extends Component {
                     </View>
                   </View>
                   <Button bordered small style={styles.readBtn }>
-                    <Icon name="add" type='Ionicons' color={Colors.$whiteColor} size={12} style={{paddingLeft: 2}}/>
-                    <Text style={styles.readTitle}> 关注 </Text>
+                    {/* <Icon name="add" type='Ionicons' color={Colors.$whiteColor} size={12} style={{paddingLeft: 2}}/> */}
+                    <Text style={styles.readTitle}>+ 关注 </Text>
                   </Button>
                 </View>
                 : null
             }
             <Image source={{uri: this.state.news.image}} style={styles.image}></Image>
             <View>
-              <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 12}}>{this.state.news.content}</Text>
+              {/* <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 12}}>{this.state.news.content}</Text> */}
+              {
+                Platform.OS === 'ios' ? <WebView source={{ uri: url }} javaScriptEnabled={true} userAgent='ios' style={{width:'100%',height:'50%'}}/> 
+                : <WebView source={{ uri: url }} javaScriptEnabled={true} userAgent='android' style={{width:'100%',height:'50%'}}/>
+              }
             </View>
           </View>
 
@@ -225,7 +230,7 @@ class DetailScreen extends Component {
           <View style={{flexDirection: 'row', justifyContent:'flex-end',paddingRight: 20,backgroundColor:Colors.$CommentBgColor,paddingTop:5}}>
             <Button transparent onPress={() => console.log('打赏')} style={{height:25}}>
               <Icon name="sort-ascending" type='material-community' color={Colors.$chartColor} size={16}/>
-              <Text style={{fontSize: 10,color:Colors.$chartColor}}>按热度</Text>
+              <Text style={{fontSize: 10,color:Colors.$tabText}}>按热度</Text>
             </Button>
           </View>
 
@@ -295,19 +300,19 @@ class DetailScreen extends Component {
         </ScrollView>
         <View style={styles.footer}>
           <Button transparent style={styles.footBtn} onPress={this.doShare}>
-            <Icon name="share-square-o" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+            <Icon name="share-square-o" type='font-awesome' color={Colors.$tabText} size={16}/>
             <Text style={styles.footerItemIconText}>分享</Text>
           </Button>
           <Button transparent style={styles.footBtn} onPress={this.doComment}>
-            <Icon name="commenting-o" type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+            <Icon name="commenting-o" type='font-awesome' color={Colors.$tabText} size={16}/>
             <Text style={styles.footerItemIconText}>评论</Text>
           </Button>
           <Button transparent style={styles.footBtn} onPress={this.doThumbs}>
-            <Icon name={this.state.isThumbs?"thumbs-up":"thumbs-o-up"} type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+            <Icon name={this.state.isThumbs?"thumbs-up":"thumbs-o-up"} type='font-awesome' color={Colors.$tabText} size={16}/>
             <Text style={styles.footerItemIconText}>点赞</Text>
           </Button>
           <Button transparent style={styles.footBtn} onPress={this.doLiked}>
-            <Icon name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color={Colors.$navigationHeaderTextColor} size={16}/>
+            <Icon name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color={Colors.$tabText} size={16}/>
             <Text style={styles.footerItemIconText}>收藏</Text>
           </Button>
         </View>
@@ -323,7 +328,7 @@ class DetailScreen extends Component {
           onBackdropPress={() => this.setState({ isShare: false })}
         >
           <View style={styles.modalContent}>
-            <Text>Hellooooooo!</Text>
+            <Text>Hello!</Text>
           </View>
         </Modal>
 

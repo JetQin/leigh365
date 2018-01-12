@@ -35,6 +35,10 @@ class SearchScreen extends Component {
         data: [],
         page: 1,
       },
+      user: {
+        data: [],
+        page: 1,
+      },
       searchType: '搜行情',
       searchValue: '',
     };
@@ -57,6 +61,11 @@ class SearchScreen extends Component {
       this.state.news.page = 1;
       this.state.news.data = [];
       this.newsCard._onRefresh();
+    }
+    if (this.state.searchType === '搜用户') {
+      this.state.user.page = 1;
+      this.state.user.data = [];
+      //this.userCard._onRefresh();
     }
   }
   async searchStock() {
@@ -119,7 +128,7 @@ class SearchScreen extends Component {
     }
 
     return (
-      <View style={{ flex: 1,marginTop:20 }}>
+      <View style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
@@ -150,17 +159,6 @@ class SearchScreen extends Component {
           tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor,borderBottomWidth:3,borderBottomColor:Colors.$tabbarTextColor}}
         >
           <Tab 
-            heading='搜行情'
-            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
-            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
-            textStyle={{color:Colors.$tabText}}
-            activeTextStyle={{color:Colors.$activeTabText}}
-          >
-            <View style={styles.stockContainer}>
-              {stock}
-            </View>
-          </Tab>
-          <Tab 
             heading='搜新闻'
             tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
             activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
@@ -169,6 +167,28 @@ class SearchScreen extends Component {
           >
             <View>
               {news}
+            </View>
+          </Tab>
+          <Tab 
+            heading='搜用户'
+            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
+            <View>
+              
+            </View>
+          </Tab>
+          <Tab 
+            heading='搜行情'
+            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
+          >
+            <View style={styles.stockContainer}>
+              {stock}
             </View>
           </Tab>
         </Tabs>
