@@ -16,7 +16,6 @@ const styles = EStyleSheet.create({
     flex: 1,
   },
   titleName:{
-    paddingLeft: 20,
     fontSize: 16,
     fontFamily: 'Montserrat-Bold',
     color: Colors.$navigationHeaderTextColor,
@@ -56,7 +55,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'space-between',
     height: 40,
     width: width - 30,
-    left: -140,
+    left: -120,
     marginTop:20,
   },
   footerIconWithNoImage:{

@@ -217,7 +217,7 @@ class NewsScreen extends Component {
           }
           </Tabs> */}
           <Tabs 
-            tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor}}
+            tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor,borderBottomWidth:3,borderBottomColor:Colors.$tabbarTextColor}}
             onChangeTab={({ ref }) => this.changeTab(ref)} 
             renderTabBar={()=> <ScrollableTab/>}
           >

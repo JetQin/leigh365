@@ -7,6 +7,7 @@ import styles from './styles/SearchScreen';
 import StockList from './components/StockList';
 import NewsCard from '../news/components/NewsCard';
 import { WordpressApi } from '../../../constants/api';
+import headerstyles from '../../commons/styles/HeaderStyle';
 
 const api = new WordpressApi();
 
@@ -118,7 +119,7 @@ class SearchScreen extends Component {
     }
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1,marginTop:20 }}>
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <Image source={require('../../../assets/imgs/logo.png')} style={styles.logo} />
@@ -146,14 +147,14 @@ class SearchScreen extends Component {
         <Tabs 
           initialPage={0} 
           onChangeTab={({ ref }) => this.changeTab(ref)}
-          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor}}
+          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor,borderBottomWidth:3,borderBottomColor:Colors.$tabbarTextColor}}
         >
           <Tab 
             heading='搜行情'
-            tabStyle={{backgroundColor:Colors.$CommentBgColor}}
-            activeTabStyle={{backgroundColor:Colors.$CommentBgColor}}
-            textStyle={{color:Colors.$tabbarTextColor}}
-            activeTextStyle={{color:Colors.$tabbarTextColor}}
+            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
           >
             <View style={styles.stockContainer}>
               {stock}
@@ -161,10 +162,10 @@ class SearchScreen extends Component {
           </Tab>
           <Tab 
             heading='搜新闻'
-            tabStyle={{backgroundColor:Colors.$CommentBgColor}}
-            activeTabStyle={{backgroundColor:Colors.$CommentBgColor}}
-            textStyle={{color:Colors.$tabbarTextColor}}
-            activeTextStyle={{color:Colors.$tabbarTextColor}}
+            tabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$searchTabBgColor}}
+            textStyle={{color:Colors.$tabText}}
+            activeTextStyle={{color:Colors.$activeTabText}}
           >
             <View>
               {news}

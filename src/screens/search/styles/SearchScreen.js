@@ -8,7 +8,7 @@ const styles = EStyleSheet.create({
     borderBottomWidth: 3,
     borderStyle: 'solid',
     height: 33,
-    backgroundColor:Colors.$CommentBgColor,
+    backgroundColor:Colors.$whiteColor,
   },
   logoContainer: {
     flex: 0.1,

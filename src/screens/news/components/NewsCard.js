@@ -119,7 +119,7 @@ class NewsCard extends Component {
                   </View>
                 </View>
               }
-              subtitleContainerStyle={{ paddingLeft: 20, paddingTop: 5, paddingBottom: 0 }}
+              subtitleContainerStyle={{ paddingLeft: 0, paddingTop: 5, paddingBottom: 0 }}
             />
           ))
         }

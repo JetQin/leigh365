@@ -345,7 +345,7 @@ class ProfileScreen extends Component {
           initialPage={0} 
           locked 
           onChangeTab={({ ref }) => this.changeTab(ref)} 
-          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor}}
+          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor,borderBottomWidth:3,borderBottomColor:Colors.$tabbarTextColor}}
         >
           <Tab 
             heading='账户中心'
