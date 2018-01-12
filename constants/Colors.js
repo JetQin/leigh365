@@ -29,5 +29,5 @@ export default {
   $tabText:'#6B97BF',
   $activeTabText:'#4699D6',
   $newsTabBgColor:'#F3FAFF',
-  $proTabBgColor:'transparent',
+  $proTabBgColor:'#F3FAFF',
 };
