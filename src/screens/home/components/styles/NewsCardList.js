@@ -63,7 +63,7 @@ const styles = EStyleSheet.create({
     flexDirection:'row',
     justifyContent: 'space-between',
     height: 40,
-    width: width - 30-20,
+    width: width - 30,
   },
   separator: {
     flex: 1,

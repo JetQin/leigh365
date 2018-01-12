@@ -100,11 +100,11 @@ class NewsCard extends Component {
               containerStyle={{paddingBottom:0}}
               title={item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}
               titleNumberOfLines={3}
-              titleStyle={item.picUrl === '' ?styles.titleName:[{height:60},styles.titleName]}
+              titleStyle={item.picUrl === '' ?styles.titleName:[{height:60,paddingLeft:10},styles.titleName]}
               hideChevron
               subtitle={
                 <View style={styles.footer}>
-                  <Text style={styles.dateText}>{ item.date }</Text>
+                  <Text style={item.picUrl === '' ?styles.dateText:[{paddingLeft:10},styles.dateText]}>{ item.date }</Text>
                   <View style={item.picUrl === '' ? styles.footerIconWithNoImage : styles.footerIcon}>
                     <Button transparent>
                       <Icon size={16} name='tags' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log(item.category+'==')} />
