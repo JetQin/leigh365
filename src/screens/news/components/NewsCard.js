@@ -114,7 +114,7 @@ class NewsCard extends Component {
                       <Icon size={18} name='comments' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} />
                       <Text style={styles.footerText}>{0}</Text>
                     </Button>
-                    <Icon size={18} name='bookmark' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Icon size={18} name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
                     <Icon size={18} name='share' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={this.shareNews} />
                   </View>
                 </View>
