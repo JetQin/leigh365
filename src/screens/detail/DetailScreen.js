@@ -200,11 +200,11 @@ class DetailScreen extends Component {
             }
             <Image source={{uri: this.state.news.image}} style={styles.image}></Image>
             <View>
-              {/* <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 12}}>{this.state.news.content}</Text> */}
-              {
+              <Text style={{fontFamily: 'Montserrat-Regular', fontSize: 16,lineHeight:20}}>{this.state.news.content}</Text>
+              {/* {
                 Platform.OS === 'ios' ? <WebView source={{ uri: url }} javaScriptEnabled={true} userAgent='ios' style={{width:'100%',height:'50%'}}/> 
                 : <WebView source={{ uri: url }} javaScriptEnabled={true} userAgent='android' style={{width:'100%',height:'50%'}}/>
-              }
+              } */}
             </View>
           </View>
 
