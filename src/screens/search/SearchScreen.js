@@ -133,23 +133,39 @@ class SearchScreen extends Component {
                 style={styles.searchInput}
               />
             </View>
-            <Button transparent onPress={this.doSearch} style={{right:'10%'}}>
-              <Icon type='ionicon' name="ios-search" size={20} />
+            <Button transparent onPress={this.doSearch} style={{right:'10%',bottom:'25%'}}>
+              <Icon type='ionicon' name="ios-search" size={16} />
             </Button>
           </View>
           <View style={styles.closeContainer}>
             <Button transparent style={styles.closeBtn} onPress={() => this.props.navigation.goBack()} >
-              <Icon type='font-awesome'  name="close" size={20} color={Colors.$navigationHeaderTextColor} />
+              <Icon type='font-awesome'  name="close" size={12} color={Colors.$navigationHeaderTextColor} />
             </Button>
           </View>
         </View>
-        <Tabs initialPage={0} onChangeTab={({ ref }) => this.changeTab(ref)}>
-          <Tab heading='搜行情'>
+        <Tabs 
+          initialPage={0} 
+          onChangeTab={({ ref }) => this.changeTab(ref)}
+          tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor}}
+        >
+          <Tab 
+            heading='搜行情'
+            tabStyle={{backgroundColor:Colors.$CommentBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$CommentBgColor}}
+            textStyle={{color:Colors.$tabbarTextColor}}
+            activeTextStyle={{color:Colors.$tabbarTextColor}}
+          >
             <View style={styles.stockContainer}>
               {stock}
             </View>
           </Tab>
-          <Tab heading='搜新闻'>
+          <Tab 
+            heading='搜新闻'
+            tabStyle={{backgroundColor:Colors.$CommentBgColor}}
+            activeTabStyle={{backgroundColor:Colors.$CommentBgColor}}
+            textStyle={{color:Colors.$tabbarTextColor}}
+            activeTextStyle={{color:Colors.$tabbarTextColor}}
+          >
             <View>
               {news}
             </View>

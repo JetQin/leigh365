@@ -65,8 +65,9 @@ class NewsScreen extends Component {
     const finance = this.finance;
     const house = this.house;
     const find = this.find;
-    this.getUserInterestItem();
-    this.myCard[0]._onRefresh();
+    //this.getUserInterestItem();
+    //this.myCard[0]._onRefresh();
+    this.hot._onRefresh();
   }
 
   async updateHotNews() {
@@ -158,31 +159,31 @@ class NewsScreen extends Component {
   }
 
   changeTab(ref) {
-    let interestItem = this.state.InterestItem;
-    for (let index = 0; index < interestItem.length; index++) {
-      const element = interestItem[index];
-      if( ref.props.heading === element.name){
-        this.myCard[0]._onRefresh();
-      }
+    // let interestItem = this.state.InterestItem;
+    // for (let index = 0; index < interestItem.length; index++) {
+    //   const element = interestItem[index];
+    //   if( ref.props.heading === element.name){
+    //     this.myCard[0]._onRefresh();
+    //   }
+    // }
+    if (ref.props.heading === '推荐') {
+      this.hot._onRefresh();
     }
-    // if (ref.props.heading === '推荐') {
-    //   this.hot._onRefresh();
-    // }
-    // if (ref.props.heading === '科技') {
-    //   this.tech._onRefresh();
-    // }
-    // if (ref.props.heading === '金融') {
-    //   this.finance._onRefresh();
-    // }
-    // if (ref.props.heading === '地产') {
-    //   this.house._onRefresh();
-    // }
-    // if (ref.props.heading === '发现') {
-    //   this.find._onRefresh();
-    // }
-    // if (ref.props.heading === '关注') {
-    //   //this.props.navigation.navigate('Detail');
-    // }
+    if (ref.props.heading === '科技') {
+      this.tech._onRefresh();
+    }
+    if (ref.props.heading === '金融') {
+      this.finance._onRefresh();
+    }
+    if (ref.props.heading === '地产') {
+      this.house._onRefresh();
+    }
+    if (ref.props.heading === '发现') {
+      this.find._onRefresh();
+    }
+    if (ref.props.heading === '关注') {
+      //this.props.navigation.navigate('Detail');
+    }
     
   }
 
@@ -190,7 +191,7 @@ class NewsScreen extends Component {
     return (
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
-          <Tabs 
+          {/* <Tabs 
             tabBarUnderlineStyle={{ backgroundColor: '#049CDB'}}
             onChangeTab={({ ref }) => this.changeTab(ref)} 
             renderTabBar={()=> <ScrollableTab/>}
@@ -214,19 +215,19 @@ class NewsScreen extends Component {
               </Tab>
             ))
           }
-          </Tabs>
-          {/* <Tabs 
-            tabBarUnderlineStyle={{ backgroundColor: '#049CDB'}}
+          </Tabs> */}
+          <Tabs 
+            tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor}}
             onChangeTab={({ ref }) => this.changeTab(ref)} 
             renderTabBar={()=> <ScrollableTab/>}
           >
             
             <Tab 
               heading='推荐' 
-              tabStyle={{backgroundColor:'#F3FAFF'}}
-              activeTabStyle={{backgroundColor:'#F3FAFF'}}
-              textStyle={{color:'#6B97BF'}}
-              activeTextStyle={{color:'#6B97BF'}}
+              tabStyle={{backgroundColor:Colors.$CommentBgColor}}
+              activeTabStyle={{backgroundColor:Colors.$CommentBgColor}}
+              textStyle={{color:Colors.$tabbarTextColor}}
+              activeTextStyle={{color:Colors.$tabbarTextColor}}
             >
               <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
             </Tab>
@@ -275,7 +276,7 @@ class NewsScreen extends Component {
             >
               <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
             </Tab>
-          </Tabs> */}
+          </Tabs>
         </View>
         <View style={{position: 'absolute',right: 0,top:0}}>
           <Button transparent onPress={() => (this.props.navigation.navigate('Item'))} style={{width: 30,height: 48, backgroundColor: '#F3FAFF', justifyContent:'center', alignItems:'center'}}>

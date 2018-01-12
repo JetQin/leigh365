@@ -63,7 +63,7 @@ const styles = EStyleSheet.create({
   },
   content: {
     fontSize: 13,
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat-Bold',
     color: Colors.$grayTextColor,
     backgroundColor: 'transparent',
   },
@@ -89,7 +89,7 @@ const styles = EStyleSheet.create({
     paddingTop:10,
   },
   footerText: {
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$grayTextColor,
     paddingLeft: 10,
