@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, AsyncStorage, Alert } from 'react-native';
 import { Tabs, Tab, } from 'native-base';
 import { Icon, Button } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
 import { LoadingScreen } from '../../commons';
 import { BasicReport, StudyReport, FinancialReport } from './components';
-import { ReportApi } from '../../../constants/reportApi';
+import { ReportApi, WordpressApi } from '../../../constants/';
 
 import headerstyles from '../../commons/styles/HeaderStyle';
 import styles from './styles/ReportScreen';
 
 const reportApi = new ReportApi();
+const wordpressApi = new WordpressApi();
 
 class ReportScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -18,31 +19,27 @@ class ReportScreen extends Component {
     const headerStyle = headerstyles.headerStyle;
     const headerLeft = (
       <View style={headerstyles.headerLeft}>
-        {/* <Button onPress={() => navigation.navigate('Setting')}> */}
+        <View style={styles.headerLeftContainer}>
           <Text style={headerstyles.text}>{params.title}</Text>
-        {/* </Button> */}
+        </View>
       </View>
     );
 
     const headerRight = (
       <View style={headerstyles.headerRight}>
-        <TouchableOpacity onPress={params.addToStockList} >
-          {/* <View style={styles.headerBtn}>
-            <Text style={styles.headerText}>+加入自选行情</Text>
-          </View> */}
-          <Button
-              icon={{ name: 'add' }}
-              backgroundColor='#03A9F4'
-              buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, left: 0, top: 5 }}
-              title='加入自选'
-            />
-        </TouchableOpacity>
+        <Button
+            backgroundColor='#03A9F4'
+            buttonStyle={{ borderRadius: 0, height:25, width:90, left: 0, top: 0 }}
+            title='+加入自选'
+            fontSize={12}
+            onPress={params.addToStockList}
+          />
       </View>
     );
     return { headerStyle, headerLeft, headerRight };
   };
   static defaultProps = {
-    reportApi,
+    reportApi,wordpressApi
   }
 
   constructor(props) {
@@ -94,9 +91,25 @@ class ReportScreen extends Component {
     this.financial_report_view.update();
   }
 
-  addToStockList() {
-    console.log('add user stock list');
-    console.log(this.state.stockCode);
+  async addToStockList() {
+    const login = await AsyncStorage.getItem('@user_id');
+    if (undefined === login || login === null) {
+      Alert.alert('警告', '用户未登录，请先登录',
+        [
+          { text: '确定' },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      const params = { userId: login, code: this.state.stockCode };
+      this.props.wordpressApi.addStockToList(params);
+      Alert.alert('提示', '收藏成功',
+        [
+          { text: '确定' },
+        ],
+        { cancelable: false }
+      );
+    }
   }
 
   changeTab(ref) {

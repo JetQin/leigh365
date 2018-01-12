@@ -25,4 +25,5 @@ export default {
   $grayTextColor: '#949494',
   $tabbarTextColor: '#049CDB',
   $grayBackgroundColor: '#EEEEEE',
+  $blueBtnBackgroundColor: '#619AE3',
 };
