@@ -3,7 +3,7 @@ import Colors from '../../../constants/Colors';
 
 const headerstyles = EStyleSheet.create({
   headerStyle: {
-    height: 33,
+    height: 35,
     borderBottomWidth: 3,
     borderBottomColor: Colors.$navigationHeaderTextColor,
     borderStyle: 'solid',
@@ -19,14 +19,14 @@ const headerstyles = EStyleSheet.create({
   },
   iconContainer:{
     padding: 10,
-    bottom: 5,
+    bottom: 3,
   },
   logo:{
     padding: 10,
     left: 10,
     width: 15,
     height: 15,
-    top: 3,
+    top: 5,
   },
   tabbarIcon: {
     height: 23,
@@ -36,7 +36,7 @@ const headerstyles = EStyleSheet.create({
     color: Colors.$navigationHeaderTextColor,
     top: 2,
     left: 15,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'Montserrat-Bold',
   },
   text: {

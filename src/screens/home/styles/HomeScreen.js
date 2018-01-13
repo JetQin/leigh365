@@ -58,7 +58,7 @@ const styles = EStyleSheet.create({
     paddingLeft: 10, 
     paddingRight: 10,
     position:'absolute',
-    bottom: 50,
+    bottom: 40,
   },
   backdrop: {
     flex: 1,
