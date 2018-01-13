@@ -93,8 +93,8 @@ class BasicReport extends Component {
             <View style={styles.lineRightContainer}>
               {
                 this.state.priceInfo.price_change > 0 ?
-                  (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} iconStyle={{ paddingLeft: 20, paddingTop: 20 }} />) :
-                  (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} iconStyle={{ paddingLeft: 20, paddingBottom: 5}} />)
+                  (<Icon type='font-awesome' name='sort-up' color={Colors.$redColor} iconStyle={{ paddingLeft: 30, paddingTop: 15 }} />) :
+                  (<Icon type='font-awesome' name='sort-down' color={Colors.$greenColor} iconStyle={{ paddingLeft: 30, paddingBottom: 8 }} />)
               }
               <Text style={this.state.priceInfo.price_change > 0 ? styles.headerRedText : styles.headerGreenText}>
                 {this.getFixedNumber(this.state.priceInfo.price_change)}

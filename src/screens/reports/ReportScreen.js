@@ -29,7 +29,7 @@ class ReportScreen extends Component {
       <View style={headerstyles.headerRight}>
         <Button
             backgroundColor='#03A9F4'
-            buttonStyle={{ borderRadius: 0, height:25, width:90, left: 0, top: 0 }}
+            buttonStyle={{ borderRadius: 4, height:25, width:90, left: 0, top: 0 }}
             title='+加入自选'
             fontSize={12}
             onPress={params.addToStockList}
