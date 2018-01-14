@@ -30,7 +30,7 @@ class NewsCard extends Component {
   _onRefresh() {
     console.log('refresh');
     this.setState({ refreshing: true });
-    this.props.scroll().then(() => {
+    this.props.scroll(this.props.index).then(() => {
       this.setState({ refreshing: false, news: this.props.news });
     });
   }

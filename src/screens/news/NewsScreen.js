@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Alert } from 'react-native';
+import { View, Text, Image, Alert, AsyncStorage } from 'react-native';
 import { Tabs, ScrollableTab, Tab, Button } from 'native-base';
 import { Icon } from 'react-native-elements';
 import Colors from '../../../constants/Colors';
@@ -41,241 +41,89 @@ class NewsScreen extends Component {
 
   constructor(props) {
     super(props);
+    console.log('********* component constructor ***********');
     this.state = {
       type: 'fetchPosts',
-      hotNews: { page: 1, data: [] },
-      techNews: { page: 1, data: [] },
-      financeNews: { page: 1, data: [] },
-      houseNews: { page: 1, data: [] },
-      findNews: { page: 1, data: [] },
-      InterestItem: [ ],
+      newsCategory: [
+        {name: '推荐',id: '001',category: 'hotnews',page: 1, data: []},
+        {name: '科技',id: '002',category: 'technews',page: 1, data: []},
+        {name: '金融',id: '003',category: 'financenews',page: 1, data: []},
+        {name: '地产',id: '004',category: 'housenews',page: 1, data: []},
+        {name: '发现',id: '005',category: 'findnews',page: 1, data: []},
+      ],
     };
-    this.updateFinanceNews = this.updateFinanceNews.bind(this);
-    this.updateHotNews = this.updateHotNews.bind(this);
-    this.updateFindNews = this.updateFindNews.bind(this);
-    this.updateHouseNews = this.updateHouseNews.bind(this);
-    this.updateTechNews = this.updateTechNews.bind(this);
-    this.getUserInterestItem = this.getUserInterestItem.bind(this);
+    this.cards = new Array();
+    this.updateNews = this.updateNews.bind(this);
   }
 
-  async componentDidMount() {
-    this.myCard = [];
-    const hot = this.hot;
-    const tech = this.tech;this.myCard
-    const finance = this.finance;
-    const house = this.house;
-    const find = this.find;
-    //this.getUserInterestItem();
-    //this.myCard[0]._onRefresh();
-    this.hot._onRefresh();
-  }
-
-  async updateHotNews() {
-    const request = {
-      type: this.state.type,
-      page: this.state.hotNews.page + 1,
-      category: 'hotnews',
-    };
-    const posts = await this.props.wordpressApi.fetchPosts(request);
-    console.log(posts);
-    this.setState({ hotNews: { page: this.state.hotNews.page + 1, data: posts.concat(this.state.hotNews.data) } });
-  }
-
-  async updateFinanceNews() {
-    const request = {
-      type: this.state.type,
-      page: this.state.financeNews.page + 1,
-      category: 'financenews',
-    };
-    const posts = await this.props.wordpressApi.fetchPosts(request);
-    this.setState({ financeNews: { page: this.state.financeNews.page + 1, data: posts.concat(this.state.financeNews.data) } });
-  }
-
-  async updateFindNews() {
-    const request = {
-      type: this.state.type,
-      page: this.state.findNews.page + 1,
-      category: 'findnews',
-    };
-    const posts = await this.props.wordpressApi.fetchPosts(request);
-    this.setState({ findNews: { page: this.state.findNews.page + 1, data: posts.concat(this.state.findNews.data) } });
-  }
-
-  async updateHouseNews() {
-    const request = {
-      type: this.state.type,
-      page: this.state.houseNews.page + 1,
-      category: 'housenews',
-    };
-    const posts = await this.props.wordpressApi.fetchPosts(request);
-    this.setState({ houseNews: { page: this.state.houseNews.page + 1, data: posts.concat(this.state.houseNews.data) } });
-  }
-
-  async updateTechNews() {
-    const request = {
-      type: this.state.type,
-      page: this.state.techNews.page + 1,
-      category: 'technews',
-    };
-    const posts = await this.props.wordpressApi.fetchPosts(request);
-    this.setState({ techNews: { page: this.state.techNews.page + 1, data: posts.concat(this.state.techNews.data) } });
-  }
-
-  async updateNewsData(index,pageInfo,categoryInfo) {
-    const request = {
-      type: this.state.type,
-      page: pageInfo + 1,
-      category: categoryInfo,
-    };
-    //const posts = await this.props.wordpressApi.fetchPosts(request);
-    // var items = this.state.items;  
-    // items[i].status = 'doing';  
-    // this.setState({  
-    //       items: items  
-    // });
-    const posts = await this.props.wordpressApi.fetchPosts(request);
-    let itemList = this.state.InterestItem;
-    itemList[index].page = itemList[index].page + 1;
-    itemList[index].data = posts.concat(itemList[index].data );
-    this.setState({InterestItem: itemList});
-  }
-
-  getUserInterestItem() {
-    let interestItem = [
-      {name: '推荐',id: '001',category: 'hotnews',page: 1, data: []},
-      {name: '科技',id: '002',category: 'technews',page: 1, data: []},
-      {name: '金融',id: '003',category: 'financenews',page: 1, data: []},
-      {name: '地产',id: '004',category: 'housenews',page: 1, data: []},
-      {name: '发现',id: '005',category: 'findnews',page: 1, data: []},
-    ];
-    this.setState({InterestItem: interestItem});
-    //newCardList[0]._onRefresh();
-  }
-
-  initNewsCardData(newsCard) {
-    if(newsCard!=null){
-      newCardList.push(newsCard);  
+  
+  async componentWillMount() {
+    console.log('********* component will mount ***********');
+    let items = await AsyncStorage.getItem('@item_list');
+    console.log(items);
+    if(items){
+      // this.setState({newsCategory: items});
     }
+  }
+  
+  async componentDidMount() {
+    console.log('********* component did mount ***********');
+    let items = await AsyncStorage.getItem('@item_list');
+    if(this.refs[0]){
+      this.refs[0]._onRefresh();
+    }
+  }
+
+  async updateNews(index){
+    const request = {
+      type: this.state.type,
+      page: this.state.newsCategory[index].page + 1,
+      category: this.state.newsCategory[index].category,
+    };
+    const posts = await this.props.wordpressApi.fetchPosts(request);
+    const newsCategory = this.state.newsCategory;
+    const news = newsCategory[index];
+    news.page = news.page + 1;
+    news.data = posts.concat(news.data);
+    newsCategory[index] = news;
+    this.setState({newsCategory: newsCategory});
   }
 
   changeTab(ref) {
-    // let interestItem = this.state.InterestItem;
-    // for (let index = 0; index < interestItem.length; index++) {
-    //   const element = interestItem[index];
-    //   if( ref.props.heading === element.name){
-    //     this.myCard[0]._onRefresh();
-    //   }
-    // }
-    if (ref.props.heading === '推荐') {
-      this.hot._onRefresh();
-    }
-    if (ref.props.heading === '科技') {
-      this.tech._onRefresh();
-    }
-    if (ref.props.heading === '金融') {
-      this.finance._onRefresh();
-    }
-    if (ref.props.heading === '地产') {
-      this.house._onRefresh();
-    }
-    if (ref.props.heading === '发现') {
-      this.find._onRefresh();
-    }
-    if (ref.props.heading === '关注') {
-      //this.props.navigation.navigate('Detail');
-    }
-    
+    const index = ref.props.children.props.index;
+    const heading = this.state.newsCategory[index].category;
+    this.refs[heading]._onRefresh();
   }
 
   render() {
+    console.log('********* component render ***********');
     return (
       <View style={styles.root}>
         <View style={styles.bottomContainer}>
-          {/* <Tabs 
-            tabBarUnderlineStyle={{ backgroundColor: '#049CDB'}}
-            onChangeTab={({ ref }) => this.changeTab(ref)} 
-            renderTabBar={()=> <ScrollableTab/>}
-          >
-          {
-            this.state.InterestItem.map((item,i) => (
-              <Tab
-                key={i}
-                heading={item.name} 
-                tabStyle={{backgroundColor:'#F3FAFF'}}
-                activeTabStyle={{backgroundColor:'#F3FAFF'}}
-                textStyle={{color:'#6B97BF'}}
-                activeTextStyle={{color:'#6B97BF'}}
-              >
-                <NewsCard 
-                  ref={(c) => { this.myCard[i] = c; }} 
-                  news={item.data} 
-                  scroll={() => {this.updateNewsData(i,item.page,item.category)} }
-                  navigation={this.props.navigation} 
-                />
-              </Tab>
-            ))
-          }
-          </Tabs> */}
           <Tabs 
             tabBarUnderlineStyle={{ backgroundColor: Colors.$tabbarTextColor,borderBottomWidth:3,borderBottomColor:Colors.$tabbarTextColor}}
             onChangeTab={({ ref }) => this.changeTab(ref)} 
             renderTabBar={()=> <ScrollableTab/>}
           >
-            
-            <Tab 
-              heading='推荐' 
-              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              textStyle={{color:Colors.$tabText}}
-              activeTextStyle={{color:Colors.$activeTabText}}
-            >
-              <NewsCard ref={(c) => { this.hot = c; }} news={this.state.hotNews.data} scroll={this.updateHotNews} navigation={this.props.navigation} />
-            </Tab>
-            <Tab 
-              heading='关注'
-              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              textStyle={{color:Colors.$tabText}}
-              activeTextStyle={{color:Colors.$activeTabText}}
-            >
-              <BlogCard/>
-            </Tab>
-            <Tab 
-              heading='科技'
-              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              textStyle={{color:Colors.$tabText}}
-              activeTextStyle={{color:Colors.$activeTabText}}
-            >
-              <NewsCard ref={(c) => { this.tech = c; }} news={this.state.techNews.data} scroll={this.updateTechNews} navigation={this.props.navigation} />
-            </Tab>
-            <Tab 
-              heading='金融'
-              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              textStyle={{color:Colors.$tabText}}
-              activeTextStyle={{color:Colors.$activeTabText}}
-            >
-              <NewsCard ref={(c) => { this.finance = c; }} news={this.state.financeNews.data} scroll={this.updateFinanceNews} navigation={this.props.navigation} />
-            </Tab>
-            <Tab 
-              heading='地产'
-              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              textStyle={{color:Colors.$tabText}}
-              activeTextStyle={{color:Colors.$activeTabText}}
-            >
-              <NewsCard ref={(c) => { this.house = c; }} news={this.state.houseNews.data} scroll={this.updateHouseNews} navigation={this.props.navigation} />
-            </Tab>
-            <Tab 
-              heading='发现'
-              tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
-              textStyle={{color:Colors.$tabText}}
-              activeTextStyle={{color:Colors.$activeTabText}}
-            >
-              <NewsCard ref={(c) => { this.find = c; }} news={this.state.findNews.data} scroll={this.updateFindNews} navigation={this.props.navigation} />
-            </Tab>
+            {
+              this.state.newsCategory.map((item,index)=>(
+                <Tab
+                  key={index}
+                  heading={item.name} 
+                  tabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+                  activeTabStyle={{backgroundColor:Colors.$newsTabBgColor}}
+                  textStyle={{color:Colors.$tabText}}
+                  activeTextStyle={{color:Colors.$activeTabText}}
+                >
+                  <NewsCard 
+                    news={item.data} 
+                    index={index} 
+                    ref={item.category}
+                    scroll={(index) => this.updateNews(index)} 
+                    navigation={this.props.navigation} />
+                </Tab>
+              ))
+            }
           </Tabs>
         </View>
         <View style={{position: 'absolute',right: 0,top:0}}>
