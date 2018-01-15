@@ -1,29 +1,67 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Colors from '../../../../../constants/Colors';
 
 const styles = EStyleSheet.create({
   root: {
     flex: 1,
   },
-  row: {
-    flex: 1,
+  row:{
     flexDirection: 'row',
-    paddingTop: 2,
-    paddingBottom: 3,
-    // borderWidth: 1,
-    // borderLeftWidth: 0,
-    // borderLeftColor: '#000000',
-    // borderRightWidth: 0,
-    // borderRightColor: '#000000',
-    // borderTopWidth: 1,
-    // borderTopColor: '#000000',
-    // borderBottomWidth: 0.5,
-    // borderBottomColor: '#000000',
+    borderWidth: 0.5,
+    borderColor: Colors.$tableHeaderColor,
+    height: 30,
+    // backgroundColor:'blue',
+  },
+  headerRowText:{
+    fontSize: 14,
+    fontFamily: 'Montserrat-Bold',
+    color: Colors.$whiteColor,
+    textAlign: 'center',
+  },
+  columnText:{
+    fontSize: 10,
+    fontFamily: 'Montserrat-Regular',
+    color: Colors.$grayTextColor,
+    textAlign: 'center',
+  },
+  tabHeading:{
+    fontSize: 16,
+    fontFamily: 'Montserrat-Bold',
+    color: Colors.$grayBackgroundColor,
+    backgroundColor: 'transparent',
+  },
+  activeTabHeading:{
+    fontSize: 16,
+    fontFamily: 'Montserrat-Bold',
+    color: Colors.$grayColor,
+    backgroundColor: 'transparent',
   },
   column: {
     flex: 0.25,
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: Colors.$tableHeaderColor,
+    borderLeftWidth: 0.5,
+    borderRightWidth: 0.5,
+    borderLeftColor: Colors.$tableHeaderColor,
+    borderRightColor: Colors.$tableHeaderColor,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  columnValue: {
+    flex: 0.25,
+    backgroundColor: Colors.$whiteColor,
+    borderLeftWidth: 0.5,
+    borderRightWidth: 0.5,
+    borderLeftColor: Colors.$tableHeaderColor,
+    borderRightColor: Colors.$tableHeaderColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 20,
+    height: 20,
+  }
 });
 
 export default styles;

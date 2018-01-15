@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, RefreshControl, Share, Alert } from 'react-native';
-import { Icon, ListItem, Avatar } from 'react-native-elements';
+import { View, ScrollView, Text, RefreshControl, Share, Alert, Image } from 'react-native';
+import { Icon, List, ListItem, Avatar } from 'react-native-elements';
 import moment from 'moment';
+import { Button } from 'native-base';
 import Fonts from '../../../../constants/Fonts';
 import styles from './styles/NewsCardList';
-// import * as WeChat from 'react-native-wechat';
+import Colors from '../../../../constants/Colors';
 
 class NewsCardList extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class NewsCardList extends Component {
     this.state = {
       refreshing: false,
       news: [],
+      isLiked:false,
     };
     this.shareNews = this.shareNews.bind(this);
     this.showResult = this.showResult.bind(this);
@@ -80,6 +82,7 @@ class NewsCardList extends Component {
     return (
       <ScrollView
         ref={(c) => { this.toTop = c; }}
+        style={styles.root}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -87,30 +90,41 @@ class NewsCardList extends Component {
           />
         }
       >
+        {/* <List containerStyle={styles.listContainer}> */}
         {
           this.state.news.map((item, i) => (
             <ListItem
               key={i}
+              containerStyle={styles.listContainer}
               onPress={() => (this.props.navigation.navigate('ViewHtml', { uri: item.url }))}
-              leftIcon={item.picUrl === '' ? <View style={styles.emptyView} /> : <Avatar medium source={{ uri: item.picUrl }} />}
+              leftIcon={item.picUrl === '' ? <View style={styles.emptyView} /> : <Image source={{ uri: item.picUrl }} style={styles.avatarContainer} />}
               avatarContainerStyle={{ paddingLeft: 0, left: 0 }}
-              title={item.name}
-              titleStyle={{ paddingLeft: 10 }}
+              title={item.name.replace(/[\r\n]/g,"").replace(/[ ]/g,"")}
+              titleNumberOfLines={3}
+              titleStyle={item.picUrl === '' ?styles.titleName:[{height:70,paddingLeft:10},styles.titleName]}
               hideChevron
               subtitle={
                 <View style={styles.footer}>
-                  <Text style={styles.footerText}>{ item.date }</Text>
-                  <Icon size={12} name='tags' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Text style={styles.footerText}>{item.category}</Text>
-                  <Icon size={12} name='comments' type='font-awesome' color='#384259' iconStyle={styles.icon} />
-                  <Icon size={12} name='bookmark' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={() => console.log('hello')} />
-                  <Icon size={12} name='share' type='font-awesome' color='#384259' iconStyle={styles.icon} onPress={this.shareNews} />
+                  <Text style={item.picUrl === '' ?styles.dateText:[{paddingLeft:10},styles.dateText]}>{ item.date }</Text>
+                  <View style={item.picUrl === '' ? styles.footerIconWithNoImage : styles.footerIcon}>
+                    <Button transparent>
+                      <Icon size={16} name='tags' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                      <Text style={styles.footerText}>{item.category}</Text>
+                    </Button>
+                    <Button transparent>
+                      <Icon size={18} name='comments' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} />
+                      <Text style={styles.footerText}>{0}</Text>
+                    </Button>
+                    <Icon size={18} name={this.state.isLiked?"bookmark":"bookmark-o"} type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={() => console.log('hello')} />
+                    <Icon size={18} name='share' type='font-awesome' color={Colors.$followCircle} iconStyle={styles.icon} onPress={this.shareNews} />
+                  </View>
                 </View>
               }
-              subtitleContainerStyle={{ paddingLeft: 10, paddingTop: 8, paddingBottom: 5 }}
+              subtitleContainerStyle={{paddingTop: 5, paddingBottom: 0 }}
             />
           ))
         }
+        {/* </List> */}
       </ScrollView>
     );
   }

@@ -92,6 +92,9 @@ class HomeScreen extends React.Component {
               ) :
               (
                 <View style={styles.backdrop}>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text} numberOfLines={3}>{item.name}</Text>
+                  </View>
                   <Image source={{ uri: item.picUrl }} style={styles.image} />
                 </View>
 
@@ -104,7 +107,15 @@ class HomeScreen extends React.Component {
 
       <View style={styles.root}>
         <View style={styles.topContainer}>
-          <Swiper style={styles.wrapper} showsButtons autoplay>
+          <Swiper style={styles.wrapper} 
+            dot={
+              <View style={{backgroundColor:'rgba(0,0,0,.2)', width: 10, height: 10, borderRadius: 5, borderWidth:2, borderColor: '#FFFFFF', margin: 3 }} />
+            }
+            activeDot={
+              <View style={{backgroundColor: '#FFFFFF', width: 10, height: 10, borderRadius: 5, margin: 3 }} />
+            }
+            showsButtons 
+            autoplay>
             {swiperItems}
           </Swiper>
         </View>

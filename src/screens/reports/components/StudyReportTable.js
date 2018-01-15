@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, Tab, Card, CardItem, Text } from 'native-base';
-import { Icon, List, ListItem } from 'react-native-elements';
-import { View, Alert } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
+import { View, Alert, Image, TouchableOpacity } from 'react-native';
 
 import { ReportApi } from '../../../../constants/reportApi';
 import styles from './styles/StudyReportTable';
@@ -16,6 +16,7 @@ class StudyReportTable extends Component {
     super(props);
     this.getAuthor = this.getAuthor.bind(this);
     this.state = { author: '' };
+    this.alertConclusion = this.alertConclusion.bind(this);
   }
 
   async getAuthor(name) {
@@ -35,22 +36,23 @@ class StudyReportTable extends Component {
     );
   }
 
+  alertConclusion(conclusion){
+    Alert.alert('详细内容', conclusion,
+    [
+      { text: '确定' },
+    ]);
+  }
+
   getRatingBody() {
     let ratingBody = <View />;
     if (this.props.rating && this.props.rating.length > 0) {
       ratingBody = this.props.rating.map((item, i) => (
-        <ListItem
-          key={i}
-          hideChevron
-          title={
-            <View style={styles.row}>
-              <View style={styles.column}><Text>{item.orgName}</Text></View>
-              <View style={styles.column}><Text>{item.currentRating}</Text></View>
-              <View style={styles.column}><Text>{item.lastRating}</Text></View>
-              <View style={styles.column}><Text>{item.goalPrice === null ? '--' : parseFloat(item.goalPrice).toFixed(2)}</Text></View>
-            </View>
-          }
-        />
+        <View key={i} style={styles.row}>
+          <View style={styles.columnValue}><Text style={styles.columnText}>{item.orgName}</Text></View>
+          <View style={styles.columnValue}><Text style={styles.columnText}>{item.currentRating}</Text></View>
+          <View style={styles.columnValue}><Text style={styles.columnText}>{item.lastRating}</Text></View>
+          <View style={styles.columnValue}><Text style={styles.columnText}>{item.goalPrice === null ? '--' : parseFloat(item.goalPrice).toFixed(2)}</Text></View>
+        </View>
       ));
     }
     return ratingBody;
@@ -60,35 +62,20 @@ class StudyReportTable extends Component {
     let commentBody = <View />;
     if (this.props.comment && this.props.comment.length > 0) {
       commentBody = this.props.comment.map((item, i) => (
-        <ListItem
-          key={i}
-          hideChevron
-          title={
-            <View style={styles.row}>
-              <View style={styles.column}>
-                <Text onPress={() => this.getAuthor(item.author)}>
-                  {item.author === '' ? '--' : item.author}
-                </Text>
-              </View>
-              <View style={styles.column}><Text>{item.orgName}</Text></View>
-              <View style={styles.column}><Text>{item.pubDate}</Text></View>
-              <View style={styles.column}>
-                <Icon
-                  name='md-document'
-                  type='ionicon'
-                  onPress={() => (
-                    Alert.alert('详细内容', item.conclusion,
-                      [
-                        { text: '确定' },
-                      ],
-                      { cancelable: false }
-                    )
-                  )}
-                />
-              </View>
-            </View>
-          }
-        />
+        <View key={i} style={styles.row}>
+          <View style={styles.columnValue}>
+            <Text style={styles.columnText} onPress={() => this.getAuthor(item.author)}>
+              {item.author === '' ? '--' : item.author}
+            </Text>
+          </View>
+          <View style={styles.columnValue}><Text style={styles.columnText}>{item.orgName}</Text></View>
+          <View style={styles.columnValue}><Text style={styles.columnText}>{item.pubDate}</Text></View>
+          <View style={styles.columnValue}>
+            <TouchableOpacity onPress={() => this.alertConclusion(item.conclusion)}>
+              <Image source={require('../../../../assets/imgs/Item.jpeg')} style={styles.image} />
+            </TouchableOpacity>
+          </View>
+        </View>
       ));
     }
     return commentBody;
@@ -100,31 +87,39 @@ class StudyReportTable extends Component {
     return (
       <View style={styles.root}>
         <Tabs>
-          <Tab heading='目标价位'>
-            <Card>
-              <CardItem header>
-                <View style={styles.column}><Text>所属机构</Text></View>
-                <View style={styles.column}><Text>本期评级</Text></View>
-                <View style={styles.column}><Text>上期评级</Text></View>
-                <View style={styles.column}><Text>目标价位</Text></View>
-              </CardItem>
-              <List>
-                {ratingBody}
-              </List>
-            </Card>
+          <Tab heading='目标价位' textStyle={styles.tabHeading} activeTextStyle={styles.activeTabHeading}>
+            <View style={styles.row}>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>所属机构</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>本期评级</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>上期评级</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>目标价位</Text>
+              </View>
+            </View>
+            {ratingBody}
           </Tab>
-          <Tab heading='分析报告'>
-            <Card>
-              <CardItem header>
-                <View style={styles.column}><Text>分析员</Text></View>
-                <View style={styles.column}><Text>名次</Text></View>
-                <View style={styles.column}><Text>撰写日期</Text></View>
-                <View style={styles.column}><Text>文章</Text></View>
-              </CardItem>
-              <List>
-                {comment}
-              </List>
-            </Card>
+          <Tab heading='分析报告' textStyle={styles.tabHeading} activeTextStyle={styles.activeTabHeading}>
+            <View style={styles.row}>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>分析员</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>名次</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>撰写日期</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.headerRowText}>文章</Text>
+              </View>
+            </View>
+            {comment}
           </Tab>
         </Tabs>
       </View>

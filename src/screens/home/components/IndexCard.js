@@ -26,10 +26,10 @@ class IndexCard extends Component {
     return (
       <Swiper
          dot={
-          <View style={{backgroundColor:'rgba(0,0,0,.2)', width: 12, height: 4, borderRadius: 2, margin:3, top: 25 }} />
+          <View style={{backgroundColor:'rgba(0,0,0,.2)', width: 12, height: 4, borderRadius: 2, margin:3, top: 20 }} />
          }
          activeDot={
-          <View style={{backgroundColor: '#007aff', width: 12, height: 4, borderRadius: 2, margin: 3, top: 25 }} />
+          <View style={{backgroundColor: '#007aff', width: 12, height: 4, borderRadius: 2, margin: 3, top: 20 }} />
          }
         >
         {this._rendPageCard()}

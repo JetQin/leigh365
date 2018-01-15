@@ -7,17 +7,36 @@ const styles = EStyleSheet.create({
   },
   lineContainer: {
     flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingTop: 10,
-    paddingLeft: 2,
-    paddingRight: 2,
-    paddingBottom: 10,
     flexDirection: 'row',
   },
   columnContainer: {
     flex: 0.5,
     flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  },
+  leftColumn: {
+    flex: 0.5,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  rightColumn: {
+    flex: 0.5,
+    alignItems:'flex-end',
+    justifyContent: 'center',
+  },
+  tabHeading:{
+    fontSize: 14,
+    fontFamily: 'Montserrat-Bold',
+    color: Colors.$grayBackgroundColor,
+    backgroundColor: 'transparent',
+  },
+  activeTabHeading:{
+    fontSize: 14,
+    fontFamily: 'Montserrat-Bold',
+    color: Colors.$grayColor,
+    backgroundColor: 'transparent',
   },
   labelTitle: {
     fontSize: 12,
@@ -32,8 +51,6 @@ const styles = EStyleSheet.create({
     textAlign: 'left',
   },
   labelText: {
-    paddingTop: 2,
-    paddingLeft: 3,
     fontSize: 10,
     fontFamily: 'Montserrat-Regular',
     color: Colors.$black,
